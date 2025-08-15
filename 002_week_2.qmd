@@ -1,0 +1,122 @@
+---
+title: "Week 2"
+format: html
+---
+
+## Basic Data Types
+
+| Type    | Full Name | Example | Description                                  |
+|---------|-----------|---------|----------------------------------------------|
+| `int`   | integer   | `1`     | whole numbers. Any number without a decimal! |
+| `float` | float     | `1.01`  | floating point numbers                       |
+| `str`   | string    | 'Hello' | sequence of characters                       |
+| `bool`  | Boolean   | `True`  | `True` or `False`                            |
+
+### List
+
+-   Construct with square brackets separated by commas `[ ]`
+
+-   Can hold anything in each 'slot':
+
+    -   Values
+
+    -   Tables
+
+    -   Dictionaries
+
+    -   Another list
+
+```{python}
+first_primes = [2, 3, 5, 7, 11, 13, 17]
+first_primes
+type(first_primes)
+help(list)
+```
+
+### Dictionary/Dict...like js objects
+
+```{python}
+bus_route = {'name': 'Orange Line', 'locality': 'Boston, MA', 'stations': ['Oak Grove', 'Malden', 'Wellington', 'Sullivan Square']}
+
+bus_route
+type(bus_route)
+```
+
+#### LIST Example
+
+-   Can assemble on new lines after a **comma**
+
+```{python}
+grab_bag = [
+  'a',
+  [1, 2, 3],
+  bus_route
+]
+
+grab_bag
+```
+
+### Subsetting with `[ ]`
+
+-   Extract with `[ ]`
+
+-   Select values based on index position **STARTING WITH 0**
+
+-   Subset strings by position with `[ ]`
+
+```{python}
+grab_bag[0]
+```
+
+```{python}
+hello = 'Hello, World!'
+hello[7:10]
+```
+
+### Dicts
+
+-   Create with `{ }`
+
+-   Add pairs of related info:
+
+    -   `key` to the left of `:` Must be unique and usually string or number
+
+    -   `value` to the right of `:` ANY data type
+
+    -   Consecutive `key:value` pairs separated by comma
+
+-   Extract values using `keys` and `[ ]`
+
+```{python}
+car = {'make': 'Toyota', 'model': 'Camry', 'year': "2010", 'condition': "Fair"}
+
+car
+```
+
+```{python}
+car['model']
+```
+
+### Lists and References
+
+REMEMBER that unlesss you use `copy()` copied objects will always remain the same even though they are assigned to different names.
+
+```{python}
+a = ['I', 'like', 'vanilla']
+b = a
+a[2] = 'chocolate'
+b
+```
+
+It copies the reference in memory, not an entire new object
+
+'Pass by reference'
+
+**R = 'Pass by value' language**
+
+```{python}
+a = ['I', 'like', 'vanilla']
+b = a.copy()
+a[2] = 'chocolate'
+b
+```
