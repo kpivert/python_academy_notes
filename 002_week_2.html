@@ -20,10 +20,44 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="002_week_2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="002_week_2_files/libs/clipboard/clipboard.min.js"></script>
 <script src="002_week_2_files/libs/quarto-html/quarto.js"></script>
 <script src="002_week_2_files/libs/quarto-html/popper.min.js"></script>
 <script src="002_week_2_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -33,6 +67,9 @@ ul.task-list li input[type="checkbox"] {
 <script src="002_week_2_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="002_week_2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="002_week_2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -65,6 +102,12 @@ ul.task-list li input[type="checkbox"] {
 <section id="basic-data-types" class="level2">
 <h2 class="anchored" data-anchor-id="basic-data-types">Basic Data Types</h2>
 <table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 14%">
+<col style="width: 12%">
+<col style="width: 61%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Type</th>
@@ -78,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
 <td><code>int</code></td>
 <td>integer</td>
 <td><code>1</code></td>
-<td>whole numbers</td>
+<td>whole numbers. Any number without a decimal!</td>
 </tr>
 <tr class="even">
 <td><code>float</code></td>
@@ -100,6 +143,3881 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<section id="list" class="level3">
+<h3 class="anchored" data-anchor-id="list">List</h3>
+<ul>
+<li><p>Construct with square brackets separated by commas <code>[ ]</code></p></li>
+<li><p>Can hold anything in each ‘slot’:</p>
+<ul>
+<li><p>Values</p></li>
+<li><p>Tables</p></li>
+<li><p>Dictionaries</p></li>
+<li><p>Another list</p></li>
+</ul></li>
+</ul>
+<div id="683ec284" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>first_primes <span class="op">=</span> [<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>, <span class="dv">11</span>, <span class="dv">13</span>, <span class="dv">17</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>first_primes</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(first_primes)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(<span class="bu">list</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on class list in module builtins:
+
+class list(object)
+ |  list(iterable=(), /)
+ |
+ |  Built-in mutable sequence.
+ |
+ |  If no argument is given, the constructor creates a new empty list.
+ |  The argument must be an iterable if specified.
+ |
+ |  Methods defined here:
+ |
+ |  __add__(self, value, /)
+ |      Return self+value.
+ |
+ |  __contains__(self, key, /)
+ |      Return bool(key in self).
+ |
+ |  __delitem__(self, key, /)
+ |      Delete self[key].
+ |
+ |  __eq__(self, value, /)
+ |      Return self==value.
+ |
+ |  __ge__(self, value, /)
+ |      Return self&gt;=value.
+ |
+ |  __getattribute__(self, name, /)
+ |      Return getattr(self, name).
+ |
+ |  __getitem__(self, index, /)
+ |      Return self[index].
+ |
+ |  __gt__(self, value, /)
+ |      Return self&gt;value.
+ |
+ |  __iadd__(self, value, /)
+ |      Implement self+=value.
+ |
+ |  __imul__(self, value, /)
+ |      Implement self*=value.
+ |
+ |  __init__(self, /, *args, **kwargs)
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  __iter__(self, /)
+ |      Implement iter(self).
+ |
+ |  __le__(self, value, /)
+ |      Return self&lt;=value.
+ |
+ |  __len__(self, /)
+ |      Return len(self).
+ |
+ |  __lt__(self, value, /)
+ |      Return self&lt;value.
+ |
+ |  __mul__(self, value, /)
+ |      Return self*value.
+ |
+ |  __ne__(self, value, /)
+ |      Return self!=value.
+ |
+ |  __repr__(self, /)
+ |      Return repr(self).
+ |
+ |  __reversed__(self, /)
+ |      Return a reverse iterator over the list.
+ |
+ |  __rmul__(self, value, /)
+ |      Return value*self.
+ |
+ |  __setitem__(self, key, value, /)
+ |      Set self[key] to value.
+ |
+ |  __sizeof__(self, /)
+ |      Return the size of the list in memory, in bytes.
+ |
+ |  append(self, object, /)
+ |      Append object to the end of the list.
+ |
+ |  clear(self, /)
+ |      Remove all items from list.
+ |
+ |  copy(self, /)
+ |      Return a shallow copy of the list.
+ |
+ |  count(self, value, /)
+ |      Return number of occurrences of value.
+ |
+ |  extend(self, iterable, /)
+ |      Extend list by appending elements from the iterable.
+ |
+ |  index(self, value, start=0, stop=9223372036854775807, /)
+ |      Return first index of value.
+ |
+ |      Raises ValueError if the value is not present.
+ |
+ |  insert(self, index, object, /)
+ |      Insert object before index.
+ |
+ |  pop(self, index=-1, /)
+ |      Remove and return item at index (default last).
+ |
+ |      Raises IndexError if list is empty or index is out of range.
+ |
+ |  remove(self, value, /)
+ |      Remove first occurrence of value.
+ |
+ |      Raises ValueError if the value is not present.
+ |
+ |  reverse(self, /)
+ |      Reverse *IN PLACE*.
+ |
+ |  sort(self, /, *, key=None, reverse=False)
+ |      Sort the list in ascending order and return None.
+ |
+ |      The sort is in-place (i.e. the list itself is modified) and stable (i.e. the
+ |      order of two equal elements is maintained).
+ |
+ |      If a key function is given, apply it once to each list item and sort them,
+ |      ascending or descending, according to their function values.
+ |
+ |      The reverse flag can be set to sort in descending order.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods defined here:
+ |
+ |  __class_getitem__(object, /)
+ |      See PEP 585
+ |
+ |  ----------------------------------------------------------------------
+ |  Static methods defined here:
+ |
+ |  __new__(*args, **kwargs)
+ |      Create and return a new object.  See help(type) for accurate signature.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __hash__ = None
+</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionarydictlike-js-objects" class="level3">
+<h3 class="anchored" data-anchor-id="dictionarydictlike-js-objects">Dictionary/Dict…like js objects</h3>
+<div id="3baf7d0c" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bus_route <span class="op">=</span> {<span class="st">'name'</span>: <span class="st">'Orange Line'</span>, <span class="st">'locality'</span>: <span class="st">'Boston, MA'</span>, <span class="st">'stations'</span>: [<span class="st">'Oak Grove'</span>, <span class="st">'Malden'</span>, <span class="st">'Wellington'</span>, <span class="st">'Sullivan Square'</span>]}</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>bus_route</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(bus_route)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<pre><code>dict</code></pre>
+</div>
+</div>
+<section id="list-example" class="level4">
+<h4 class="anchored" data-anchor-id="list-example">LIST Example</h4>
+<ul>
+<li>Can assemble on new lines after a <strong>comma</strong></li>
+</ul>
+<div id="cb2787cf" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>grab_bag <span class="op">=</span> [</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'a'</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  bus_route</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>grab_bag</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>['a',
+ [1, 2, 3],
+ {'name': 'Orange Line',
+  'locality': 'Boston, MA',
+  'stations': ['Oak Grove', 'Malden', 'Wellington', 'Sullivan Square']}]</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="subsetting-with" class="level3">
+<h3 class="anchored" data-anchor-id="subsetting-with">Subsetting with <code>[ ]</code></h3>
+<ul>
+<li><p>Extract with <code>[ ]</code></p></li>
+<li><p>Select values based on index position <strong>STARTING WITH 0</strong></p></li>
+<li><p>Subset strings by position with <code>[ ]</code></p></li>
+</ul>
+<div id="2f95fdff" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grab_bag[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>'a'</code></pre>
+</div>
+</div>
+<div id="1447ab0d" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>hello <span class="op">=</span> <span class="st">'Hello, World!'</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>hello[<span class="dv">7</span>:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<pre><code>'Wor'</code></pre>
+</div>
+</div>
+</section>
+<section id="dicts" class="level3">
+<h3 class="anchored" data-anchor-id="dicts">Dicts</h3>
+<ul>
+<li><p>Create with <code>{ }</code></p></li>
+<li><p>Add pairs of related info:</p>
+<ul>
+<li><p><code>key</code> to the left of <code>:</code> Must be unique and usually string or number</p></li>
+<li><p><code>value</code> to the right of <code>:</code> ANY data type</p></li>
+<li><p>Consecutive <code>key:value</code> pairs separated by comma</p></li>
+</ul></li>
+<li><p>Extract values using <code>keys</code> and <code>[ ]</code></p></li>
+</ul>
+<div id="67e122e1" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>car <span class="op">=</span> {<span class="st">'make'</span>: <span class="st">'Toyota'</span>, <span class="st">'model'</span>: <span class="st">'Camry'</span>, <span class="st">'year'</span>: <span class="st">"2010"</span>, <span class="st">'condition'</span>: <span class="st">"Fair"</span>}</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>car</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<pre><code>{'make': 'Toyota', 'model': 'Camry', 'year': '2010', 'condition': 'Fair'}</code></pre>
+</div>
+</div>
+<div id="2fa7d655" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>car[<span class="st">'model'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>'Camry'</code></pre>
+</div>
+</div>
+</section>
+<section id="lists-and-references" class="level3">
+<h3 class="anchored" data-anchor-id="lists-and-references">Lists and References</h3>
+<p>REMEMBER that unlesss you use <code>copy()</code> copied objects will always remain the same even though they are assigned to different names.</p>
+<div id="313e38e8" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">'I'</span>, <span class="st">'like'</span>, <span class="st">'vanilla'</span>]</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="op">=</span> <span class="st">'chocolate'</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>['I', 'like', 'chocolate']</code></pre>
+</div>
+</div>
+<p>It copies the reference in memory, not an entire new object</p>
+<p>‘Pass by reference’</p>
+<p><strong>R = ‘Pass by value’ language</strong></p>
+<div id="24d5eb8f" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> [<span class="st">'I'</span>, <span class="st">'like'</span>, <span class="st">'vanilla'</span>]</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> a.copy()</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>a[<span class="dv">2</span>] <span class="op">=</span> <span class="st">'chocolate'</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>['I', 'like', 'vanilla']</code></pre>
+</div>
+</div>
+</section>
+<section id="typesclasses" class="level3">
+<h3 class="anchored" data-anchor-id="typesclasses">Types/Classes</h3>
+<p>With Python 3.X type and class are interchangable</p>
+<div id="7e7728b3" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="dv">1</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="fl">1.</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(<span class="st">"1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>str</code></pre>
+</div>
+</div>
+<div id="84e0028f" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="pandas-series" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-series">Pandas Series</h3>
+<ul>
+<li><p>Similar to lists but with added capabilities</p></li>
+<li><p>Create using <code>Series()</code> function</p></li>
+<li><p>Come with <code>index</code> attribute (0, 1, 2, for each row)</p></li>
+<li><p><code>dtype: object</code> <code>object</code> is the most general <code>dtype</code> and in this case refers to <strong>string values</strong></p></li>
+</ul>
+<div id="b0369b9f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> pd.Series([<span class="st">'red'</span>, <span class="st">'orange'</span>, <span class="st">'yellow'</span>, <span class="st">'green'</span>, <span class="st">'blue'</span>, <span class="st">'indigo'</span>, <span class="st">'violet'</span>])</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>colors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>0       red
+1    orange
+2    yellow
+3     green
+4      blue
+5    indigo
+6    violet
+dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="attributes" class="level3">
+<h3 class="anchored" data-anchor-id="attributes">Attributes</h3>
+<ul>
+<li><p>Built-in components of object</p></li>
+<li><p>e.g., <code>size</code></p></li>
+<li><p>Won’t work for lists since they don’t have a <code>size</code> attribute</p></li>
+</ul>
+<div id="f46894a9" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>colors.size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>7</code></pre>
+</div>
+</div>
+</section>
+<section id="methods" class="level3">
+<h3 class="anchored" data-anchor-id="methods">Methods</h3>
+<ul>
+<li><p>Built-in features of some classes</p></li>
+<li><p>Functions defined as part of a class and can only be used on objects of that <strong>class</strong></p></li>
+<li><p>Methods are written after the object called on</p>
+<ul>
+<li><code>&lt;object name&gt;.&lt;method.name&gt;(&lt;arg 1&gt; = &lt;val 1&gt;, etc.)</code></li>
+</ul></li>
+<li><p>Pandas series have <code>.describe()</code></p></li>
+<li><p>Generates statistics for a series (works for strings and numerics!)</p></li>
+</ul>
+<div id="ac293e26" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>colors.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>count       7
+unique      7
+top       red
+freq        1
+dtype: object</code></pre>
+</div>
+</div>
+<div id="f6f067a3" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pd.Series.describe)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function describe in module pandas.core.generic:
+
+describe(self, percentiles=None, include=None, exclude=None) -&gt; 'Self'
+    Generate descriptive statistics.
+
+    Descriptive statistics include those that summarize the central
+    tendency, dispersion and shape of a
+    dataset's distribution, excluding ``NaN`` values.
+
+    Analyzes both numeric and object series, as well
+    as ``DataFrame`` column sets of mixed data types. The output
+    will vary depending on what is provided. Refer to the notes
+    below for more detail.
+
+    Parameters
+    ----------
+    percentiles : list-like of numbers, optional
+        The percentiles to include in the output. All should
+        fall between 0 and 1. The default is
+        ``[.25, .5, .75]``, which returns the 25th, 50th, and
+        75th percentiles.
+    include : 'all', list-like of dtypes or None (default), optional
+        A white list of data types to include in the result. Ignored
+        for ``Series``. Here are the options:
+
+        - 'all' : All columns of the input will be included in the output.
+        - A list-like of dtypes : Limits the results to the
+          provided data types.
+          To limit the result to numeric types submit
+          ``numpy.number``. To limit it instead to object columns submit
+          the ``numpy.object`` data type. Strings
+          can also be used in the style of
+          ``select_dtypes`` (e.g. ``df.describe(include=['O'])``). To
+          select pandas categorical columns, use ``'category'``
+        - None (default) : The result will include all numeric columns.
+    exclude : list-like of dtypes or None (default), optional,
+        A black list of data types to omit from the result. Ignored
+        for ``Series``. Here are the options:
+
+        - A list-like of dtypes : Excludes the provided data types
+          from the result. To exclude numeric types submit
+          ``numpy.number``. To exclude object columns submit the data
+          type ``numpy.object``. Strings can also be used in the style of
+          ``select_dtypes`` (e.g. ``df.describe(exclude=['O'])``). To
+          exclude pandas categorical columns, use ``'category'``
+        - None (default) : The result will exclude nothing.
+
+    Returns
+    -------
+    Series or DataFrame
+        Summary statistics of the Series or Dataframe provided.
+
+    See Also
+    --------
+    DataFrame.count: Count number of non-NA/null observations.
+    DataFrame.max: Maximum of the values in the object.
+    DataFrame.min: Minimum of the values in the object.
+    DataFrame.mean: Mean of the values.
+    DataFrame.std: Standard deviation of the observations.
+    DataFrame.select_dtypes: Subset of a DataFrame including/excluding
+        columns based on their dtype.
+
+    Notes
+    -----
+    For numeric data, the result's index will include ``count``,
+    ``mean``, ``std``, ``min``, ``max`` as well as lower, ``50`` and
+    upper percentiles. By default the lower percentile is ``25`` and the
+    upper percentile is ``75``. The ``50`` percentile is the
+    same as the median.
+
+    For object data (e.g. strings or timestamps), the result's index
+    will include ``count``, ``unique``, ``top``, and ``freq``. The ``top``
+    is the most common value. The ``freq`` is the most common value's
+    frequency. Timestamps also include the ``first`` and ``last`` items.
+
+    If multiple object values have the highest count, then the
+    ``count`` and ``top`` results will be arbitrarily chosen from
+    among those with the highest count.
+
+    For mixed data types provided via a ``DataFrame``, the default is to
+    return only an analysis of numeric columns. If the dataframe consists
+    only of object and categorical data without any numeric columns, the
+    default is to return an analysis of both the object and categorical
+    columns. If ``include='all'`` is provided as an option, the result
+    will include a union of attributes of each type.
+
+    The `include` and `exclude` parameters can be used to limit
+    which columns in a ``DataFrame`` are analyzed for the output.
+    The parameters are ignored when analyzing a ``Series``.
+
+    Examples
+    --------
+    Describing a numeric ``Series``.
+
+    &gt;&gt;&gt; s = pd.Series([1, 2, 3])
+    &gt;&gt;&gt; s.describe()
+    count    3.0
+    mean     2.0
+    std      1.0
+    min      1.0
+    25%      1.5
+    50%      2.0
+    75%      2.5
+    max      3.0
+    dtype: float64
+
+    Describing a categorical ``Series``.
+
+    &gt;&gt;&gt; s = pd.Series(['a', 'a', 'b', 'c'])
+    &gt;&gt;&gt; s.describe()
+    count     4
+    unique    3
+    top       a
+    freq      2
+    dtype: object
+
+    Describing a timestamp ``Series``.
+
+    &gt;&gt;&gt; s = pd.Series([
+    ...     np.datetime64("2000-01-01"),
+    ...     np.datetime64("2010-01-01"),
+    ...     np.datetime64("2010-01-01")
+    ... ])
+    &gt;&gt;&gt; s.describe()
+    count                      3
+    mean     2006-09-01 08:00:00
+    min      2000-01-01 00:00:00
+    25%      2004-12-31 12:00:00
+    50%      2010-01-01 00:00:00
+    75%      2010-01-01 00:00:00
+    max      2010-01-01 00:00:00
+    dtype: object
+
+    Describing a ``DataFrame``. By default only numeric fields
+    are returned.
+
+    &gt;&gt;&gt; df = pd.DataFrame({'categorical': pd.Categorical(['d', 'e', 'f']),
+    ...                    'numeric': [1, 2, 3],
+    ...                    'object': ['a', 'b', 'c']
+    ...                    })
+    &gt;&gt;&gt; df.describe()
+           numeric
+    count      3.0
+    mean       2.0
+    std        1.0
+    min        1.0
+    25%        1.5
+    50%        2.0
+    75%        2.5
+    max        3.0
+
+    Describing all columns of a ``DataFrame`` regardless of data type.
+
+    &gt;&gt;&gt; df.describe(include='all')  # doctest: +SKIP
+           categorical  numeric object
+    count            3      3.0      3
+    unique           3      NaN      3
+    top              f      NaN      a
+    freq             1      NaN      1
+    mean           NaN      2.0    NaN
+    std            NaN      1.0    NaN
+    min            NaN      1.0    NaN
+    25%            NaN      1.5    NaN
+    50%            NaN      2.0    NaN
+    75%            NaN      2.5    NaN
+    max            NaN      3.0    NaN
+
+    Describing a column from a ``DataFrame`` by accessing it as
+    an attribute.
+
+    &gt;&gt;&gt; df.numeric.describe()
+    count    3.0
+    mean     2.0
+    std      1.0
+    min      1.0
+    25%      1.5
+    50%      2.0
+    75%      2.5
+    max      3.0
+    Name: numeric, dtype: float64
+
+    Including only numeric columns in a ``DataFrame`` description.
+
+    &gt;&gt;&gt; df.describe(include=[np.number])
+           numeric
+    count      3.0
+    mean       2.0
+    std        1.0
+    min        1.0
+    25%        1.5
+    50%        2.0
+    75%        2.5
+    max        3.0
+
+    Including only string columns in a ``DataFrame`` description.
+
+    &gt;&gt;&gt; df.describe(include=[object])  # doctest: +SKIP
+           object
+    count       3
+    unique      3
+    top         a
+    freq        1
+
+    Including only categorical columns from a ``DataFrame`` description.
+
+    &gt;&gt;&gt; df.describe(include=['category'])
+           categorical
+    count            3
+    unique           3
+    top              d
+    freq             1
+
+    Excluding numeric columns from a ``DataFrame`` description.
+
+    &gt;&gt;&gt; df.describe(exclude=[np.number])  # doctest: +SKIP
+           categorical object
+    count            3      3
+    unique           3      3
+    top              f      a
+    freq             1      1
+
+    Excluding object columns from a ``DataFrame`` description.
+
+    &gt;&gt;&gt; df.describe(exclude=[object])  # doctest: +SKIP
+           categorical  numeric
+    count            3      3.0
+    unique           3      NaN
+    top              f      NaN
+    freq             1      NaN
+    mean           NaN      2.0
+    std            NaN      1.0
+    min            NaN      1.0
+    25%            NaN      1.5
+    50%            NaN      2.0
+    75%            NaN      2.5
+    max            NaN      3.0
+</code></pre>
+</div>
+</div>
+<div id="46c12c8c" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>numbers <span class="op">=</span> pd.Series([<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>])</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>numbers</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<pre><code>0    1
+1    2
+2    3
+3    4
+4    5
+dtype: int64</code></pre>
+</div>
+</div>
+<div id="a4ba66e5" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>numbers.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+<pre><code>np.float64(3.0)</code></pre>
+</div>
+</div>
+</section>
+<section id="method-chaining" class="level3">
+<h3 class="anchored" data-anchor-id="method-chaining">Method Chaining</h3>
+<div id="b513b07d" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>rain <span class="op">=</span> pd.Series([<span class="fl">0.3822</span>, <span class="fl">0.0000</span>, <span class="fl">0.2184</span>, <span class="fl">0.0000</span>, <span class="fl">0.0000</span>, <span class="fl">0.3782</span>, <span class="fl">0.0022</span>, <span class="fl">0.4015</span>, <span class="fl">0.0518</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="9d2727b2" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pd.Series.nlargest)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pd.Series.<span class="bu">round</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function nlargest in module pandas.core.series:
+
+nlargest(self, n: 'int' = 5, keep: "Literal['first', 'last', 'all']" = 'first') -&gt; 'Series'
+    Return the largest `n` elements.
+
+    Parameters
+    ----------
+    n : int, default 5
+        Return this many descending sorted values.
+    keep : {'first', 'last', 'all'}, default 'first'
+        When there are duplicate values that cannot all fit in a
+        Series of `n` elements:
+
+        - ``first`` : return the first `n` occurrences in order
+          of appearance.
+        - ``last`` : return the last `n` occurrences in reverse
+          order of appearance.
+        - ``all`` : keep all occurrences. This can result in a Series of
+          size larger than `n`.
+
+    Returns
+    -------
+    Series
+        The `n` largest values in the Series, sorted in decreasing order.
+
+    See Also
+    --------
+    Series.nsmallest: Get the `n` smallest elements.
+    Series.sort_values: Sort Series by values.
+    Series.head: Return the first `n` rows.
+
+    Notes
+    -----
+    Faster than ``.sort_values(ascending=False).head(n)`` for small `n`
+    relative to the size of the ``Series`` object.
+
+    Examples
+    --------
+    &gt;&gt;&gt; countries_population = {"Italy": 59000000, "France": 65000000,
+    ...                         "Malta": 434000, "Maldives": 434000,
+    ...                         "Brunei": 434000, "Iceland": 337000,
+    ...                         "Nauru": 11300, "Tuvalu": 11300,
+    ...                         "Anguilla": 11300, "Montserrat": 5200}
+    &gt;&gt;&gt; s = pd.Series(countries_population)
+    &gt;&gt;&gt; s
+    Italy       59000000
+    France      65000000
+    Malta         434000
+    Maldives      434000
+    Brunei        434000
+    Iceland       337000
+    Nauru          11300
+    Tuvalu         11300
+    Anguilla       11300
+    Montserrat      5200
+    dtype: int64
+
+    The `n` largest elements where ``n=5`` by default.
+
+    &gt;&gt;&gt; s.nlargest()
+    France      65000000
+    Italy       59000000
+    Malta         434000
+    Maldives      434000
+    Brunei        434000
+    dtype: int64
+
+    The `n` largest elements where ``n=3``. Default `keep` value is 'first'
+    so Malta will be kept.
+
+    &gt;&gt;&gt; s.nlargest(3)
+    France    65000000
+    Italy     59000000
+    Malta       434000
+    dtype: int64
+
+    The `n` largest elements where ``n=3`` and keeping the last duplicates.
+    Brunei will be kept since it is the last with value 434000 based on
+    the index order.
+
+    &gt;&gt;&gt; s.nlargest(3, keep='last')
+    France      65000000
+    Italy       59000000
+    Brunei        434000
+    dtype: int64
+
+    The `n` largest elements where ``n=3`` with all duplicates kept. Note
+    that the returned Series has five elements due to the three duplicates.
+
+    &gt;&gt;&gt; s.nlargest(3, keep='all')
+    France      65000000
+    Italy       59000000
+    Malta         434000
+    Maldives      434000
+    Brunei        434000
+    dtype: int64
+
+Help on function round in module pandas.core.series:
+
+round(self, decimals: 'int' = 0, *args, **kwargs) -&gt; 'Series'
+    Round each value in a Series to the given number of decimals.
+
+    Parameters
+    ----------
+    decimals : int, default 0
+        Number of decimal places to round to. If decimals is negative,
+        it specifies the number of positions to the left of the decimal point.
+    *args, **kwargs
+        Additional arguments and keywords have no effect but might be
+        accepted for compatibility with NumPy.
+
+    Returns
+    -------
+    Series
+        Rounded values of the Series.
+
+    See Also
+    --------
+    numpy.around : Round values of an np.array.
+    DataFrame.round : Round values of a DataFrame.
+
+    Examples
+    --------
+    &gt;&gt;&gt; s = pd.Series([0.1, 1.3, 2.7])
+    &gt;&gt;&gt; s.round()
+    0    0.0
+    1    1.0
+    2    3.0
+    dtype: float64
+</code></pre>
+</div>
+</div>
+<p>In order to chain, you have to wrap in <code>( )</code></p>
+<div id="26914a70" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  rain</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>   .nlargest(n <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>   .<span class="bu">round</span>(decimals <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>7    0.40
+0    0.38
+5    0.38
+dtype: float64</code></pre>
+</div>
+</div>
+<div id="68f0662d" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>rain.nlargest(<span class="dv">3</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>7    0.40
+0    0.38
+5    0.38
+dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="dataframes" class="level3">
+<h3 class="anchored" data-anchor-id="dataframes">DataFrames</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th><strong>Attribute</strong></th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.index</code></td>
+<td>Row labels</td>
+</tr>
+<tr class="even">
+<td><code>.columns</code></td>
+<td>Column Names</td>
+</tr>
+<tr class="odd">
+<td><code>.values</code></td>
+<td>Values in each cell</td>
+</tr>
+</tbody>
+</table>
+<p>Making DataFrames by hand</p>
+<ul>
+<li><p>Use <code>DataFrame</code> function</p></li>
+<li><p>Takes a <strong>dictionary</strong> where <code>key</code> is column name and <code>values</code> are column values</p></li>
+</ul>
+<div id="8d59a6d1" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>pressure <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'temperature'</span>: pd.Series([<span class="fl">0.0</span>, <span class="fl">20.0</span>, <span class="fl">40.0</span>, <span class="fl">60.0</span>, <span class="fl">80.0</span>, <span class="fl">100.0</span>, <span class="fl">120.0</span>, <span class="fl">140.0</span>, <span class="fl">160.0</span>]),</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'pressure'</span>: pd.Series([<span class="fl">0.0002</span>, <span class="fl">0.0012</span>, <span class="fl">0.0060</span>, <span class="fl">0.0300</span>, <span class="fl">0.0900</span>, <span class="fl">0.2700</span>, <span class="fl">0.7500</span>, <span class="fl">1.8500</span>, <span class="fl">4.2000</span>])</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>.shape</code> gives DataFrame dimensions</p>
+<div id="fc2cd1b5" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pressure.columns</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>pressure.index</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>pressure.values</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>pressure</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>pressure.shape</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<pre><code>(9, 2)</code></pre>
+</div>
+</div>
+</section>
+<section id="to-subset-columns" class="level3">
+<h3 class="anchored" data-anchor-id="to-subset-columns"><code>[ ]</code>To subset Columns</h3>
+<ul>
+<li>This gives us a Series which we can use Series methods on</li>
+</ul>
+<div id="9fc1118c" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>pressure[<span class="st">'temperature'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>0      0.0
+1     20.0
+2     40.0
+3     60.0
+4     80.0
+5    100.0
+6    120.0
+7    140.0
+8    160.0
+Name: temperature, dtype: float64</code></pre>
+</div>
+</div>
+<div id="891116bf" class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pressure[<span class="st">'temperature'</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>np.float64(80.0)</code></pre>
+</div>
+</div>
+<div id="d1971afa" class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pressure[<span class="st">'pressure'</span>].<span class="bu">sum</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<pre><code>np.float64(7.1974)</code></pre>
+</div>
+</div>
+<div id="e36d87b3" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>pressure.size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="27">
+<pre><code>18</code></pre>
+</div>
+</div>
+<p><code>.info()</code> Very cool</p>
+<div id="7e9fb840" class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>pressure.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 9 entries, 0 to 8
+Data columns (total 2 columns):
+ #   Column       Non-Null Count  Dtype  
+---  ------       --------------  -----  
+ 0   temperature  9 non-null      float64
+ 1   pressure     9 non-null      float64
+dtypes: float64(2)
+memory usage: 276.0 bytes</code></pre>
+</div>
+</div>
+<p><code>.head()</code> Also very cool</p>
+<p>Python truncates &gt;60 rows and will show 5 head and 5 tail</p>
+<div id="fd4e94de" class="cell" data-execution_count="29">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>pressure.head(<span class="dv">4</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>pressure.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="29">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">temperature</th>
+<th data-quarto-table-cell-role="th">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>0.0</td>
+<td>0.0002</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>20.0</td>
+<td>0.0012</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>40.0</td>
+<td>0.0060</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>60.0</td>
+<td>0.0300</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>80.0</td>
+<td>0.0900</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><code>.tail()</code> Also very cool</p>
+<div id="262e9025" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>pressure.tail()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">temperature</th>
+<th data-quarto-table-cell-role="th">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>80.0</td>
+<td>0.09</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>100.0</td>
+<td>0.27</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>120.0</td>
+<td>0.75</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>140.0</td>
+<td>1.85</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>160.0</td>
+<td>4.20</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="filtering-data" class="level3">
+<h3 class="anchored" data-anchor-id="filtering-data">Filtering Data</h3>
+<div id="7dcceb21" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/palmerpenguins/penguins.py:2: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  import pkg_resources</code></pre>
+</div>
+</div>
+<div id="8aab02e5" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e0fe54a8" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'species'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<pre><code>0         Adelie
+1         Adelie
+2         Adelie
+3         Adelie
+4         Adelie
+         ...    
+339    Chinstrap
+340    Chinstrap
+341    Chinstrap
+342    Chinstrap
+343    Chinstrap
+Name: species, Length: 344, dtype: object</code></pre>
+</div>
+</div>
+<div id="78317394" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">340</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>43.5</td>
+<td>18.1</td>
+<td>202.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">341</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>49.6</td>
+<td>18.2</td>
+<td>193.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">342</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.8</td>
+<td>19.0</td>
+<td>210.0</td>
+<td>4100.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">343</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.2</td>
+<td>18.7</td>
+<td>198.0</td>
+<td>3775.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="loc" class="level3">
+<h3 class="anchored" data-anchor-id="loc"><code>.loc[]</code></h3>
+<ul>
+<li><p>Subset data based on values</p></li>
+<li><p>Use <code>.loc[]</code> to return rows that pass logical test (.<code>loc[]</code> selecting based on human-readable <em>loc</em>(ations)</p></li>
+</ul>
+<div id="183fbd07" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">152</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>46.1</td>
+<td>13.2</td>
+<td>211.0</td>
+<td>4500.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">153</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.0</td>
+<td>16.3</td>
+<td>230.0</td>
+<td>5700.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">154</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>48.7</td>
+<td>14.1</td>
+<td>210.0</td>
+<td>4450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">155</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.0</td>
+<td>15.2</td>
+<td>218.0</td>
+<td>5700.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">156</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>47.6</td>
+<td>14.5</td>
+<td>215.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">272</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>46.8</td>
+<td>14.3</td>
+<td>215.0</td>
+<td>4850.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">273</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.4</td>
+<td>15.7</td>
+<td>222.0</td>
+<td>5750.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">274</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>45.2</td>
+<td>14.8</td>
+<td>212.0</td>
+<td>5200.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">275</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>49.9</td>
+<td>16.1</td>
+<td>213.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>124 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-tests" class="level3">
+<h3 class="anchored" data-anchor-id="logical-tests">Logical Tests</h3>
+<p>Require a boolean vector (array of <code>True</code>s and <code>False</code>s)</p>
+<div id="55e6c00a" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<pre><code>0      False
+1      False
+2      False
+3      False
+4      False
+       ...  
+339    False
+340    False
+341    False
+342    False
+343    False
+Name: species, Length: 344, dtype: bool</code></pre>
+</div>
+</div>
+<div id="4b3086b3" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>gentoo <span class="op">=</span> penguins.loc[penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="0fc4aa90" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>gentoo</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">152</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>46.1</td>
+<td>13.2</td>
+<td>211.0</td>
+<td>4500.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">153</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.0</td>
+<td>16.3</td>
+<td>230.0</td>
+<td>5700.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">154</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>48.7</td>
+<td>14.1</td>
+<td>210.0</td>
+<td>4450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">155</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.0</td>
+<td>15.2</td>
+<td>218.0</td>
+<td>5700.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">156</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>47.6</td>
+<td>14.5</td>
+<td>215.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">272</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>46.8</td>
+<td>14.3</td>
+<td>215.0</td>
+<td>4850.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">273</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.4</td>
+<td>15.7</td>
+<td>222.0</td>
+<td>5750.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">274</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>45.2</td>
+<td>14.8</td>
+<td>212.0</td>
+<td>5200.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">275</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>49.9</td>
+<td>16.1</td>
+<td>213.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>124 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="comparison-operators" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-operators">Comparison Operators</h3>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Logical Operator</th>
+<th>Example</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&gt;</code></td>
+<td><code>x &gt; y</code></td>
+<td>x greater than y?</td>
+</tr>
+<tr class="even">
+<td><code>&gt;=</code></td>
+<td><code>x &gt;= y</code></td>
+<td>x greater than or equal to y</td>
+</tr>
+<tr class="odd">
+<td><code>&lt;</code></td>
+<td><code>x &lt; y</code></td>
+<td>x less than y?</td>
+</tr>
+<tr class="even">
+<td><code>&lt;=</code></td>
+<td><code>x &lt;= y</code></td>
+<td>x less than or equal to y</td>
+</tr>
+<tr class="odd">
+<td><code>==</code></td>
+<td><code>x == y</code></td>
+<td>x equals y?</td>
+</tr>
+<tr class="even">
+<td><code>!=</code></td>
+<td><code>x != y</code></td>
+<td>x does not equal y?</td>
+</tr>
+<tr class="odd">
+<td><code>pd.isna()</code></td>
+<td><code>pd.isna(x)</code></td>
+<td>Is <code>x</code> a missing value (<code>NaN</code>)?</td>
+</tr>
+</tbody>
+</table>
+<div id="34ef4e57" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'bill_length_mm'</span>] <span class="op">&gt;</span> <span class="dv">55</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">185</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>59.6</td>
+<td>17.0</td>
+<td>230.0</td>
+<td>6050.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">253</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.9</td>
+<td>17.0</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">267</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.1</td>
+<td>16.0</td>
+<td>230.0</td>
+<td>5850.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">293</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>58.0</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="ccff1589" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'bill_depth_mm'</span>] <span class="op">==</span> penguins[<span class="st">'bill_length_mm'</span>] <span class="op">/</span> <span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="40">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.2</td>
+<td>19.6</td>
+<td>195.0</td>
+<td>4675.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">137</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>40.2</td>
+<td>20.1</td>
+<td>200.0</td>
+<td>3975.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="2bb30ca7" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'flipper_length_mm'</span>] <span class="op">&gt;</span> (penguins[<span class="st">'bill_length_mm'</span>] <span class="op">*</span> <span class="dv">5</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.1</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3475.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>21.1</td>
+<td>198.0</td>
+<td>4400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.6</td>
+<td>17.8</td>
+<td>185.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.7</td>
+<td>19.0</td>
+<td>195.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">18</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.4</td>
+<td>18.4</td>
+<td>184.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.9</td>
+<td>19.2</td>
+<td>189.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.3</td>
+<td>18.9</td>
+<td>187.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">34</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.4</td>
+<td>17.0</td>
+<td>195.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">42</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.0</td>
+<td>18.5</td>
+<td>186.0</td>
+<td>3100.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">48</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.0</td>
+<td>17.9</td>
+<td>190.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">52</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.0</td>
+<td>17.9</td>
+<td>190.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">54</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>34.5</td>
+<td>18.1</td>
+<td>187.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">59</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.6</td>
+<td>19.1</td>
+<td>194.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">60</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.7</td>
+<td>16.9</td>
+<td>185.0</td>
+<td>3150.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">64</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>36.4</td>
+<td>17.1</td>
+<td>184.0</td>
+<td>2850.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">66</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.5</td>
+<td>16.2</td>
+<td>195.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">68</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.9</td>
+<td>16.6</td>
+<td>190.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">74</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.5</td>
+<td>17.5</td>
+<td>190.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">78</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.2</td>
+<td>16.1</td>
+<td>187.0</td>
+<td>3550.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>17.2</td>
+<td>189.0</td>
+<td>3200.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">82</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>18.8</td>
+<td>187.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">83</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.1</td>
+<td>19.4</td>
+<td>193.0</td>
+<td>4200.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">84</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>37.3</td>
+<td>17.8</td>
+<td>191.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">86</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.3</td>
+<td>19.5</td>
+<td>190.0</td>
+<td>3800.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">87</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.9</td>
+<td>18.6</td>
+<td>189.0</td>
+<td>3500.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">90</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>35.7</td>
+<td>18.0</td>
+<td>202.0</td>
+<td>3550.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">92</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>34.0</td>
+<td>17.1</td>
+<td>185.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">94</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.2</td>
+<td>17.3</td>
+<td>187.0</td>
+<td>3300.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">95</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>40.8</td>
+<td>18.9</td>
+<td>208.0</td>
+<td>4300.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>33.1</td>
+<td>16.1</td>
+<td>178.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">100</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.0</td>
+<td>17.9</td>
+<td>192.0</td>
+<td>3725.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">103</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.8</td>
+<td>20.0</td>
+<td>190.0</td>
+<td>4250.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">104</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.9</td>
+<td>18.6</td>
+<td>193.0</td>
+<td>2925.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">106</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.6</td>
+<td>17.2</td>
+<td>199.0</td>
+<td>3750.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">110</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.1</td>
+<td>16.5</td>
+<td>198.0</td>
+<td>3825.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">117</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.3</td>
+<td>20.5</td>
+<td>199.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.7</td>
+<td>17.0</td>
+<td>189.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">120</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.2</td>
+<td>17.2</td>
+<td>187.0</td>
+<td>3150.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">121</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.7</td>
+<td>19.8</td>
+<td>198.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">124</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.2</td>
+<td>15.9</td>
+<td>186.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">132</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.8</td>
+<td>18.5</td>
+<td>193.0</td>
+<td>3500.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">133</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>37.5</td>
+<td>18.5</td>
+<td>199.0</td>
+<td>4475.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">136</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>35.6</td>
+<td>17.5</td>
+<td>191.0</td>
+<td>3175.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">142</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>32.1</td>
+<td>15.5</td>
+<td>188.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">144</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>37.3</td>
+<td>16.8</td>
+<td>192.0</td>
+<td>3000.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">147</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.6</td>
+<td>18.4</td>
+<td>184.0</td>
+<td>3475.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">148</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.0</td>
+<td>17.8</td>
+<td>195.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">149</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>37.8</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">150</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>36.0</td>
+<td>17.1</td>
+<td>187.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">162</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>40.9</td>
+<td>13.7</td>
+<td>214.0</td>
+<td>4650.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">176</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>42.9</td>
+<td>13.1</td>
+<td>215.0</td>
+<td>5000.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">220</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>43.5</td>
+<td>14.2</td>
+<td>220.0</td>
+<td>4700.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">238</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>43.4</td>
+<td>14.4</td>
+<td>218.0</td>
+<td>4600.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">258</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>41.7</td>
+<td>14.7</td>
+<td>210.0</td>
+<td>4700.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><code>np.NaN</code> = missing or unknown values…including for strings.</p>
+<div id="0d018793" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># np.NaN == np.NaN</span></span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co"># np.nan == np.nan</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="find-missing-values" class="level3">
+<h3 class="anchored" data-anchor-id="find-missing-values">Find Missing Values</h3>
+<div id="5d0487e0" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>pd.isna(penguins[<span class="st">'flipper_length_mm'</span>])</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>penguins.loc[pd.isna(penguins[<span class="st">'flipper_length_mm'</span>])]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="f540b0c0" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'island'</span>] <span class="op">!=</span> <span class="st">"Torgersen"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="44">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">20</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.8</td>
+<td>18.3</td>
+<td>174.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">21</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.7</td>
+<td>18.7</td>
+<td>180.0</td>
+<td>3600.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">22</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.9</td>
+<td>19.2</td>
+<td>189.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">23</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.2</td>
+<td>18.1</td>
+<td>185.0</td>
+<td>3950.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">24</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.8</td>
+<td>17.2</td>
+<td>180.0</td>
+<td>3800.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">340</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>43.5</td>
+<td>18.1</td>
+<td>202.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">341</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>49.6</td>
+<td>18.2</td>
+<td>193.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">342</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.8</td>
+<td>19.0</td>
+<td>210.0</td>
+<td>4100.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">343</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.2</td>
+<td>18.7</td>
+<td>198.0</td>
+<td>3775.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>292 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="logical-operators" class="level3">
+<h3 class="anchored" data-anchor-id="logical-operators">Logical Operators</h3>
+<p><strong>NOTE:</strong> Using bitwise operators <code>&amp;</code> and <code>|</code> versus Boolean operators <code>and</code> and <code>or</code>. Pandas (b/c numpy) uses <strong>bitwise.</strong></p>
+<table class="table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 70%">
+<col style="width: 9%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Logical Operator</th>
+<th>Interpret as</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>&amp;</code></td>
+<td>Do <strong><em>both</em></strong> <code>A</code> and <code>B</code> return <code>True</code>?</td>
+<td><code>A &amp; B</code></td>
+</tr>
+<tr class="even">
+<td><code>|</code></td>
+<td>Does <strong><em>one or both</em></strong> of <code>A</code> and <code>B</code> return <code>True</code>?</td>
+<td><code>A | B</code></td>
+</tr>
+<tr class="odd">
+<td><code>~</code></td>
+<td>Does <code>A</code><strong><em>not return</em></strong> <code>True</code>? (<code>~</code> flips the result of <code>A</code>)</td>
+<td><code>~A</code></td>
+</tr>
+</tbody>
+</table>
+<p>NB: <code>~</code> = <strong>unary logical operator</strong> which negates result of single logical test.</p>
+<p>Python treats <code>0</code> as False, every other number as <code>True</code></p>
+<p>You must wrap each logical test in <code>( )</code></p>
+<div id="7d4019a7" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>(penguins[<span class="st">'island'</span>] <span class="op">==</span> <span class="st">'Torgersen'</span>) <span class="op">&amp;</span> (penguins[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2009</span>)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>penguins.loc[(penguins[<span class="st">'island'</span>] <span class="op">==</span> <span class="st">'Torgersen'</span>) <span class="op">&amp;</span> (penguins[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2009</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="45">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">116</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.6</td>
+<td>17.0</td>
+<td>188.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">117</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.3</td>
+<td>20.5</td>
+<td>199.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.7</td>
+<td>17.0</td>
+<td>189.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">119</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.1</td>
+<td>18.6</td>
+<td>189.0</td>
+<td>3325.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">120</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.2</td>
+<td>17.2</td>
+<td>187.0</td>
+<td>3150.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">121</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.7</td>
+<td>19.8</td>
+<td>198.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">122</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.2</td>
+<td>17.0</td>
+<td>176.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">123</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.4</td>
+<td>18.5</td>
+<td>202.0</td>
+<td>3875.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">124</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.2</td>
+<td>15.9</td>
+<td>186.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">125</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.6</td>
+<td>19.0</td>
+<td>199.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">126</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.8</td>
+<td>17.6</td>
+<td>191.0</td>
+<td>3275.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">127</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.5</td>
+<td>18.3</td>
+<td>195.0</td>
+<td>4300.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">128</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.0</td>
+<td>17.1</td>
+<td>191.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">129</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>44.1</td>
+<td>18.0</td>
+<td>210.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">130</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.5</td>
+<td>17.9</td>
+<td>190.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">131</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>43.1</td>
+<td>19.2</td>
+<td>197.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="21def078" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[(penguins[<span class="st">'bill_length_mm'</span>] <span class="op">&lt;</span> <span class="dv">35</span>) <span class="op">|</span> (penguins[<span class="st">'bill_length_mm'</span>] <span class="op">&gt;</span><span class="dv">55</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.1</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3475.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>21.1</td>
+<td>198.0</td>
+<td>4400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.4</td>
+<td>18.4</td>
+<td>184.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">54</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>34.5</td>
+<td>18.1</td>
+<td>187.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>17.2</td>
+<td>189.0</td>
+<td>3200.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">92</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>34.0</td>
+<td>17.1</td>
+<td>185.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>33.1</td>
+<td>16.1</td>
+<td>178.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">142</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>32.1</td>
+<td>15.5</td>
+<td>188.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">185</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>59.6</td>
+<td>17.0</td>
+<td>230.0</td>
+<td>6050.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">253</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.9</td>
+<td>17.0</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">267</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.1</td>
+<td>16.0</td>
+<td>230.0</td>
+<td>5850.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">293</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>58.0</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="boolean-composition" class="level3">
+<h3 class="anchored" data-anchor-id="boolean-composition">Boolean Composition</h3>
+<p>Can string &gt; 2 logical test together. Python evaluates <strong>LEFT</strong> to <strong>RIGHT unless tow tests are grouped in parentheses.</strong></p>
+<p>Different values returned</p>
+<div id="5c9d649f" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a>  (penguins[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2008</span>) <span class="op">&amp;</span></span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  (penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>) <span class="op">|</span></span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>  (penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Chinstrap'</span>)</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="47">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">186</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>49.1</td>
+<td>14.8</td>
+<td>220.0</td>
+<td>5150.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">187</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>48.4</td>
+<td>16.3</td>
+<td>220.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">188</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>42.6</td>
+<td>13.7</td>
+<td>213.0</td>
+<td>4950.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">189</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>44.4</td>
+<td>17.3</td>
+<td>219.0</td>
+<td>5250.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">190</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>44.0</td>
+<td>13.6</td>
+<td>208.0</td>
+<td>4350.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">340</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>43.5</td>
+<td>18.1</td>
+<td>202.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">341</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>49.6</td>
+<td>18.2</td>
+<td>193.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">342</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.8</td>
+<td>19.0</td>
+<td>210.0</td>
+<td>4100.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">343</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.2</td>
+<td>18.7</td>
+<td>198.0</td>
+<td>3775.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>114 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<div id="408b40d2" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>  (penguins[<span class="st">'year'</span>] <span class="op">==</span> <span class="dv">2008</span>) <span class="op">&amp;</span></span>
+<span id="cb76-3"><a href="#cb76-3" aria-hidden="true" tabindex="-1"></a>  ((penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Gentoo'</span>) <span class="op">|</span> (penguins[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Chinstrap'</span>))</span>
+<span id="cb76-4"><a href="#cb76-4" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="48">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">186</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>49.1</td>
+<td>14.8</td>
+<td>220.0</td>
+<td>5150.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">187</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>48.4</td>
+<td>16.3</td>
+<td>220.0</td>
+<td>5400.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">188</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>42.6</td>
+<td>13.7</td>
+<td>213.0</td>
+<td>4950.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">189</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>44.4</td>
+<td>17.3</td>
+<td>219.0</td>
+<td>5250.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">190</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>44.0</td>
+<td>13.6</td>
+<td>208.0</td>
+<td>4350.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">315</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>53.5</td>
+<td>19.9</td>
+<td>205.0</td>
+<td>4500.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">316</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>49.0</td>
+<td>19.5</td>
+<td>210.0</td>
+<td>3950.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">317</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>46.2</td>
+<td>17.5</td>
+<td>187.0</td>
+<td>3650.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">318</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.9</td>
+<td>19.1</td>
+<td>196.0</td>
+<td>3550.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">319</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>45.5</td>
+<td>17.0</td>
+<td>196.0</td>
+<td>3500.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+</tbody>
+</table>
+
+<p>64 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="isin-method-from-series-class-tests-for-set-membership" class="level3">
+<h3 class="anchored" data-anchor-id="isin-method-from-series-class-tests-for-set-membership"><code>.isin()</code> Method from Series class tests for <strong>set membership</strong></h3>
+<div id="1bfe2006" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>penguins[<span class="st">'island'</span>].isin([<span class="st">'Torgersen'</span>, <span class="st">'Dream'</span>])</span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb77-3"><a href="#cb77-3" aria-hidden="true" tabindex="-1"></a>(penguins[<span class="st">'island'</span>] <span class="op">==</span> <span class="st">'Torgersen'</span>) <span class="op">|</span> (penguins[<span class="st">'island'</span>] <span class="op">==</span> <span class="st">'Dream'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="49">
+<pre><code>0      True
+1      True
+2      True
+3      True
+4      True
+       ... 
+339    True
+340    True
+341    True
+342    True
+343    True
+Name: island, Length: 344, dtype: bool</code></pre>
+</div>
+</div>
+</section>
+<section id="advanced-filtering" class="level3">
+<h3 class="anchored" data-anchor-id="advanced-filtering">Advanced Filtering</h3>
+<p>Use functions that will return a Boolean Series to use with <code>.loc[]</code>.</p>
+<p>For Series <code>.str.startswith()</code></p>
+<div id="800f146b" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>penguins.loc[penguins[<span class="st">'island'</span>].<span class="bu">str</span>.startswith(<span class="st">'To'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="50">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.3</td>
+<td>20.6</td>
+<td>190.0</td>
+<td>3650.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.9</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3625.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.2</td>
+<td>19.6</td>
+<td>195.0</td>
+<td>4675.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.1</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3475.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.0</td>
+<td>20.2</td>
+<td>190.0</td>
+<td>4250.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">10</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.8</td>
+<td>17.1</td>
+<td>186.0</td>
+<td>3300.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">11</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.8</td>
+<td>17.3</td>
+<td>180.0</td>
+<td>3700.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">12</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.1</td>
+<td>17.6</td>
+<td>182.0</td>
+<td>3200.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">13</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.6</td>
+<td>21.2</td>
+<td>191.0</td>
+<td>3800.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>21.1</td>
+<td>198.0</td>
+<td>4400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">15</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.6</td>
+<td>17.8</td>
+<td>185.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.7</td>
+<td>19.0</td>
+<td>195.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.5</td>
+<td>20.7</td>
+<td>197.0</td>
+<td>4500.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">18</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.4</td>
+<td>18.4</td>
+<td>184.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>46.0</td>
+<td>21.5</td>
+<td>194.0</td>
+<td>4200.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">68</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.9</td>
+<td>16.6</td>
+<td>190.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">69</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.8</td>
+<td>19.4</td>
+<td>198.0</td>
+<td>4450.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">71</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.7</td>
+<td>18.4</td>
+<td>190.0</td>
+<td>3900.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">72</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.6</td>
+<td>17.2</td>
+<td>196.0</td>
+<td>3550.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">73</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>45.8</td>
+<td>18.9</td>
+<td>197.0</td>
+<td>4150.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">74</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.5</td>
+<td>17.5</td>
+<td>190.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">75</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.8</td>
+<td>18.5</td>
+<td>195.0</td>
+<td>4250.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">76</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.9</td>
+<td>16.8</td>
+<td>191.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">77</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.2</td>
+<td>19.4</td>
+<td>184.0</td>
+<td>3900.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">78</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.2</td>
+<td>16.1</td>
+<td>187.0</td>
+<td>3550.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">79</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.1</td>
+<td>19.1</td>
+<td>195.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>17.2</td>
+<td>189.0</td>
+<td>3200.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">81</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.9</td>
+<td>17.6</td>
+<td>196.0</td>
+<td>4700.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">82</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>18.8</td>
+<td>187.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">83</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.1</td>
+<td>19.4</td>
+<td>193.0</td>
+<td>4200.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">116</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.6</td>
+<td>17.0</td>
+<td>188.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">117</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.3</td>
+<td>20.5</td>
+<td>199.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">118</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.7</td>
+<td>17.0</td>
+<td>189.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">119</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.1</td>
+<td>18.6</td>
+<td>189.0</td>
+<td>3325.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">120</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.2</td>
+<td>17.2</td>
+<td>187.0</td>
+<td>3150.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">121</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>37.7</td>
+<td>19.8</td>
+<td>198.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">122</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.2</td>
+<td>17.0</td>
+<td>176.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">123</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.4</td>
+<td>18.5</td>
+<td>202.0</td>
+<td>3875.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">124</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.2</td>
+<td>15.9</td>
+<td>186.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">125</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.6</td>
+<td>19.0</td>
+<td>199.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">126</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.8</td>
+<td>17.6</td>
+<td>191.0</td>
+<td>3275.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">127</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>41.5</td>
+<td>18.3</td>
+<td>195.0</td>
+<td>4300.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">128</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.0</td>
+<td>17.1</td>
+<td>191.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">129</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>44.1</td>
+<td>18.0</td>
+<td>210.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">130</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.5</td>
+<td>17.9</td>
+<td>190.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">131</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>43.1</td>
+<td>19.2</td>
+<td>197.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="viz" class="level3">
+<h3 class="anchored" data-anchor-id="viz">Viz!!</h3>
+<blockquote class="blockquote">
+<p>“The simple graph has brought more information to the data analyst’s mind that any other device.”—John Tukey, 1962</p>
+</blockquote>
+</section>
 </section>
 
 </main>

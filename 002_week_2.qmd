@@ -120,3 +120,591 @@ b = a.copy()
 a[2] = 'chocolate'
 b
 ```
+
+### Types/Classes
+
+With Python 3.X type and class are interchangable
+
+```{python}
+type(1)
+type(1.)
+type("1")
+```
+
+```{python}
+import pandas as pd
+```
+
+### Pandas Series
+
+-   Similar to lists but with added capabilities
+
+-   Create using `Series()` function
+
+-   Come with `index` attribute (0, 1, 2, for each row)
+
+-   `dtype: object` `object` is the most general `dtype` and in this case refers to **string values**
+
+```{python}
+
+colors = pd.Series(['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'])
+colors
+```
+
+### Attributes
+
+-   Built-in components of object
+
+-   e.g., `size`
+
+-   Won't work for lists since they don't have a `size` attribute
+
+```{python}
+colors.size
+```
+
+### Methods
+
+-   Built-in features of some classes
+
+-   Functions defined as part of a class and can only be used on objects of that **class**
+
+-   Methods are written after the object called on
+
+    -   `<object name>.<method.name>(<arg 1> = <val 1>, etc.)`
+
+-   Pandas series have `.describe()`
+
+-   Generates statistics for a series (works for strings and numerics!)
+
+```{python}
+colors.describe()
+```
+
+```{python}
+help(pd.Series.describe)
+```
+
+```{python}
+numbers = pd.Series([1, 2, 3, 4, 5])
+numbers
+```
+
+```{python}
+numbers.mean()
+```
+
+### Method Chaining
+
+```{python}
+rain = pd.Series([0.3822, 0.0000, 0.2184, 0.0000, 0.0000, 0.3782, 0.0022, 0.4015, 0.0518])
+```
+
+```{python}
+help(pd.Series.nlargest)
+help(pd.Series.round)
+```
+
+In order to chain, you have to wrap in `( )`
+
+```{python}
+(
+  rain
+   .nlargest(n = 3)
+   .round(decimals = 2)
+)
+```
+
+```{python}
+rain.nlargest(3).round(2)
+```
+
+### DataFrames
+
+| **Attribute** | Description         |
+|---------------|---------------------|
+| `.index`      | Row labels          |
+| `.columns`    | Column Names        |
+| `.values`     | Values in each cell |
+
+Making DataFrames by hand
+
+-   Use `DataFrame` function
+
+-   Takes a **dictionary** where `key` is column name and `values` are column values
+
+```{python}
+
+pressure = pd.DataFrame({
+  'temperature': pd.Series([0.0, 20.0, 40.0, 60.0, 80.0, 100.0, 120.0, 140.0, 160.0]),
+  'pressure': pd.Series([0.0002, 0.0012, 0.0060, 0.0300, 0.0900, 0.2700, 0.7500, 1.8500, 4.2000])
+})
+```
+
+`.shape` gives DataFrame dimensions
+
+```{python}
+pressure.columns
+pressure.index
+pressure.values
+
+pressure
+
+pressure.shape
+```
+
+### `[ ]`To subset Columns
+
+-   This gives us a Series which we can use Series methods on
+
+```{python}
+pressure['temperature']
+```
+
+```{python}
+pressure['temperature'].mean()
+```
+
+```{python}
+pressure['pressure'].sum()
+```
+
+```{python}
+pressure.size
+```
+
+`.info()` Very cool
+
+```{python}
+pressure.info()
+```
+
+`.head()` Also very cool
+
+Python truncates \>60 rows and will show 5 head and 5 tail
+
+```{python}
+pressure.head(4)
+pressure.head()
+```
+
+`.tail()` Also very cool
+
+```{python}
+pressure.tail()
+```
+
+### Filtering Data
+
+```{python}
+from palmerpenguins import load_penguins
+```
+
+```{python}
+penguins = load_penguins()
+```
+
+```{python}
+penguins['species']
+```
+
+```{python}
+penguins
+```
+
+### `.loc[]`
+
+-   Subset data based on values
+
+-   Use `.loc[]` to return rows that pass logical test (.`loc[]` selecting based on human-readable *loc*(ations)
+
+```{python}
+penguins.loc[penguins['species'] == 'Gentoo']
+```
+
+### Logical Tests
+
+Require a boolean vector (array of `True`s and `False`s)
+
+```{python}
+penguins['species'] == 'Gentoo'
+```
+
+```{python}
+gentoo = penguins.loc[penguins['species'] == 'Gentoo']
+```
+
+```{python}
+gentoo
+```
+
+### Comparison Operators
+
+| Logical Operator | Example       | Tests                           |
+|------------------|---------------|---------------------------------|
+| `>`              | `x > y`       | x greater than y?               |
+| `>=`             | `x >= y`      | x greater than or equal to y    |
+| `<`              | `x < y`       | x less than y?                  |
+| `<=`             | `x <= y`      | x less than or equal to y       |
+| `==`             | `x == y`      | x equals y?                     |
+| `!=`             | `x != y`      | x does not equal y?             |
+| `pd.isna()`      | `pd.isna(x)`  | Is `x` a missing value (`NaN`)? |
+
+```{python}
+penguins.loc[penguins['bill_length_mm'] > 55]
+```
+
+```{python}
+penguins.loc[penguins['bill_depth_mm'] == penguins['bill_length_mm'] / 2]
+```
+
+```{python}
+penguins.loc[penguins['flipper_length_mm'] > (penguins['bill_length_mm'] * 5)]
+```
+
+`np.NaN` = missing or unknown values...including for strings.
+
+```{python}
+import numpy as np
+# np.NaN == np.NaN
+
+# np.nan == np.nan
+```
+
+### Find Missing Values
+
+```{python}
+pd.isna(penguins['flipper_length_mm'])
+
+penguins.loc[pd.isna(penguins['flipper_length_mm'])]
+```
+
+```{python}
+
+penguins.loc[penguins['island'] != "Torgersen"]
+```
+
+### Logical Operators
+
+**NOTE:** Using bitwise operators `&` and `|` versus Boolean operators `and` and `or`. Pandas (b/c numpy) uses **bitwise.**
+
+| Logical Operator | Interpret as                                                   | Example |
+|------------------|----------------------------------------------------------------|---------|
+| `&`              | Do ***both*** `A` and `B` return `True`?                       | `A & B` |
+| `|`              | Does ***one or both*** of `A` and `B` return `True`?           | `A | B` |
+| `~`              | Does `A`***not return*** `True`? (`~` flips the result of `A`) | `~A`    |
+
+NB: `~` = **unary logical operator** which negates result of single logical test.
+
+Python treats `0` as False, every other number as `True`
+
+You must wrap each logical test in `( )`
+
+```{python}
+(penguins['island'] == 'Torgersen') & (penguins['year'] == 2009)
+penguins.loc[(penguins['island'] == 'Torgersen') & (penguins['year'] == 2009)]
+```
+
+```{python}
+penguins.loc[(penguins['bill_length_mm'] < 35) | (penguins['bill_length_mm'] >55)]
+```
+
+### Boolean Composition
+
+Can string \> 2 logical test together. Python evaluates **LEFT** to **RIGHT unless tow tests are grouped in parentheses.**
+
+Different values returned
+
+```{python}
+penguins.loc[
+  (penguins['year'] == 2008) &
+  (penguins['species'] == 'Gentoo') |
+  (penguins['species'] == 'Chinstrap')
+]
+```
+
+```{python}
+penguins.loc[
+  (penguins['year'] == 2008) &
+  ((penguins['species'] == 'Gentoo') | (penguins['species'] == 'Chinstrap'))
+]
+```
+
+### `.isin()` Method from Series class tests for **set membership**
+
+
+```{python}
+penguins['island'].isin(['Torgersen', 'Dream'])
+
+(penguins['island'] == 'Torgersen') | (penguins['island'] == 'Dream')
+```
+
+### Advanced Filtering 
+
+Use functions that will return a Boolean Series to use with `.loc[]`.
+
+For Series `.str.startswith()`
+
+
+```{python}
+penguins.loc[penguins['island'].str.startswith('To')]
+```
+
+### Viz!!
+
+> "The simple graph has brought more information to the data analyst's mind that any other device."---John Tukey, 1962
+
+### {plotnine}
+
+Avoid 
+- `import plotnine`
+- `import plotnine as p9`
+
+### `from`!!!!
+
+Use `from` to specify **specific module** from a package. Don't need to namespace using the package name. For multiple functions, use commas
+
+```{python}
+
+from numpy import sqrt
+sqrt(25)
+```
+
+
+```{python}
+from numpy import sqrt, log10
+
+sqrt(25) + log10(100)
+ ```
+
+
+ ```{python}
+ 
+ from plotnine import ggplot, aes, geom_point, geom_boxplot, geom_count, geom_smooth, geom_histogram, geom_density_2d
+
+ ```
+
+
+ ```{python}
+ from plotnine.data import mpg
+ ```
+
+
+ ```{python}
+ mpg
+ ```
+
+
+**NB: You MUST use `mapping = aes()`**
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) + 
+    geom_point()
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+    )
+  )
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'cty',
+      y = 'hwy'
+    )
+  ) +
+  geom_point()
+)
+```
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'cty',
+      y = 'hwy'
+      )
+    ) +
+    geom_smooth()
+)
+```
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'hwy'
+      )
+    ) +
+    geom_histogram(
+      bins = 30
+    )
+)
+```
+
+
+```{python}
+help(geom_histogram)
+```
+
+
+```{python}
+p = (
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+    )
+  )
+)
+```
+
+
+```{python}
+ggplot.show(
+  p +
+    geom_point()
+)
+```
+
+
+```{python}
+
+p = (
+    ggplot(
+      data = mpg, 
+      mapping = aes(
+        x = 'class',
+        y = 'drv'
+      )
+    ) +
+  geom_point()
+)
+
+p
+```
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'class',
+      y = 'drv'
+    )
+  ) +
+  geom_count()
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'class',
+      y = 'hwy'
+      )
+    ) +
+    geom_boxplot()
+  )
+```
+
+### (The Fix)
+
+- Python evaluates code one line at a time!!!!!
+- But if wrapped in `( )`, Python will read everything inside them as one set of instructions
+
+Ugh... `+` moves to beginning of line 
+
+
+>ggplot(data = mpg, mapping = aes(x = 'class', y = 'hwy'))
+  + geom_boxplot()
+
+Can also use explicit line break (like in bash) `\` instead of `( )`
+
+> ggplot(data = mpg, mapping = aes(x = 'class', y = 'hwy')) \
+    + geom_boxplot()
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'cty',
+      y = 'hwy'
+      )
+    ) +
+    geom_point() +
+    geom_smooth()
+)
+```    
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'cty', 
+      y = 'hwy'
+      )
+    ) +
+    geom_density_2d()
+)
+```
+
+
+```{python}
+
+help(geom_boxplot)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'class',
+      y = 'hwy'
+      )
+    ) +
+    geom_boxplot(
+      outlier_shape = 'x'
+    )
+)
+```
