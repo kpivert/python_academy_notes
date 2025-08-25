@@ -1,0 +1,169 @@
+---
+title: Demo - Week 1
+format: html
+editor: visual
+---
+
+# Imports
+
+```{python}
+ 
+#imports
+import os
+import numpy as np   #Numerical Python - For processing numpy arrays
+import pandas as pd  #Panel Data - For processing columns and dataframes
+import seaborn as sns #just to get the penguin data
+
+# Use pd.set_option to set some configuations: 
+# Syntax:  pd.set_option(option_name, value)
+
+# Show all columns - otherwise they could be "ellipsed out"
+pd.set_option('display.max_columns', None)
+
+# I use the following often to supress scientific notation or control numeric displays
+pd.set_option('display.float_format', '{:.3f}'.format)
+```
+
+# Prep for the csv
+
+This is a bit wonky, but in order to practice using the `pd.read_csv` function you learned, here we load the Palmer Penguins Dataset and save it as a csv into our data folder.
+
+We'll use this famous dataset for today's demo because most of you have likely seen it before and we only have 30 min together.
+
+```{python}
+penguins = sns.load_dataset("penguins")
+penguins.to_csv("data/penguins.csv")
+
+```
+
+## Read in Penguins
+
+Here we use `pd.read_csv` but set an index col since the csv has one.
+
+```{python}
+penguins = pd.read_csv("data/penguins.csv", index_col = 0)
+penguins
+```
+
+To work with the working directory in RStudio, can use the `os` package.
+
+```{python}
+
+#See os functions
+help(os)
+
+#Check out the current working dirctory
+print(os.getcwd())
+```
+
+# value_counts
+
+There's 2 ways to get the value counts. One way will be deprecated for and gives a warning.
+
+Here we use the function to be deprecated:
+
+```{python}
+
+#Use species column to demo this.
+pd.value_counts(penguins['species'])  #This way will  be deprecated
+```
+
+Now we use the value_counts method on a column.
+
+So this method is built into a Series object.
+
+```{python}
+
+penguins['species'].value_counts()   #The future way to do value_counts
+```
+
+The tutorial uses a list (not a series) to demo `pd.value_counts`.
+
+You cannot call `list_name.value_counts()` because `value_counts` is not a method built into Python's `list` class.
+
+For now, you can still call `pd.value_counts(list_name)`, but that functionality is going away.
+
+Since we don't usually do data analysis on a list, this is likely not a problem that will pop up in your futures.
+
+```{python}
+
+#Basic list - what is a list in Python?
+#Processing lists tends to be SLOW....But they can contain different types.
+
+#create a list of multiple types
+penguins_list = ["Chinstrap", 3, "Chinstrap", 5.5, "Adelie", "Adelie", "Adelie"]
+
+#try value_counts in our 2 ways
+pd.value_counts(penguins_list) #deprecated warning
+
+penguins_list.value_counts() #will crash - can only call 
+                             #value_counts on a column (Series)
+```
+
+```{python}
+print("Data type of the list variable:", type(penguins_list))
+print("Data type of the column variable:", type(penguins['species']))
+```
+
+## Describe
+
+Practice: how do I get the longest bill_length_mm?
+
+```{python}
+
+penguins['bill_length_mm'].min()
+
+```
+
+```{python}
+
+# Describe gives more descriptive stats all at once
+
+penguins['bill_length_mm'].describe()
+
+```
+
+## np.arange
+
+Time permitting: `np.arange` - helpful
+
+```{python}
+
+np.arange(0,100,4)  #3 parameters:  start, 'the almost end', the skip factor
+
+np.arange(.1,1,.1)
+
+```
+
+Just to demo its helpfulness, we'll use `np.arange` to get different percentiles
+
+```{python}
+
+#np.arange is helpful in many different scenarios
+penguins['bill_length_mm'].describe(percentiles=np.arange(.1,1,.1))
+
+```
+
+## Counting nulls
+
+```{python}
+
+#Selecting just a few cols
+penguins = penguins[["species", "island", "bill_length_mm"]]
+
+#Can break onto the next line
+(penguins.isna()
+         .sum())
+
+#can run help on a class to find out its methods
+help(pd.Series)
+```
+
+## Group by - For Thurs
+
+```{python}
+
+penguins.groupby("species").agg({"species":"count", 
+                                 "bill_length_mm":["mean", "max"]})
+
+```

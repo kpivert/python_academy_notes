@@ -1,0 +1,301 @@
+---
+title: "Week 3"
+format: html
+---
+
+```{python}
+import pandas as pd
+import numpy as np
+from palmerpenguins import load_penguins_raw, load_penguins
+penguins_raw_df = load_penguins_raw()
+penguins_df = load_penguins()
+
+```
+
+### Selecting Rows and Columns
+
+-   `.info()` Very, very helpful
+
+```{python}
+
+penguins_raw_df.info()
+```
+
+### Subsetting Columns (aka `select`-ing) with `[ ]`
+
+-   FWIW, subsetting == indexing == selecting == extracting
+-   Remember, pass multiple values as a single argument using a **list**, with values within `[ ]`
+-   When supply a list of column names as argument, result is **DataFrame** NOT **Series**
+
+```{python}
+penguins_raw_df['Individual ID']
+```
+
+```{python}
+penguins_raw_df[['Individual ID', 'Species', 'Island']]
+```
+
+```{python}
+penguins_raw_df[['Species', 'Region', 'Stage']]
+```
+
+### `.rename()`
+
+-   Use dictionary to rename DataFrame columns
+    -   `{'Old name 1': 'New Name 1', 'Old name 2': 'New Name 2'}`
+-   NB: You have to reassign it. It won't make the change permanent without reassigning the object...
+
+```{python}
+penguins_raw_df.rename(columns = {'studyName': 'Study Name'})
+```
+
+```{python}
+penguins_raw_df.rename(columns = {'studyName': 'Study', 'Sample Number': 'Sample', 'Individual ID': 'ID'})
+```
+
+### Selecting Rows with `.loc[]`
+
+-   Can use `.loc[]` to filter data sets using a Boolean array as an input
+
+```{python}
+penguins_raw_df.loc[penguins_raw_df['Island'] == 'Torgersen']
+```
+
+Use this syntax to select by **rows only.**
+
+`<dataset>.loc[<row indices>]`
+
+Use this syntax to select by **rows and columns.**
+
+`<dataset>.loc[<row indices>, <column indicies>]`
+
+**NB:** `.loc[]` is a special ATTRIBUTE of DataFrame class that uses `[ ]` instead of `( )`
+
+### Row Indices
+
+-   Row index starts at 0 and increases by 1 for each row
+-   Row index values always shown on left of DataFrame
+
+```{python}
+penguins_raw_df.loc[0]
+```
+
+```{python}
+penguins_raw_df.loc[1, 'Species']
+```
+
+Can use `.loc[]` to select \>1 value. Use lists of row indicies and column names
+
+```{python}
+penguins_raw_df.loc[[0, 1, 2, 3], ['Species', 'Region', 'Island']]
+```
+
+### `start:end`
+
+-   If row indicies or columns in consecutive order can use `:` which will grab all entries from the `start` element **up to and and including** the `end` element
+
+```{python}
+penguins_raw_df.loc[0:3, 'Species':'Island']
+```
+
+```{python}
+penguins_raw_df.loc[25:35]
+```
+
+### `:` as a shorthand for ALL ROWS or ALL COLUMNS
+
+```{python}
+penguins_raw_df.loc[:, ['Species', 'Comments']]
+```
+
+NB: if only selecting columns, use `[ ]` instead of `.loc[]`
+
+```{python}
+penguins_raw_df[['Species', 'Comments']]
+```
+
+### Non-default row indicies
+
+-   Can use something else, other than 0, 1, 2, .... (that is, name, etc.)
+
+But then you have to use the index name. **`.loc[]` expects a NAME**
+
+`new_index.loc['Tor_Ad_3']`
+
+### Selecting by position with `.iloc[]`
+
+-   Similar to `slice()`
+-   `.iloc[]` `i`ndex `loc`ation (computer-readable) vs. `.loc[]` which is human readable locations (labels)
+
+```{python}
+penguins_raw_df.iloc[0, 0]
+```
+
+### Modify, Add, Derive Variables from Data Using `[ ]` Notation
+
+```{python}
+penguins_size = (
+  penguins_df[[
+    'species', 'flipper_length_mm', 'body_mass_g'
+    ]]
+    .rename(
+      columns = {'flipper_length_mm': 'flipper_length', 'body_mass_g': 'body_mass'})
+  )
+```
+
+```{python}
+penguins_size['body_mass'] / 1000
+```
+
+### Python, like R, is vectorized....
+
+```{python}
+
+penguins_size['body_mass_kg'] = penguins_size['body_mass'] / 1000
+
+penguins_size
+```
+
+Can use `[ ]` to modify or assign a column
+
+1.  Select **New** column with `[ ]` as if it always existed
+
+```{python}
+
+penguins_size['flipper_length_cm'] = penguins_size['flipper_length'] / 100
+# penguins_size['flipper_length'] * 0.1
+```
+
+```{python}
+penguins_size['body_mass'] = penguins_size['body_mass'] / 1000
+penguins_size['flipper_length'] = penguins_size['flipper_length'] / 100
+```
+
+```{python}
+penguins_size['flipper_length_mean'] = penguins_size['flipper_length'].mean()
+
+penguins_size['flipper_length'] = penguins_size['flipper_length'] - penguins_size['flipper_length_mean']
+```
+
+### Functions to use with `[ ]`
+
+Using `[ ]`to assign or modify a column should work with any vectorized function.
+
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+|                                   | Purpose                                                                                                                                                             | Example Usage                                |
++===================================+=====================================================================================================================================================================+==============================================+
+| ***Operators***                   |                                                                                                                                                                     |                                              |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `+ - * / ^`                       | Math operations                                                                                                                                                     | `penguin_size['flipper_length'] / 100`       |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `// %`                            | Integer division and remainder                                                                                                                                      | `penguin_size['body_mass'] // 100`           |
+|                                   |                                                                                                                                                                     |                                              |
+|                                   |                                                                                                                                                                     | `penguin_size['body_mass'] % 100`            |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `< <= > >= != ==`                 | Logical operators returning `True` or `False`                                                                                                                       | `penguin_size['body_mass'] >= 4000`          |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| ***Numerical Functions***         |                                                                                                                                                                     |                                              |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `.round()`                        | Round to specified number of digits                                                                                                                                 | `(flipper_length / 100).round()`             |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `.abs()`                          | Absolute value                                                                                                                                                      | `penguin_size['flipper_length'].abs()`       |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `numpy.sqrt()`                    | Compute square root                                                                                                                                                 | `numpy.sqrt(penguin_size['flipper_length'])` |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `numpy.log()`                     | Compute logarithm with natural, base 2, or base 10                                                                                                                  | `numpy.log10(penguin_size['body_mass'])`     |
+|                                   |                                                                                                                                                                     |                                              |
+| `numpy.log2()`                    |                                                                                                                                                                     |                                              |
+|                                   |                                                                                                                                                                     |                                              |
+| `numpy.log10()`                   |                                                                                                                                                                     |                                              |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| ***Ordered Observations***        |                                                                                                                                                                     |                                              |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `.shift()`                        | Find the *previous* value by shifting values down—`.shift(1)`, or *next* value by shifting values up—`.shift(-1)`, in a column                                      | `penguin_size['flipper_length'].shift(1)`    |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `.rank()`                         | Rank the values in the column. Choose how ties are handled with `method` argument. Recommend keeping default `na_action = "keep"`.                                  | `penguin_size['body_mass'].rank()`           |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| ***Cumulative Summary Function*** |                                                                                                                                                                     |                                              |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+| `.cumsum() .cummin() .cummax()`   | Cumulatively aggregated summaries. Returns a vector where each item is the cumulative summary statistic (.`sum()`, `.min()`) up to that entry in the input vector\> | `penguin_size['body_mass'].cummin()`         |
++-----------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------------+
+
+### Challenge 1
+
+```{python}
+
+penguins_size['rank'] = penguins_size['body_mass'].rank(method = 'first')
+penguins_size
+```
+
+### Challenge 2
+
+```{python}
+penguins_size['body_mass_diff'] = penguins_size['body_mass'] - penguins_size['body_mass'].mean()
+penguins_size['body_mass_diff'] = penguins_size['body_mass_diff'].abs()
+penguins_size['body_mass_diff'] = penguins_size['body_mass_diff'].round(decimals = 2)
+penguins_size
+```
+
+### Non-Vectorized Functions
+
+Many functions outside the PyData (???) ecosystem are NOT vectorized.
+
+### MUST Use `.apply()` for non-vectorized functions
+
+The `.apply()` methond takes a function as input and will **apply** the function to each value in the **Series**
+
+`column.apply(func)`
+
+1. `column` is code to select column of data `penguin_size['body_mass']`
+2. `.apply()` method will run function iteratively.
+3. `func` is actual function to apply. JUST THE NAME ONLY. It does NOT need `()`
+
+
+```{python}
+penguins_size['body_mass'].apply(lambda x: x ** 2) ## Anonymous function! Much easier than R. 
+penguins_size['body_mass'].apply(np.log10)
+```
+
+
+```{python}
+type(penguins_size['body_mass'])
+```
+
+**`.apply` can run on DataFrame objects for each column!**
+
+### ChainedAssignmentError
+
+
+```{python}
+penguins_size['flipper_length'][0] = 181
+```
+
+Need to `df.loc[row_indexer, 'col'] = values`
+
+Do NOT use `[ ]` to select **ROWS**, you must use **`.loc[]`**
+
+To replace values in entire column you can use `[]`
+
+`<dataset>['column_name'] = <new_values>`
+
+To work with specific rows use `.loc[]`
+
+`<dataset>.loc[<row_index>, <'column_name'>] = <new_value>`
+
+```{python}
+penguins_size.loc[penguins_size['species'] == 'Adelie', 'species'] = "ADELIE"
+penguins_size
+```
+
+### `copy_on_write` Option
+
+`pd.set_option("mode.copy_on_write", True)`
+
+Chained assignment won't work with this option
+
+
+```{python}
+penguins_size.loc[0, 'body_mass'] = 3850
+penguins_size
+
+```

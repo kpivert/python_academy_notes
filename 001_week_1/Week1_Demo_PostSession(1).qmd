@@ -1,0 +1,283 @@
+---
+title: Demo - Week 1
+format: pdf
+editor: visual
+---
+
+# Imports
+
+```{python}
+ 
+#imports
+import os
+import numpy as np   #Numerical Python - For processing numpy arrays
+import pandas as pd  #Panel Data - For processing columns and dataframes
+import seaborn as sns #just to get the penguin data
+
+# Use pd.set_option to set some configuations: 
+# Syntax:  pd.set_option(option_name, value)
+
+# Show all columns - otherwise they could be "ellipsed out"
+pd.set_option('display.max_columns', None)
+
+# I use the following often to supress scientific notation or 
+# control numeric displays
+pd.set_option('display.float_format', '{:.3f}'.format)
+```
+
+# Prep for the csv
+
+This is a bit wonky, but in order to practice using the `pd.read_csv` function you learned, here we load the Palmer Penguins Dataset and save it as a csv into our data folder.
+
+We'll use this famous dataset for today's demo because most of you have likely seen it before and we only have 30 min together.
+
+```{python}
+penguins = sns.load_dataset("penguins")
+penguins.to_csv("data/penguins.csv")
+
+```
+
+## Read in Penguins
+
+Here we use `pd.read_csv` but set an index col since the csv has one.
+
+```{python}
+penguins = pd.read_csv("data/penguins.csv", index_col = 0)
+penguins
+```
+
+To work with the working directory in RStudio, can use the `os` package.
+
+```{python}
+
+#See os functions by commenting in this help call
+#help(os)
+
+#Check out the current working dirctory
+print(os.getcwd())
+```
+
+# value_counts
+
+There's 2 ways to get the value counts. One way will be deprecated for and gives a warning.
+
+Here we use the function to be deprecated:
+
+```{python}
+
+#Use species column to demo this.
+pd.value_counts(penguins['species'])  #This way will  
+                                      #be deprecated
+
+
+```
+
+Now we use the value_counts method on a column.
+
+So this method is built into a Series object.
+
+```{python}
+
+penguins['species'].value_counts()   #The future way
+                                     #to do value_counts
+```
+
+The tutorial uses a list (not a series) to demo `pd.value_counts`.
+
+You cannot call `list_name.value_counts()` because `value_counts` is not a method built into Python's `list` class.
+
+For now, you can still call `pd.value_counts(list_name)`, but that functionality is going away.
+
+Since we don't usually do data analysis on a list, this is likely not a problem that will pop up in your futures.
+
+```{python}
+
+#Basic list - what is a list in Python?
+#Processing lists tends to be SLOW....
+#But they can contain different types.
+
+#create a list of multiple types
+penguins_list = ["Chinstrap", 3, "Chinstrap", 5.5, 
+                 "Adelie", "Adelie", "Adelie"]
+
+#try value_counts in our 2 ways
+pd.value_counts(penguins_list) #deprecated warning
+
+#penguins_list.value_counts() #comment in and you'll see this line of code
+                              #will crash - can only call 
+                              #value_counts on a column (Series)
+```
+
+```{python}
+print("Data type of the list variable:", type(penguins_list))
+print("Data type of the column variable:", type(penguins['species']))
+```
+
+## Describe
+
+Practice: how do I get the longest bill_length_mm?
+
+```{python}
+
+penguins['bill_length_mm'].min()
+
+```
+
+```{python}
+
+# Describe gives more descriptive stats all at once
+
+penguins['bill_length_mm'].describe()
+
+```
+
+## np.arange
+
+Time permitting: `np.arange` - helpful
+
+```{python}
+
+np.arange(0,100,4)  #3 parameters:  start, 
+                    #               'the almost end', 
+                    #                'the skip factor
+
+np.arange(.1,1,.1)
+
+```
+
+Just to demo its helpfulness, we'll use `np.arange` to get different percentiles
+
+```{python}
+
+#np.arange is helpful in many different scenarios
+penguins['bill_length_mm'].describe(percentiles=np.arange(.1,1,.1))
+
+```
+
+## Counting nulls
+
+```{python}
+
+#Selecting just a few cols
+penguins = penguins[["species", "island", "bill_length_mm"]]
+
+#Can break onto the next line
+(penguins.isna()
+         .sum())
+
+#can run help on a class to find out its methods
+#help(pd.Series) 
+```
+
+## Piping Discussion via a Group By Example
+
+```         
+# Piping In R (more for your mentor):
+
+x %>% f(1) is equivalent to f(x, 1) 
+
+  
+```
+
+To do this in Python, you would use function chaining or method chaining.
+
+So technically, `x %>% f(1)` is equivalent to:
+
+-   `f(x,1)` if f is a function living in some imported python package
+-   `x.f(1)` if f were a method living inside of an object x of class type x
+
+And `x %>% f(1) %>% g(2)` is equivalent to one of these:
+
+-   `g(f(x,1), 2)` if f,g are functions in a package
+-   `x.f(1).g(2)` if g is a function living in an object x of class type x.f(1)
+
+R like:\
+x.\
+f(1).\
+g(2)
+
+In R, `penguins$species %>% pd.value_counts()` translates to:
+
+```{python}
+
+pd.value_counts(penguins['species'])  #This way will  be deprecated -
+                                      #value_counts as a function in 
+                                      #pandas package is going away
+```
+
+```{python}
+ type(penguins['species'])     
+
+
+penguins['species'].value_counts()  #value_counts is a function 
+                                    #living in the Series class
+
+```
+
+R example:
+
+```         
+penguins %>%
+  group_by(species) %>%
+  summarise(mean_bill = mean(bill_length_mm, na.rm = TRUE)) 
+```
+
+```{python}
+
+penguins.groupby("species").agg({"species":"count",
+                                 "bill_length_mm":["mean", "max"]})
+
+```
+
+Above: add sorting for another chain level
+
+## How to do Glimpse in Python
+
+```{r}
+#install.packages("dplyr") # Run this if you haven't installed it
+#install.packages("reticulate")  #Run this if you haven't installed it
+
+library(dplyr)
+library(reticulate)
+penguins_r <- py$penguins
+glimpse(penguins_r)
+```
+
+```{python}
+penguins.info()
+print("**************************************")
+penguins.describe()
+print("**************************************")
+penguins.head(5)
+
+```
+
+## my_df\["col_name"\] vs. my_df.col_name
+
+-   The period notation cannot handle column names with spaces
+-   The period notation can be confusing if the name of a column matches that of methods built into Series/columns. See grades\["min"\] versus grades.min below.
+
+```{python}
+grades = pd.DataFrame({"student": "Ann Bob Chris".split(), 
+                           "min":[82, 85, 72], 
+                           "max":[92, 94, 87]})
+grades  #print the example dataframe
+```
+
+```{python}
+grades["min"]  #shows the contents of the min column in the grades dataframe.
+               #nothing crazy here.
+```
+
+```{python}
+
+grades.min #confusing!  
+           #Python is letting us know that min is a method 
+           #tied/bound to the grades object/dataframe
+
+```
+
+```{python}
+grades.min()  #If we add parentheses, then we get what we might expect:
+              #The min of each column in the grades dataframe.
+```

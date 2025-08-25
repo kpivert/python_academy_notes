@@ -708,3 +708,19 @@ ggplot.show(
     )
 )
 ```
+
+### Additional Bits
+
+`df_query()`
+[https://www.w3schools.com/python/pandas/ref_df_query.asp]()
+
+
+```{python}
+#| eval: false
+
+# NB: ~ to negate!!
+
+covid.loc[covid['state'].isin(high_dens),'high_density']=1
+covid.loc[~covid['state'].isin(high_dens),'high_density']=0
+
+```

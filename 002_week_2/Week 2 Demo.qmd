@@ -1,0 +1,171 @@
+---
+title: "week2_demo"
+format: pdf
+editor: visual
+---
+
+```{python}
+import os
+import numpy as np #Numerical Python - For processing numpy arrays
+import pandas as pd #Panel Data - For processing columns and dataframes
+import seaborn as sns #just to get the penguin data
+
+# Show all columns - otherwise they could be "ellipsed out"
+pd.set_option('display.max_columns', None)
+
+#Load penguins
+penguins = sns.load_dataset("penguins")
+penguins
+```
+
+# Compound Filtering
+
+FYI: Python uses the operators `and` and `or` in many use cases (see below)
+
+But when filtering/subsetting, the operators `&` and `|` are used.
+
+```{python}
+
+day = "Tuesday" 
+time = 9
+
+if ((day == 'Friday'  and time >= 5) or day == 'Saturday' or day == 'Sunday'):
+  print('Sleep In!')
+
+else:
+  print('Get up early!')
+
+```
+
+Also note:
+
+-   `.loc` gets brackets because we're indexing, even though it may feel like it should be a method and have parentheses.
+-   We need to include parentheses in compound expressions. (The tutorial mentions but it's easy to forget.)
+
+Example: The following will crash because it is missing parentheses.
+
+-   `penguins.loc[penguins['sex'] == 'Female' &  penguins['flipper_length_mm'] > 190]`
+
+More info: The operator `&` has a higher precedence than `==` so Python interprets the above line of code as the following line of code. Then Python gets confused because it does not know how to compare a String and a Series/column.
+
+-   `penguins.loc[penguins['sex'] == ('Female' &  penguins['flipper_length_mm']) > 190]`
+
+```{python}
+
+#one step
+penguins.loc[(penguins['sex'] == 'Female') & (penguins['flipper_length_mm'] > 190)]
+
+#This is tough syntax. You can do in 2 steps 
+#if it makes reading the code easier:
+
+#step 1 create the mask
+filter = (penguins['sex'] == 'Female') & (penguins['flipper_length_mm'] > 190)
+
+#Then ask for the filtered table
+penguins_f_gt_190 = penguins.loc[filter]
+```
+
+Technically, you don't need `loc` to filter rows. It can save you some trouble though.
+
+-   Example: `penguins['species']` =\> returns a column/series (vector)
+-   Example:
+    -   `ad_filter = penguins['species'] == 'Adelie'`
+    -   `penguins[ad_filter]` =\> performs masking/filtering =\> very different behavior
+
+```{python}
+
+#Both filter as desired
+penguins.loc[penguins['sex'] == 'Female']  #more explicit and safer
+
+penguins[penguins['sex'] == 'Female'] #you'll see this a lot though
+```
+
+The format for using `.loc[]` is as follows: `data_frame.loc[rows, columns]`.
+
+-   The rows parameter is generally a boolean (True/False) expression which evaluates to True for the rows you want to keep
+-   the columns parameter is generally a list of columns you'd like to keep.
+-   We can use a colon in either position to indicate we'd like to keep all of the rows/cols
+
+```{python}
+#Gets all rows of females penguins and shows all columns from/between species to bill_depth_mm.
+penguins.loc[penguins['sex'] == 'Female', 'species':'bill_depth_mm']
+```
+
+```{python}
+#Gets all rows of females penguins and only shows the 2 specified cols
+penguins.loc[penguins['sex'] == 'Female', ['species','bill_depth_mm']]
+```
+
+# Follow up on loc
+
+Often, folks will try and assign values to a subset of a df without usoing `.loc`. This causes warnings or errors, depending on the version of pandas.
+
+So the following example is a classic pandas gotcha.
+
+```{python}
+
+#create a SD
+df = pd.DataFrame(data = {
+    'name': ['Alice', 'Bob', 'Charlie', 'David'],
+    'age': [25, 30, 22, 28],
+    'city': ['New York', 'London', 'Paris', 'Tokyo']
+})
+
+#Setting the index col to name
+df = df.set_index('name')
+df
+```
+
+```{python}
+
+#This correctly gets the rows where age > 25
+df[df['age'] > 25]
+
+#This correctly gets the rows where age > 25 and then selects just
+#the city col from that subset.
+df[df['age'] > 25]['city']
+
+#If we add an equal sign to the above code (like we did below), then 
+# we're trying to update the city of any row where age is greater than 25 to be DC.
+# This gives a pandas warning/error (depending on version of pandas)
+df[df['age'] > 25]['city'] = 'DC'
+df
+```
+
+However, if we use `loc`, we're essentially telling Python, "I know what I am doing - make the change to the original dataframe please." So no errors/warnings appear.
+
+```{python}
+
+#Not using loc can cause Copy Warnings - Loc gets you out of that
+
+df.loc[df['age'] > 25, 'city'] = 'DC'
+df
+```
+
+# `.iloc`
+
+FYI: `.iloc` ignores index and gets rows via integer locations.
+
+```{python}
+#Series
+df.iloc[2]
+print(type(df.iloc[2]))
+
+print("------------------------------")
+
+#dataframe
+df.iloc[[2]]
+print(type(df.iloc[[2]]))
+
+```
+
+Can use `iloc` to get the values associated with the max or min.
+
+```{python}
+
+#Get the oldest person by sorting and using iloc
+df.sort_values("age", ascending=False).iloc[[0]]
+
+```
+
+Discuss: `plotnine` -\> do you feel it's very similar to R?
