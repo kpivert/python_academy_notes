@@ -99,7 +99,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div id="9d4f71ee" class="cell" data-execution_count="1">
+<div id="093ee56c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins_raw, load_penguins</span>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>.info()</code> Very, very helpful</li>
 </ul>
-<div id="b172a94f" class="cell" data-execution_count="2">
+<div id="5161333c" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
@@ -152,7 +152,7 @@ memory usage: 45.8+ KB</code></pre>
 <li>Remember, pass multiple values as a single argument using a <strong>list</strong>, with values within <code>[ ]</code></li>
 <li>When supply a list of column names as argument, result is <strong>DataFrame</strong> NOT <strong>Series</strong></li>
 </ul>
-<div id="0408585f" class="cell" data-execution_count="3">
+<div id="1c219e69" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df[<span class="st">'Individual ID'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>0        N1A1
@@ -169,7 +169,7 @@ memory usage: 45.8+ KB</code></pre>
 Name: Individual ID, Length: 344, dtype: object</code></pre>
 </div>
 </div>
-<div id="27325040" class="cell" data-execution_count="4">
+<div id="cfe56463" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df[[<span class="st">'Individual ID'</span>, <span class="st">'Species'</span>, <span class="st">'Island'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -258,7 +258,7 @@ Name: Individual ID, Length: 344, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="60839495" class="cell" data-execution_count="5">
+<div id="6e108ad5" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df[[<span class="st">'Species'</span>, <span class="st">'Region'</span>, <span class="st">'Stage'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -357,7 +357,7 @@ Name: Individual ID, Length: 344, dtype: object</code></pre>
 </ul></li>
 <li>NB: You have to reassign it. It won’t make the change permanent without reassigning the object…</li>
 </ul>
-<div id="b54d83b9" class="cell" data-execution_count="6">
+<div id="548e0566" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.rename(columns <span class="op">=</span> {<span class="st">'studyName'</span>: <span class="st">'Study Name'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <div>
@@ -614,7 +614,7 @@ Name: Individual ID, Length: 344, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="5606c4f7" class="cell" data-execution_count="7">
+<div id="2a2fd713" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.rename(columns <span class="op">=</span> {<span class="st">'studyName'</span>: <span class="st">'Study'</span>, <span class="st">'Sample Number'</span>: <span class="st">'Sample'</span>, <span class="st">'Individual ID'</span>: <span class="st">'ID'</span>})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="7">
 <div>
@@ -877,7 +877,7 @@ Name: Individual ID, Length: 344, dtype: object</code></pre>
 <ul>
 <li>Can use <code>.loc[]</code> to filter data sets using a Boolean array as an input</li>
 </ul>
-<div id="89c7f25a" class="cell" data-execution_count="8">
+<div id="c4801ff2" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[penguins_raw_df[<span class="st">'Island'</span>] <span class="op">==</span> <span class="st">'Torgersen'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="8">
 <div>
@@ -1965,7 +1965,7 @@ Name: Individual ID, Length: 344, dtype: object</code></pre>
 <li>Row index starts at 0 and increases by 1 for each row</li>
 <li>Row index values always shown on left of DataFrame</li>
 </ul>
-<div id="41f3dbcb" class="cell" data-execution_count="9">
+<div id="0d7ff9d1" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="9">
 <pre><code>studyName                                          PAL0708
@@ -1988,14 +1988,14 @@ Comments                    Not enough blood for isotopes.
 Name: 0, dtype: object</code></pre>
 </div>
 </div>
-<div id="df20f1cd" class="cell" data-execution_count="10">
+<div id="6c6fda22" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[<span class="dv">1</span>, <span class="st">'Species'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>'Adelie Penguin (Pygoscelis adeliae)'</code></pre>
 </div>
 </div>
 <p>Can use <code>.loc[]</code> to select &gt;1 value. Use lists of row indicies and column names</p>
-<div id="2cac527d" class="cell" data-execution_count="11">
+<div id="f002670d" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>], [<span class="st">'Species'</span>, <span class="st">'Region'</span>, <span class="st">'Island'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <div>
@@ -2047,7 +2047,7 @@ Name: 0, dtype: object</code></pre>
 <ul>
 <li>If row indicies or columns in consecutive order can use <code>:</code> which will grab all entries from the <code>start</code> element <strong>up to and and including</strong> the <code>end</code> element</li>
 </ul>
-<div id="622aabff" class="cell" data-execution_count="12">
+<div id="3a829d29" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[<span class="dv">0</span>:<span class="dv">3</span>, <span class="st">'Species'</span>:<span class="st">'Island'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
 <div>
@@ -2093,7 +2093,7 @@ Name: 0, dtype: object</code></pre>
 </div>
 </div>
 </div>
-<div id="82bb7e99" class="cell" data-execution_count="13">
+<div id="ad0db671" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[<span class="dv">25</span>:<span class="dv">35</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 <div>
@@ -2352,7 +2352,7 @@ Name: 0, dtype: object</code></pre>
 </section>
 <section id="as-a-shorthand-for-all-rows-or-all-columns" class="level3">
 <h3 class="anchored" data-anchor-id="as-a-shorthand-for-all-rows-or-all-columns"><code>:</code> as a shorthand for ALL ROWS or ALL COLUMNS</h3>
-<div id="7ee15753" class="cell" data-execution_count="14">
+<div id="c8f5a23b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.loc[:, [<span class="st">'Species'</span>, <span class="st">'Comments'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
 <div>
@@ -2430,7 +2430,7 @@ Name: 0, dtype: object</code></pre>
 </div>
 </div>
 <p>NB: if only selecting columns, use <code>[ ]</code> instead of <code>.loc[]</code></p>
-<div id="30ab9036" class="cell" data-execution_count="15">
+<div id="2a59a375" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df[[<span class="st">'Species'</span>, <span class="st">'Comments'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <div>
@@ -2522,7 +2522,7 @@ Name: 0, dtype: object</code></pre>
 <li>Similar to <code>slice()</code></li>
 <li><code>.iloc[]</code> <code>i</code>ndex <code>loc</code>ation (computer-readable) vs.&nbsp;<code>.loc[]</code> which is human readable locations (labels)</li>
 </ul>
-<div id="b8bfa10b" class="cell" data-execution_count="16">
+<div id="58193b43" class="cell" data-execution_count="16">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>penguins_raw_df.iloc[<span class="dv">0</span>, <span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>'PAL0708'</code></pre>
@@ -2531,7 +2531,7 @@ Name: 0, dtype: object</code></pre>
 </section>
 <section id="modify-add-derive-variables-from-data-using-notation" class="level3">
 <h3 class="anchored" data-anchor-id="modify-add-derive-variables-from-data-using-notation">Modify, Add, Derive Variables from Data Using <code>[ ]</code> Notation</h3>
-<div id="26894961" class="cell" data-execution_count="17">
+<div id="82bfef41" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>penguins_size <span class="op">=</span> (</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  penguins_df[[</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'species'</span>, <span class="st">'flipper_length_mm'</span>, <span class="st">'body_mass_g'</span></span>
@@ -2540,7 +2540,7 @@ Name: 0, dtype: object</code></pre>
 <span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>      columns <span class="op">=</span> {<span class="st">'flipper_length_mm'</span>: <span class="st">'flipper_length'</span>, <span class="st">'body_mass_g'</span>: <span class="st">'body_mass'</span>})</span>
 <span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="bbbb6c3a" class="cell" data-execution_count="18">
+<div id="92cd2636" class="cell" data-execution_count="18">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass'</span>] <span class="op">/</span> <span class="dv">1000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="18">
 <pre><code>0      3.750
@@ -2560,7 +2560,7 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 </section>
 <section id="python-like-r-is-vectorized." class="level3">
 <h3 class="anchored" data-anchor-id="python-like-r-is-vectorized.">Python, like R, is vectorized….</h3>
-<div id="14d5c410" class="cell" data-execution_count="19">
+<div id="273052d1" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass_kg'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass'</span>] <span class="op">/</span> <span class="dv">1000</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>penguins_size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2667,15 +2667,15 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 <ol type="1">
 <li>Select <strong>New</strong> column with <code>[ ]</code> as if it always existed</li>
 </ol>
-<div id="eda45181" class="cell" data-execution_count="20">
+<div id="8f3dab0e" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'flipper_length_cm'</span>] <span class="op">=</span> penguins_size[<span class="st">'flipper_length'</span>] <span class="op">/</span> <span class="dv">100</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># penguins_size['flipper_length'] * 0.1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="9e4f957b" class="cell" data-execution_count="21">
+<div id="4756ab02" class="cell" data-execution_count="21">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass'</span>] <span class="op">/</span> <span class="dv">1000</span></span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'flipper_length'</span>] <span class="op">=</span> penguins_size[<span class="st">'flipper_length'</span>] <span class="op">/</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="59d0c1dd" class="cell" data-execution_count="22">
+<div id="e86f29a9" class="cell" data-execution_count="22">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'flipper_length_mean'</span>] <span class="op">=</span> penguins_size[<span class="st">'flipper_length'</span>].mean()</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'flipper_length'</span>] <span class="op">=</span> penguins_size[<span class="st">'flipper_length'</span>] <span class="op">-</span> penguins_size[<span class="st">'flipper_length_mean'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -2776,7 +2776,7 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 </section>
 <section id="challenge-1" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-1">Challenge 1</h3>
-<div id="bd55a77e" class="cell" data-execution_count="23">
+<div id="5cfcb477" class="cell" data-execution_count="23">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'rank'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass'</span>].rank(method <span class="op">=</span> <span class="st">'first'</span>)</span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>penguins_size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="23">
@@ -2917,7 +2917,7 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 </section>
 <section id="challenge-2" class="level3">
 <h3 class="anchored" data-anchor-id="challenge-2">Challenge 2</h3>
-<div id="e3c093c2" class="cell" data-execution_count="24">
+<div id="a04d2fd8" class="cell" data-execution_count="24">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass_diff'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass'</span>] <span class="op">-</span> penguins_size[<span class="st">'body_mass'</span>].mean()</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass_diff'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass_diff'</span>].<span class="bu">abs</span>()</span>
 <span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass_diff'</span>] <span class="op">=</span> penguins_size[<span class="st">'body_mass_diff'</span>].<span class="bu">round</span>(decimals <span class="op">=</span> <span class="dv">2</span>)</span>
@@ -3083,7 +3083,7 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 <li><code>.apply()</code> method will run function iteratively.</li>
 <li><code>func</code> is actual function to apply. JUST THE NAME ONLY. It does NOT need <code>()</code></li>
 </ol>
-<div id="2204b5ee" class="cell" data-execution_count="25">
+<div id="7d1ab93c" class="cell" data-execution_count="25">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass'</span>].<span class="bu">apply</span>(<span class="kw">lambda</span> x: x <span class="op">**</span> <span class="dv">2</span>) <span class="co">## Anonymous function! Much easier than R. </span></span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'body_mass'</span>].<span class="bu">apply</span>(np.log10)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="25">
@@ -3101,7 +3101,7 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 Name: body_mass, Length: 344, dtype: float64</code></pre>
 </div>
 </div>
-<div id="ca4d060e" class="cell" data-execution_count="26">
+<div id="825264bb" class="cell" data-execution_count="26">
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="bu">type</span>(penguins_size[<span class="st">'body_mass'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="26">
 <pre><code>pandas.core.series.Series</code></pre>
@@ -3111,10 +3111,10 @@ Name: body_mass, Length: 344, dtype: float64</code></pre>
 </section>
 <section id="chainedassignmenterror" class="level3">
 <h3 class="anchored" data-anchor-id="chainedassignmenterror">ChainedAssignmentError</h3>
-<div id="77b76ddc" class="cell" data-execution_count="27">
+<div id="7904d4c5" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>penguins_size[<span class="st">'flipper_length'</span>][<span class="dv">0</span>] <span class="op">=</span> <span class="dv">181</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>/var/folders/zr/6kznk2wd5qg20zv76qj1h8m80000gn/T/ipykernel_34861/3241208630.py:1: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
+<pre><code>/var/folders/zr/6kznk2wd5qg20zv76qj1h8m80000gn/T/ipykernel_70972/3241208630.py:1: FutureWarning: ChainedAssignmentError: behaviour will change in pandas 3.0!
 You are setting values through chained assignment. Currently this works in certain cases, but when using Copy-on-Write (which will become the default behaviour in pandas 3.0) this will never work to update the original DataFrame or Series, because the intermediate object on which we are setting values will behave as a copy.
 A typical example is when you are setting values in a column of a DataFrame, like:
 
@@ -3125,7 +3125,7 @@ Use `df.loc[row_indexer, "col"] = values` instead, to perform the assignment in 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
 
   penguins_size['flipper_length'][0] = 181
-/var/folders/zr/6kznk2wd5qg20zv76qj1h8m80000gn/T/ipykernel_34861/3241208630.py:1: SettingWithCopyWarning: 
+/var/folders/zr/6kznk2wd5qg20zv76qj1h8m80000gn/T/ipykernel_70972/3241208630.py:1: SettingWithCopyWarning: 
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
@@ -3138,7 +3138,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <p><code>&lt;dataset&gt;['column_name'] = &lt;new_values&gt;</code></p>
 <p>To work with specific rows use <code>.loc[]</code></p>
 <p><code>&lt;dataset&gt;.loc[&lt;row_index&gt;, &lt;'column_name'&gt;] = &lt;new_value&gt;</code></p>
-<div id="8325da8e" class="cell" data-execution_count="28">
+<div id="d0a864c0" class="cell" data-execution_count="28">
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>penguins_size.loc[penguins_size[<span class="st">'species'</span>] <span class="op">==</span> <span class="st">'Adelie'</span>, <span class="st">'species'</span>] <span class="op">=</span> <span class="st">"ADELIE"</span></span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>penguins_size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="28">
@@ -3293,7 +3293,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <h3 class="anchored" data-anchor-id="copy_on_write-option"><code>copy_on_write</code> Option</h3>
 <p><code>pd.set_option("mode.copy_on_write", True)</code></p>
 <p>Chained assignment won’t work with this option</p>
-<div id="79bc21da" class="cell" data-execution_count="29">
+<div id="69c29408" class="cell" data-execution_count="29">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>penguins_size.loc[<span class="dv">0</span>, <span class="st">'body_mass'</span>] <span class="op">=</span> <span class="dv">3850</span></span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>penguins_size</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="29">
@@ -3443,6 +3443,2314 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 </div>
 </div>
+</section>
+<section id="arrange-rows-in-data" class="level3">
+<h3 class="anchored" data-anchor-id="arrange-rows-in-data">Arrange rows in Data</h3>
+<p>Using <code>.sort_values()</code></p>
+<div id="df4495a7" class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>penguins <span class="op">=</span> load_penguins()</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>penguins</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="30">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.5</td>
+<td>17.4</td>
+<td>186.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>36.7</td>
+<td>19.3</td>
+<td>193.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">340</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>43.5</td>
+<td>18.1</td>
+<td>202.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">341</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>49.6</td>
+<td>18.2</td>
+<td>193.0</td>
+<td>3775.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">342</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.8</td>
+<td>19.0</td>
+<td>210.0</td>
+<td>4100.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">343</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>50.2</td>
+<td>18.7</td>
+<td>198.0</td>
+<td>3775.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<div id="8c74610f" class="cell" data-execution_count="31">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values(<span class="st">'bill_length_mm'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="31">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">142</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>32.1</td>
+<td>15.5</td>
+<td>188.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>33.1</td>
+<td>16.1</td>
+<td>178.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">92</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>34.0</td>
+<td>17.1</td>
+<td>185.0</td>
+<td>3400.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.1</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3475.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">253</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.9</td>
+<td>17.0</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">293</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>58.0</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">185</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>59.6</td>
+<td>17.0</td>
+<td>230.0</td>
+<td>6050.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<p><code>.sort_values()</code> is method of DataFrame class. Can only use on DataFrame.</p>
+<p>Required arguement = <code>by</code></p>
+<p><code>&lt;dataset&gt;.sort_values('&lt;column&gt;')</code></p>
+<p>OR</p>
+<p><code>&lt;dataset&gt;.sort_values(['&lt;column1&gt;', '&lt;column2&gt;', ...])</code></p>
+<p>By default, <code>.sort_values()</code> will sort in ascending order</p>
+<p>It also returns a <strong>modified copy of original DataFrame.</strong> If you want to save you have to assign it.</p>
+<div id="318a177b" class="cell" data-execution_count="32">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values(<span class="st">'island'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="32">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">171</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>48.7</td>
+<td>15.1</td>
+<td>222.0</td>
+<td>5350.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">238</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>43.4</td>
+<td>14.4</td>
+<td>218.0</td>
+<td>4600.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">237</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.8</td>
+<td>17.3</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">236</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>44.9</td>
+<td>13.8</td>
+<td>212.0</td>
+<td>4750.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">235</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>50.0</td>
+<td>15.9</td>
+<td>224.0</td>
+<td>5350.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">72</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.6</td>
+<td>17.2</td>
+<td>196.0</td>
+<td>3550.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">71</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.7</td>
+<td>18.4</td>
+<td>190.0</td>
+<td>3900.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">68</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>35.9</td>
+<td>16.6</td>
+<td>190.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.1</td>
+<td>18.7</td>
+<td>181.0</td>
+<td>3750.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="tie-breakers" class="level3">
+<h3 class="anchored" data-anchor-id="tie-breakers">Tie Breakers</h3>
+<p>To sort rows that share same value, must give <code>.sort_values()</code> a second column to use as a tie breaker.</p>
+<div id="f60d2792" class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values([<span class="st">'island'</span>, <span class="st">'bill_length_mm'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="33">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">54</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>34.5</td>
+<td>18.1</td>
+<td>187.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">52</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.0</td>
+<td>17.9</td>
+<td>190.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">100</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.0</td>
+<td>17.9</td>
+<td>192.0</td>
+<td>3725.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">25</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.3</td>
+<td>18.9</td>
+<td>187.0</td>
+<td>3800.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">66</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>35.5</td>
+<td>16.2</td>
+<td>195.0</td>
+<td>3350.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">131</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>43.1</td>
+<td>19.2</td>
+<td>197.0</td>
+<td>3500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">129</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>44.1</td>
+<td>18.0</td>
+<td>210.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">73</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>45.8</td>
+<td>18.9</td>
+<td>197.0</td>
+<td>4150.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">19</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>46.0</td>
+<td>21.5</td>
+<td>194.0</td>
+<td>4200.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<p>Can provide as many columns to tie break/sort by, but MUST be passed as a LIST with <code>[]</code></p>
+<p><code>.sort_values()</code> uses each new column to break ties among rows that share identical values in all of the preceding columns</p>
+<p>Default behavior: - numeric: smallest number at top - string: alpha order from A-Z then a-z - another data type: similar ascending pattern</p>
+</section>
+<section id="descending-order" class="level3">
+<h3 class="anchored" data-anchor-id="descending-order">Descending Order</h3>
+<p>Use <code>ascending = False</code></p>
+<div id="733a265e" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values(<span class="st">'bill_length_mm'</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">185</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>59.6</td>
+<td>17.0</td>
+<td>230.0</td>
+<td>6050.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">293</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>58.0</td>
+<td>17.8</td>
+<td>181.0</td>
+<td>3700.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">253</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.9</td>
+<td>17.0</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">339</td>
+<td>Chinstrap</td>
+<td>Dream</td>
+<td>55.8</td>
+<td>19.8</td>
+<td>207.0</td>
+<td>4000.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">267</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.1</td>
+<td>16.0</td>
+<td>230.0</td>
+<td>5850.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">98</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>33.1</td>
+<td>16.1</td>
+<td>178.0</td>
+<td>2900.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">142</td>
+<td>Adelie</td>
+<td>Dream</td>
+<td>32.1</td>
+<td>15.5</td>
+<td>188.0</td>
+<td>3050.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<p>For multiple columns</p>
+<ul>
+<li>Provide a list of booleans</li>
+<li><code>Nan</code> appear at end… <code>help(na_position)</code> shows default value is <code>last</code></li>
+</ul>
+<div id="4eb15987" class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values(</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'island'</span>, <span class="st">'bill_length_mm'</span>], </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>  ascending <span class="op">=</span> [<span class="va">True</span>, <span class="va">False</span>]</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="35">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">185</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>59.6</td>
+<td>17.0</td>
+<td>230.0</td>
+<td>6050.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">253</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.9</td>
+<td>17.0</td>
+<td>228.0</td>
+<td>5600.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">267</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>55.1</td>
+<td>16.0</td>
+<td>230.0</td>
+<td>5850.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">215</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>54.3</td>
+<td>15.7</td>
+<td>231.0</td>
+<td>5650.0</td>
+<td>male</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">259</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>53.4</td>
+<td>15.8</td>
+<td>219.0</td>
+<td>5500.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">80</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>17.2</td>
+<td>189.0</td>
+<td>3200.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">18</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.4</td>
+<td>18.4</td>
+<td>184.0</td>
+<td>3325.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.1</td>
+<td>18.1</td>
+<td>193.0</td>
+<td>3475.0</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">70</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>33.5</td>
+<td>19.0</td>
+<td>190.0</td>
+<td>3600.0</td>
+<td>female</td>
+<td>2008</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2007</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<p>Hmmm… none of these <code>help()</code> call worked</p>
+<div id="5374d6b3" class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(na_position)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pd.DataFrame.na_position)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bcb8d9c0" class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>penguins.sort_values(</span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  [<span class="st">'island'</span>, <span class="st">'year'</span>, <span class="st">'flipper_length_mm'</span>],</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>  ascending <span class="op">=</span> [<span class="va">False</span>, <span class="va">True</span>, <span class="va">False</span>]</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">species</th>
+<th data-quarto-table-cell-role="th">island</th>
+<th data-quarto-table-cell-role="th">bill_length_mm</th>
+<th data-quarto-table-cell-role="th">bill_depth_mm</th>
+<th data-quarto-table-cell-role="th">flipper_length_mm</th>
+<th data-quarto-table-cell-role="th">body_mass_g</th>
+<th data-quarto-table-cell-role="th">sex</th>
+<th data-quarto-table-cell-role="th">year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">14</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>34.6</td>
+<td>21.1</td>
+<td>198.0</td>
+<td>4400.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">17</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>42.5</td>
+<td>20.7</td>
+<td>197.0</td>
+<td>4500.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>40.3</td>
+<td>18.0</td>
+<td>195.0</td>
+<td>3250.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>39.2</td>
+<td>19.6</td>
+<td>195.0</td>
+<td>4675.0</td>
+<td>male</td>
+<td>2007</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">16</td>
+<td>Adelie</td>
+<td>Torgersen</td>
+<td>38.7</td>
+<td>19.0</td>
+<td>195.0</td>
+<td>3450.0</td>
+<td>female</td>
+<td>2007</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">107</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.2</td>
+<td>20.0</td>
+<td>190.0</td>
+<td>3900.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">105</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>39.7</td>
+<td>18.9</td>
+<td>184.0</td>
+<td>3550.0</td>
+<td>male</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">102</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>37.7</td>
+<td>16.0</td>
+<td>183.0</td>
+<td>3075.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">108</td>
+<td>Adelie</td>
+<td>Biscoe</td>
+<td>38.1</td>
+<td>17.0</td>
+<td>181.0</td>
+<td>3175.0</td>
+<td>female</td>
+<td>2009</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">271</td>
+<td>Gentoo</td>
+<td>Biscoe</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>2009</td>
+</tr>
+</tbody>
+</table>
+
+<p>344 rows × 8 columns</p>
+</div>
+</div>
+</div>
+<div id="8459e356" class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(pd.DataFrame.sort_values)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on function sort_values in module pandas.core.frame:
+
+sort_values(
+    self,
+    by: 'IndexLabel',
+    *,
+    axis: 'Axis' = 0,
+    ascending: 'bool | list[bool] | tuple[bool, ...]' = True,
+    inplace: 'bool' = False,
+    kind: 'SortKind' = 'quicksort',
+    na_position: 'str' = 'last',
+    ignore_index: 'bool' = False,
+    key: 'ValueKeyFunc | None' = None
+) -&gt; 'DataFrame | None'
+    Sort by the values along either axis.
+
+    Parameters
+    ----------
+    by : str or list of str
+        Name or list of names to sort by.
+
+        - if `axis` is 0 or `'index'` then `by` may contain index
+          levels and/or column labels.
+        - if `axis` is 1 or `'columns'` then `by` may contain column
+          levels and/or index labels.
+    axis : "{0 or 'index', 1 or 'columns'}", default 0
+         Axis to be sorted.
+    ascending : bool or list of bool, default True
+         Sort ascending vs. descending. Specify list for multiple sort
+         orders.  If this is a list of bools, must match the length of
+         the by.
+    inplace : bool, default False
+         If True, perform operation in-place.
+    kind : {'quicksort', 'mergesort', 'heapsort', 'stable'}, default 'quicksort'
+         Choice of sorting algorithm. See also :func:`numpy.sort` for more
+         information. `mergesort` and `stable` are the only stable algorithms. For
+         DataFrames, this option is only applied when sorting on a single
+         column or label.
+    na_position : {'first', 'last'}, default 'last'
+         Puts NaNs at the beginning if `first`; `last` puts NaNs at the
+         end.
+    ignore_index : bool, default False
+         If True, the resulting axis will be labeled 0, 1, …, n - 1.
+    key : callable, optional
+        Apply the key function to the values
+        before sorting. This is similar to the `key` argument in the
+        builtin :meth:`sorted` function, with the notable difference that
+        this `key` function should be *vectorized*. It should expect a
+        ``Series`` and return a Series with the same shape as the input.
+        It will be applied to each column in `by` independently.
+
+    Returns
+    -------
+    DataFrame or None
+        DataFrame with sorted values or None if ``inplace=True``.
+
+    See Also
+    --------
+    DataFrame.sort_index : Sort a DataFrame by the index.
+    Series.sort_values : Similar method for a Series.
+
+    Examples
+    --------
+    &gt;&gt;&gt; df = pd.DataFrame({
+    ...     'col1': ['A', 'A', 'B', np.nan, 'D', 'C'],
+    ...     'col2': [2, 1, 9, 8, 7, 4],
+    ...     'col3': [0, 1, 9, 4, 2, 3],
+    ...     'col4': ['a', 'B', 'c', 'D', 'e', 'F']
+    ... })
+    &gt;&gt;&gt; df
+      col1  col2  col3 col4
+    0    A     2     0    a
+    1    A     1     1    B
+    2    B     9     9    c
+    3  NaN     8     4    D
+    4    D     7     2    e
+    5    C     4     3    F
+
+    Sort by col1
+
+    &gt;&gt;&gt; df.sort_values(by=['col1'])
+      col1  col2  col3 col4
+    0    A     2     0    a
+    1    A     1     1    B
+    2    B     9     9    c
+    5    C     4     3    F
+    4    D     7     2    e
+    3  NaN     8     4    D
+
+    Sort by multiple columns
+
+    &gt;&gt;&gt; df.sort_values(by=['col1', 'col2'])
+      col1  col2  col3 col4
+    1    A     1     1    B
+    0    A     2     0    a
+    2    B     9     9    c
+    5    C     4     3    F
+    4    D     7     2    e
+    3  NaN     8     4    D
+
+    Sort Descending
+
+    &gt;&gt;&gt; df.sort_values(by='col1', ascending=False)
+      col1  col2  col3 col4
+    4    D     7     2    e
+    5    C     4     3    F
+    2    B     9     9    c
+    0    A     2     0    a
+    1    A     1     1    B
+    3  NaN     8     4    D
+
+    Putting NAs first
+
+    &gt;&gt;&gt; df.sort_values(by='col1', ascending=False, na_position='first')
+      col1  col2  col3 col4
+    3  NaN     8     4    D
+    4    D     7     2    e
+    5    C     4     3    F
+    2    B     9     9    c
+    0    A     2     0    a
+    1    A     1     1    B
+
+    Sorting with a key function
+
+    &gt;&gt;&gt; df.sort_values(by='col4', key=lambda col: col.str.lower())
+       col1  col2  col3 col4
+    0    A     2     0    a
+    1    A     1     1    B
+    2    B     9     9    c
+    3  NaN     8     4    D
+    4    D     7     2    e
+    5    C     4     3    F
+
+    Natural sort with the key argument,
+    using the `natsort &lt;https://github.com/SethMMorton/natsort&gt;` package.
+
+    &gt;&gt;&gt; df = pd.DataFrame({
+    ...    "time": ['0hr', '128hr', '72hr', '48hr', '96hr'],
+    ...    "value": [10, 20, 30, 40, 50]
+    ... })
+    &gt;&gt;&gt; df
+        time  value
+    0    0hr     10
+    1  128hr     20
+    2   72hr     30
+    3   48hr     40
+    4   96hr     50
+    &gt;&gt;&gt; from natsort import index_natsorted
+    &gt;&gt;&gt; df.sort_values(
+    ...     by="time",
+    ...     key=lambda x: np.argsort(index_natsorted(df["time"]))
+    ... )
+        time  value
+    0    0hr     10
+    3   48hr     40
+    2   72hr     30
+    4   96hr     50
+    1  128hr     20
+</code></pre>
+</div>
+</div>
+</section>
+<section id="aesthetic-mapping-in-plotnine" class="level3">
+<h3 class="anchored" data-anchor-id="aesthetic-mapping-in-plotnine">Aesthetic Mapping in <code>plotnine()</code></h3>
+<div id="39d3159f" class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotnine <span class="im">as</span> p9</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine <span class="im">import</span> ggplot, aes, geom_point, geom_smooth, geom_line</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> plotnine.data <span class="im">import</span> mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="e3030b9b" class="cell" data-execution_count="40">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>mpg</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">manufacturer</th>
+<th data-quarto-table-cell-role="th">model</th>
+<th data-quarto-table-cell-role="th">displ</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">cyl</th>
+<th data-quarto-table-cell-role="th">trans</th>
+<th data-quarto-table-cell-role="th">drv</th>
+<th data-quarto-table-cell-role="th">cty</th>
+<th data-quarto-table-cell-role="th">hwy</th>
+<th data-quarto-table-cell-role="th">fl</th>
+<th data-quarto-table-cell-role="th">class</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>audi</td>
+<td>a4</td>
+<td>1.8</td>
+<td>1999</td>
+<td>4</td>
+<td>auto(l5)</td>
+<td>f</td>
+<td>18</td>
+<td>29</td>
+<td>p</td>
+<td>compact</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>audi</td>
+<td>a4</td>
+<td>1.8</td>
+<td>1999</td>
+<td>4</td>
+<td>manual(m5)</td>
+<td>f</td>
+<td>21</td>
+<td>29</td>
+<td>p</td>
+<td>compact</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>audi</td>
+<td>a4</td>
+<td>2.0</td>
+<td>2008</td>
+<td>4</td>
+<td>manual(m6)</td>
+<td>f</td>
+<td>20</td>
+<td>31</td>
+<td>p</td>
+<td>compact</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>audi</td>
+<td>a4</td>
+<td>2.0</td>
+<td>2008</td>
+<td>4</td>
+<td>auto(av)</td>
+<td>f</td>
+<td>21</td>
+<td>30</td>
+<td>p</td>
+<td>compact</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>audi</td>
+<td>a4</td>
+<td>2.8</td>
+<td>1999</td>
+<td>6</td>
+<td>auto(l5)</td>
+<td>f</td>
+<td>16</td>
+<td>26</td>
+<td>p</td>
+<td>compact</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">229</td>
+<td>volkswagen</td>
+<td>passat</td>
+<td>2.0</td>
+<td>2008</td>
+<td>4</td>
+<td>auto(s6)</td>
+<td>f</td>
+<td>19</td>
+<td>28</td>
+<td>p</td>
+<td>midsize</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">230</td>
+<td>volkswagen</td>
+<td>passat</td>
+<td>2.0</td>
+<td>2008</td>
+<td>4</td>
+<td>manual(m6)</td>
+<td>f</td>
+<td>21</td>
+<td>29</td>
+<td>p</td>
+<td>midsize</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">231</td>
+<td>volkswagen</td>
+<td>passat</td>
+<td>2.8</td>
+<td>1999</td>
+<td>6</td>
+<td>auto(l5)</td>
+<td>f</td>
+<td>16</td>
+<td>26</td>
+<td>p</td>
+<td>midsize</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">232</td>
+<td>volkswagen</td>
+<td>passat</td>
+<td>2.8</td>
+<td>1999</td>
+<td>6</td>
+<td>manual(m5)</td>
+<td>f</td>
+<td>18</td>
+<td>26</td>
+<td>p</td>
+<td>midsize</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">233</td>
+<td>volkswagen</td>
+<td>passat</td>
+<td>3.6</td>
+<td>2008</td>
+<td>6</td>
+<td>auto(s6)</td>
+<td>f</td>
+<td>17</td>
+<td>26</td>
+<td>p</td>
+<td>midsize</td>
+</tr>
+</tbody>
+</table>
+
+<p>234 rows × 11 columns</p>
+</div>
+</div>
+</div>
+<div id="59e06a2d" class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    geom_point()</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-42-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="454ca398" class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>, </span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span>,</span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb53-9"><a href="#cb53-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb53-10"><a href="#cb53-10" aria-hidden="true" tabindex="-1"></a>    geom_point()</span>
+<span id="cb53-11"><a href="#cb53-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-43-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>NB:</strong> To fix labels from being cut off:</p>
+<p><code>from matplotlib import rcParams</code> <code>rcParams.update({"savefig.bbox": "tight"})</code></p>
+</section>
+<section id="aesthetics" class="level2">
+<h2 class="anchored" data-anchor-id="aesthetics">Aesthetics</h2>
+<section id="size" class="level3">
+<h3 class="anchored" data-anchor-id="size"><code>size</code></h3>
+<div id="e9de7a03" class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span>,</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  geom_point(</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>      size <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>  )  </span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/scales/scale_size.py:46: PlotnineWarning: Using size for a discrete variable is not advised.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-44-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="transparency-alpha" class="level3">
+<h3 class="anchored" data-anchor-id="transparency-alpha"><sub><code>transparency</code></sub> <code>alpha</code></h3>
+<div id="7bf79298" class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a>        alpha <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/scales/scale_alpha.py:71: PlotnineWarning: Using alpha for a discrete variable is not advised.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-45-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="shape" class="level3">
+<h3 class="anchored" data-anchor-id="shape"><code>shape</code></h3>
+<div id="8c2f0c0e" class="cell" data-execution_count="45">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span>,</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>      shape <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>    geom_point()</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-46-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="for-color-blind-check" class="level3">
+<h3 class="anchored" data-anchor-id="for-color-blind-check">For color blind check:</h3>
+<p><a href="https://www.color-blindness.com/coblis-color-blindness-simulator">Coblis</a></p>
+</section>
+<section id="local-aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="local-aesthetics">Local aesthetics</h3>
+<div id="94c2b891" class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>    geom_smooth()</span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-47-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="1b6d3318" class="cell" data-execution_count="47">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb61-5"><a href="#cb61-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb61-6"><a href="#cb61-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb61-7"><a href="#cb61-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb61-8"><a href="#cb61-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb61-9"><a href="#cb61-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb61-10"><a href="#cb61-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb61-11"><a href="#cb61-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb61-12"><a href="#cb61-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb61-13"><a href="#cb61-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb61-14"><a href="#cb61-14" aria-hidden="true" tabindex="-1"></a>    geom_smooth(</span>
+<span id="cb61-15"><a href="#cb61-15" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb61-16"><a href="#cb61-16" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb61-17"><a href="#cb61-17" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb61-18"><a href="#cb61-18" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb61-19"><a href="#cb61-19" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.
+/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-48-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="setting-vs-mapping-aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="setting-vs-mapping-aesthetics">Setting vs Mapping Aesthetics</h3>
+<div id="5eb8aeb3" class="cell" data-execution_count="48">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'blue'</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-49-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="a911049a" class="cell" data-execution_count="49">
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb64-7"><a href="#cb64-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb64-8"><a href="#cb64-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb64-9"><a href="#cb64-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb64-10"><a href="#cb64-10" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'blue'</span>,</span>
+<span id="cb64-11"><a href="#cb64-11" aria-hidden="true" tabindex="-1"></a>      shape <span class="op">=</span> <span class="st">'x'</span>,</span>
+<span id="cb64-12"><a href="#cb64-12" aria-hidden="true" tabindex="-1"></a>      alpha <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb64-13"><a href="#cb64-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb64-14"><a href="#cb64-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-50-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="4d045164" class="cell" data-execution_count="50">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'class'</span>,</span>
+<span id="cb65-12"><a href="#cb65-12" aria-hidden="true" tabindex="-1"></a>        shape <span class="op">=</span> <span class="st">'fl'</span>,</span>
+<span id="cb65-13"><a href="#cb65-13" aria-hidden="true" tabindex="-1"></a>        alpha <span class="op">=</span> <span class="st">'displ'</span></span>
+<span id="cb65-14"><a href="#cb65-14" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb65-15"><a href="#cb65-15" aria-hidden="true" tabindex="-1"></a>    )  </span>
+<span id="cb65-16"><a href="#cb65-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-51-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<div id="8a0bea13" class="cell" data-execution_count="51">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a>        <span class="co"># color = 'cty'</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>        <span class="co"># size = 'cty'</span></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a>        shape <span class="op">=</span> <span class="st">'cty'</span></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="1cdc38c0" class="cell" data-execution_count="52">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span>,</span>
+<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'cty'</span></span>
+<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a>    geom_point() <span class="op">+</span></span>
+<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a>    p9.scale_color_gradient(</span>
+<span id="cb67-12"><a href="#cb67-12" aria-hidden="true" tabindex="-1"></a>      low <span class="op">=</span> <span class="st">'red'</span>, </span>
+<span id="cb67-13"><a href="#cb67-13" aria-hidden="true" tabindex="-1"></a>      high <span class="op">=</span> <span class="st">'darkblue'</span></span>
+<span id="cb67-14"><a href="#cb67-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb67-15"><a href="#cb67-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-53-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<div id="f2434bc9" class="cell" data-execution_count="53">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg,</span>
+<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span>,</span>
+<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'class'</span>,</span>
+<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a>      size <span class="op">=</span> <span class="st">'class'</span>,</span>
+<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a>      shape <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a>    geom_point()</span>
+<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/scales/scale_size.py:46: PlotnineWarning: Using size for a discrete variable is not advised.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-54-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<div id="cc90c832" class="cell" data-execution_count="54">
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg,</span>
+<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'displ &lt; 5'</span></span>
+<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-55-output-1.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<div id="896c503f" class="cell" data-execution_count="55">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a>ggplot.show(</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> mpg, </span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'displ'</span>,</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'hwy'</span></span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb71-8"><a href="#cb71-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb71-9"><a href="#cb71-9" aria-hidden="true" tabindex="-1"></a>    geom_point(</span>
+<span id="cb71-10"><a href="#cb71-10" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb71-11"><a href="#cb71-11" aria-hidden="true" tabindex="-1"></a>        color <span class="op">=</span> <span class="st">'class'</span></span>
+<span id="cb71-12"><a href="#cb71-12" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb71-13"><a href="#cb71-13" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb71-14"><a href="#cb71-14" aria-hidden="true" tabindex="-1"></a>    geom_smooth(</span>
+<span id="cb71-15"><a href="#cb71-15" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">"red"</span></span>
+<span id="cb71-16"><a href="#cb71-16" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb71-17"><a href="#cb71-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/Users/kurtispivert/Documents/00_gh/python_academy_notes/.venv/lib/python3.13/site-packages/plotnine/stats/smoothers.py:345: PlotnineWarning: Confidence intervals are not yet implemented for lowess smoothings.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="003_week_3_files/figure-html/cell-56-output-2.png" width="672" height="480" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-group-aesthetic" class="level3">
+<h3 class="anchored" data-anchor-id="the-group-aesthetic">The <code>group</code> Aesthetic</h3>
+<p>See <a href="https://plotnine.org/">https://plotnine.org/</a></p>
+<div id="4698f26b" class="cell" data-execution_count="56">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a>  ggplot(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> df, </span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>    mapping <span class="op">=</span> aes(</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>      x <span class="op">=</span> <span class="st">'x'</span>, </span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>      y <span class="op">=</span> <span class="st">'y'</span>,</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>      color <span class="op">=</span> <span class="st">'ID'</span></span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>    ) <span class="op">+</span></span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>    geom_line(</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a>      mapping <span class="op">=</span> aes(</span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a>        group <span class="op">=</span> <span class="st">'ID'</span> <span class="co"># &lt;-</span></span>
+<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="bd7904aa" class="cell" data-execution_count="57">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="bu">help</span>(geom_line)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Help on class geom_line in module plotnine.geoms.geom_line:
+
+class geom_line(plotnine.geoms.geom_path.geom_path)
+ |  geom_line(
+ |      mapping: 'aes | None' = None,
+ |      data: 'DataLike | None' = None,
+ |      **kwargs: 'Any'
+ |  )
+ |
+ |  Connected points
+ |
+ |  **Usage**
+ |
+ |      geom_line(
+ |          mapping=None,
+ |          data=None,
+ |          *,
+ |          stat="identity",
+ |          position="identity",
+ |          na_rm=False,
+ |          inherit_aes=True,
+ |          show_legend=None,
+ |          raster=False,
+ |          lineend="butt",
+ |          linejoin="round",
+ |          arrow=None,
+ |          **kwargs
+ |      )
+ |
+ |  Parameters
+ |  ----------
+ |  mapping : ~plotnine.mapping.aes.aes, default=None
+ |      Aesthetic mappings created with [aes](:class:`plotnine.mapping.aes.aes`). If specified and `inherit_aes=True`{.py}, it is combined with the default mapping for the plot. You must supply mapping if there is no plot mapping.
+ |
+ |       Aesthetic    Default value
+ |      -----------  ---------------
+ |      **x**
+ |      **y**
+ |      alpha        `1`{.py}
+ |      color        `'black'`{.py}
+ |      group
+ |      linetype     `'solid'`{.py}
+ |      size         `0.5`{.py}
+ |
+ |      The **bold** aesthetics are required.
+ |  data : ~pandas.DataFrame, default=None
+ |      The data to be displayed in this layer. If `None`{.py}, the data from from the `ggplot()`{.py} call is used. If specified, it overrides the data from the `ggplot()`{.py} call.
+ |  stat : str | ~plotnine.stats.stat.stat, default="identity"
+ |      The statistical transformation to use on the data for this layer. If it is a string, it must be the registered and known to Plotnine.
+ |  position : str | ~plotnine.positions.position.position, default="identity"
+ |      Position adjustment. If it is a string, it must be registered and known to Plotnine.
+ |  na_rm : bool, default=False
+ |      If `False`{.py}, removes missing values with a warning. If `True`{.py} silently removes missing values.
+ |  inherit_aes : bool, default=True
+ |      If `False`{.py}, overrides the default aesthetics.
+ |  show_legend : bool | dict, default=None
+ |      Whether this layer should be included in the legends. `None`{.py} the default, includes any aesthetics that are mapped. If a [](:class:`bool`), `False`{.py} never includes and `True`{.py} always includes. A [](:class:`dict`) can be used to *exclude* specific aesthetis of the layer from showing in the legend. e.g `show_legend={'color': False}`{.py}, any other aesthetic are included by default.
+ |  raster : bool, default=False
+ |      If `True`, draw onto this layer a raster (bitmap) object even ifthe final image is in vector format.
+ |  **kwargs: Any
+ |      Aesthetics or parameters used by the `stat`.
+ |
+ |  See Also
+ |  --------
+ |  plotnine.geom_path : For documentation of other parameters.
+ |
+ |  Method resolution order:
+ |      geom_line
+ |      plotnine.geoms.geom_path.geom_path
+ |      plotnine.geoms.geom.geom
+ |      abc.ABC
+ |      builtins.object
+ |
+ |  Methods defined here:
+ |
+ |  setup_data(self, data: 'pd.DataFrame') -&gt; 'pd.DataFrame'
+ |      Modify the data before drawing takes place
+ |
+ |      This function is called *before* position adjustments are done.
+ |      It is used by geoms to create the final aesthetics used for
+ |      drawing. The base class method does nothing, geoms can override
+ |      this method for two reasons:
+ |
+ |      1. The `stat` does not create all the aesthetics (usually
+ |         position aesthetics) required for drawing the `geom`,
+ |         but those aesthetics can be computed from the available
+ |         data. For example [](`~plotnine.geoms.geom_boxplot`)
+ |         and [](`~plotnine.geoms.geom_violin`).
+ |
+ |      2. The `geom` inherits from another `geom` (superclass) which
+ |         does the drawing and the superclass requires certain aesthetics
+ |         to be present in the data. For example
+ |         [](`~plotnine.geoms.geom_tile`) and
+ |         [](`~plotnine.geoms.geom_area`).
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data used for drawing the geom.
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          Data used for drawing the geom.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes defined here:
+ |
+ |  __abstractmethods__ = frozenset()
+ |
+ |  __annotations__ = {}
+ |
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from plotnine.geoms.geom_path.geom_path:
+ |
+ |  draw_panel(
+ |      self,
+ |      data: 'pd.DataFrame',
+ |      panel_params: 'panel_view',
+ |      coord: 'coord',
+ |      ax: 'Axes'
+ |  )
+ |      Plot all groups
+ |
+ |      For efficiency, geoms that do not need to partition
+ |      different groups before plotting should override this
+ |      method and avoid the groupby.
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data to be plotted by this geom. This is the
+ |          dataframe created in the plot_build pipeline.
+ |      panel_params :
+ |          The scale information as may be required by the
+ |          axes. At this point, that information is about
+ |          ranges, ticks and labels. Attributes are of interest
+ |          to the geom are:
+ |
+ |          ```python
+ |          "panel_params.x.range"  # tuple
+ |          "panel_params.y.range"  # tuple
+ |          ```
+ |      coord :
+ |          Coordinate (e.g. coord_cartesian) system of the geom.
+ |      ax :
+ |          Axes on which to plot.
+ |      params :
+ |          Combined parameters for the geom and stat. Also
+ |          includes the `zorder`.
+ |
+ |  handle_na(self, data: 'pd.DataFrame') -&gt; 'pd.DataFrame'
+ |      Remove rows with NaN values
+ |
+ |      geoms that infer extra information from missing values
+ |      should override this method. For example
+ |      [](`~plotnine.geoms.geom_path`).
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          Data without the NaNs.
+ |
+ |      Notes
+ |      -----
+ |      Shows a warning if the any rows are removed and the
+ |      `na_rm` parameter is False. It only takes into account
+ |      the columns of the required aesthetics.
+ |
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from plotnine.geoms.geom_path.geom_path:
+ |
+ |  draw_group(
+ |      data: 'pd.DataFrame',
+ |      panel_params: 'panel_view',
+ |      coord: 'coord',
+ |      ax: 'Axes',
+ |      params: 'dict[str, Any]'
+ |  )
+ |      Plot data belonging to a group.
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data to be plotted by this geom. This is the
+ |          dataframe created in the plot_build pipeline.
+ |      panel_params :
+ |          The scale information as may be required by the
+ |          axes. At this point, that information is about
+ |          ranges, ticks and labels. Keys of interest to
+ |          the geom are:
+ |
+ |          ```python
+ |          "x_range"  # tuple
+ |          "y_range"  # tuple
+ |          ```
+ |      coord : coord
+ |          Coordinate (e.g. coord_cartesian) system of the geom.
+ |      ax : axes
+ |          Axes on which to plot.
+ |      params : dict
+ |          Combined parameters for the geom and stat. Also
+ |          includes the `zorder`.
+ |
+ |  draw_legend(data: 'pd.Series[Any]', da: 'DrawingArea', lyr: 'layer') -&gt; 'DrawingArea'
+ |      Draw a horizontal line in the box
+ |
+ |      Parameters
+ |      ----------
+ |      data : Series
+ |          Data Row
+ |      da : DrawingArea
+ |          Canvas
+ |      lyr : layer
+ |          Layer
+ |
+ |      Returns
+ |      -------
+ |      out : DrawingArea
+ |
+ |  legend_key_size(
+ |      data: 'pd.Series[Any]',
+ |      min_size: 'tuple[int, int]',
+ |      lyr: 'layer'
+ |  ) -&gt; 'tuple[int, int]'
+ |      Calculate the size of key that would fit the layer contents
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          A row of the data plotted to this layer
+ |      min_size :
+ |          Initial size which should be expanded to fit the contents.
+ |      lyr :
+ |          Layer
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from plotnine.geoms.geom_path.geom_path:
+ |
+ |  DEFAULT_AES = {'alpha': 1, 'color': 'black', 'linetype': 'solid', 'siz...
+ |
+ |  DEFAULT_PARAMS = {'arrow': None, 'lineend': 'butt', 'linejoin': 'round...
+ |
+ |  REQUIRED_AES = {'x', 'y'}
+ |
+ |  ----------------------------------------------------------------------
+ |  Methods inherited from plotnine.geoms.geom.geom:
+ |
+ |  __deepcopy__(self, memo: 'dict[Any, Any]') -&gt; 'geom'
+ |      Deep copy without copying the self.data dataframe
+ |
+ |      geoms should not override this method.
+ |
+ |  __init__(
+ |      self,
+ |      mapping: 'aes | None' = None,
+ |      data: 'DataLike | None' = None,
+ |      **kwargs: 'Any'
+ |  )
+ |      Initialize self.  See help(type(self)) for accurate signature.
+ |
+ |  __radd__(self, other: 'ggplot') -&gt; 'ggplot'
+ |      Add layer representing geom object on the right
+ |
+ |      Parameters
+ |      ----------
+ |      plot :
+ |          ggplot object
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          ggplot object with added layer.
+ |
+ |  draw_layer(self, data: 'pd.DataFrame', layout: 'Layout', coord: 'coord')
+ |      Draw layer across all panels
+ |
+ |      geoms should not override this method.
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          DataFrame specific for this layer
+ |      layout :
+ |          Layout object created when the plot is getting
+ |          built
+ |      coord :
+ |          Type of coordinate axes
+ |      params :
+ |          Combined *geom* and *stat* parameters. Also
+ |          includes the stacking order of the layer in
+ |          the plot (*zorder*)
+ |
+ |  setup_aes_params(self, data: 'pd.DataFrame')
+ |      Override this method to verify and/or adjust aesthetic parameters
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data
+ |
+ |  setup_params(self, data: 'pd.DataFrame')
+ |      Override this method to verify and/or adjust parameters
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data
+ |
+ |  to_layer(self) -&gt; 'layer'
+ |      Make a layer that represents this geom
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          Layer
+ |
+ |  use_defaults(self, data: 'pd.DataFrame', aes_modifiers: 'dict[str, Any]') -&gt; 'pd.DataFrame'
+ |      Combine data with defaults and set aesthetics from parameters
+ |
+ |      geoms should not override this method.
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data used for drawing the geom.
+ |      aes_modifiers :
+ |          Aesthetics to evaluate
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          Data used for drawing the geom.
+ |
+ |  ----------------------------------------------------------------------
+ |  Class methods inherited from plotnine.geoms.geom.geom:
+ |
+ |  aesthetics() -&gt; 'set[str]'
+ |      Return all the aesthetics for this geom
+ |
+ |      geoms should not override this method.
+ |
+ |  ----------------------------------------------------------------------
+ |  Static methods inherited from plotnine.geoms.geom.geom:
+ |
+ |  draw_unit(
+ |      data: 'pd.DataFrame',
+ |      panel_params: 'panel_view',
+ |      coord: 'coord',
+ |      ax: 'Axes',
+ |      params: 'dict[str, Any]'
+ |  )
+ |      Plot data belonging to a unit.
+ |
+ |      A matplotlib plot function may require that an aethestic
+ |      have a single unique value. e.g. `linestyle="dashed"`{.py}
+ |      and not `linestyle=["dashed", "dotted", ...]`{.py}.
+ |      A single call to such a function can only plot lines with
+ |      the same linestyle. However, if the plot we want has more
+ |      than one line with different linestyles, we need to group
+ |      the lines with the same linestyle and plot them as one
+ |      unit. In this case, draw_group calls this function to do
+ |      the plotting. For an example see
+ |      [](`~plotnine.geoms.geom_point`).
+ |
+ |      Parameters
+ |      ----------
+ |      data :
+ |          Data to be plotted by this geom. This is the
+ |          dataframe created in the plot_build pipeline.
+ |      panel_params :
+ |          The scale information as may be required by the
+ |          axes. At this point, that information is about
+ |          ranges, ticks and labels. Keys of interest to
+ |          the geom are:
+ |
+ |          ```python
+ |          "x_range"  # tuple
+ |          "y_range"  # tuple
+ |          ```
+ |
+ |          In rare cases a geom may need access to the x or y scales.
+ |          Those are available at:
+ |
+ |          ```python
+ |          "scales"   # SimpleNamespace
+ |          ```
+ |      coord :
+ |          Coordinate (e.g. coord_cartesian) system of the
+ |          geom.
+ |      ax :
+ |          Axes on which to plot.
+ |      params :
+ |          Combined parameters for the geom and stat. Also
+ |          includes the `zorder`.
+ |
+ |  from_stat(stat: 'stat') -&gt; 'geom'
+ |      Return an instantiated geom object
+ |
+ |      geoms should not override this method.
+ |
+ |      Parameters
+ |      ----------
+ |      stat :
+ |          `stat`
+ |
+ |      Returns
+ |      -------
+ |      :
+ |          A geom object
+ |
+ |      Raises
+ |      ------
+ |      PlotnineError
+ |          If unable to create a `geom`.
+ |
+ |  ----------------------------------------------------------------------
+ |  Data descriptors inherited from plotnine.geoms.geom.geom:
+ |
+ |  __dict__
+ |      dictionary for instance variables
+ |
+ |  __weakref__
+ |      list of weak references to the object
+ |
+ |  ----------------------------------------------------------------------
+ |  Data and other attributes inherited from plotnine.geoms.geom.geom:
+ |
+ |  NON_MISSING_AES = set()
+ |
+ |  aes_params = {}
+ |
+ |  legend_geom = 'point'
+</code></pre>
+</div>
+</div>
+</section>
+<section id="check-out-jeroens-data-viz-with-plotnine" class="level3">
+<h3 class="anchored" data-anchor-id="check-out-jeroens-data-viz-with-plotnine">Check Out Jeroen’s Data Viz with Plotnine</h3>
+<p><a href="">https://f0nzie.github.io/rmarkdown-python-plotnine</a></p>
+</section>
 </section>
 
 </main>

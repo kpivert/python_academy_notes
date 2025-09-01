@@ -299,3 +299,450 @@ penguins_size.loc[0, 'body_mass'] = 3850
 penguins_size
 
 ```
+
+### Arrange rows in Data 
+
+Using `.sort_values()`
+
+
+```{python}
+penguins = load_penguins()
+penguins
+```
+
+
+```{python}
+penguins.sort_values('bill_length_mm')
+```
+
+`.sort_values()` is method of DataFrame class. Can only use on DataFrame.
+
+Required arguement = `by`
+
+`<dataset>.sort_values('<column>')`
+
+OR
+
+`<dataset>.sort_values(['<column1>', '<column2>', ...])`
+
+By default, `.sort_values()` will sort in ascending order
+
+It also returns a **modified copy of original DataFrame.** If you want to save you have to assign it.
+
+```{python}
+penguins.sort_values('island')
+```
+
+### Tie Breakers
+
+To sort rows that share same value, must give `.sort_values()` a second column to use as a tie breaker. 
+
+```{python}
+penguins.sort_values(['island', 'bill_length_mm'])
+```
+
+Can provide as many columns to tie break/sort by, but MUST be passed as a LIST with `[]`
+
+`.sort_values()` uses each new column to break ties among rows that share identical values in all of the preceding columns 
+
+Default behavior:
+- numeric: smallest number at top
+- string: alpha order from A-Z then a-z
+- another data type: similar ascending pattern
+
+### Descending Order
+
+Use `ascending = False`
+
+
+```{python}
+penguins.sort_values('bill_length_mm', ascending = False)
+```
+
+For multiple columns
+
+- Provide a list of booleans
+- `Nan` appear at end... `help(na_position)` shows default value is `last`
+
+```{python}
+penguins.sort_values(
+  ['island', 'bill_length_mm'], 
+  ascending = [True, False]
+  )
+```
+
+Hmmm... none of these `help()` call worked
+```{python}
+#| eval: false
+help(na_position)
+help(pd.DataFrame.na_position)
+```
+
+```{python}
+penguins.sort_values(
+  ['island', 'year', 'flipper_length_mm'],
+  ascending = [False, True, False]
+)
+```
+
+
+```{python}
+help(pd.DataFrame.sort_values)
+```
+
+### Aesthetic Mapping in `plotnine()`
+
+
+```{python}
+import plotnine as p9
+from plotnine import ggplot, aes, geom_point, geom_smooth, geom_line
+from plotnine.data import mpg
+```
+
+
+```{python}
+mpg
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point()
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'displ', 
+      y = 'hwy',
+      color = 'class'
+      )
+    ) +
+    geom_point()
+)
+```
+
+**NB:** To fix labels from being cut off:
+
+`from matplotlib import rcParams`
+`rcParams.update({"savefig.bbox": "tight"})`
+
+## Aesthetics
+
+### `size`
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy',
+      color = 'class'
+      )
+    ) +
+  geom_point(
+    mapping = aes(
+      size = 'class'
+    )
+  )  
+)
+```
+
+### ~`transparency`~ `alpha` 
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        alpha = 'class'
+      )
+    )
+)
+```
+
+### `shape`
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy',
+      shape = 'class'
+      )
+    ) +
+    geom_point()
+)
+```
+
+### For color blind check: 
+
+[Coblis](https://www.color-blindness.com/coblis-color-blindness-simulator)
+
+### Local aesthetics
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        color = 'class'
+      )
+    ) +
+    geom_smooth()
+)
+```
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        color = 'class'
+      )
+    ) +
+    geom_smooth(
+      mapping = aes(
+        color = 'class'
+      )
+    )
+)
+```
+
+### Setting vs Mapping Aesthetics
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      color = 'blue'
+    )
+)
+```
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      color = 'blue',
+      shape = 'x',
+      alpha = 0.5
+    )
+)
+```
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        color = 'class',
+        shape = 'fl',
+        alpha = 'displ'
+      )
+    )  
+)
+```
+
+### Exercise 1
+
+
+```{python}
+#| eval: false
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        # color = 'cty'
+        # size = 'cty'
+        shape = 'cty'
+      )
+    )
+)
+```
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy',
+      color = 'cty'
+      )
+    ) +
+    geom_point() +
+    p9.scale_color_gradient(
+      low = 'red', 
+      high = 'darkblue'
+    )
+)
+```
+
+### Exercise 2
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy',
+      color = 'class',
+      size = 'class',
+      shape = 'class'
+      )
+    ) +
+    geom_point()
+)
+
+```
+
+### Exercise 3
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = mpg,
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        color = 'displ < 5'
+      )
+    )
+)
+```
+
+### Exercise 4
+
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = mpg, 
+    mapping = aes(
+      x = 'displ',
+      y = 'hwy'
+      )
+    ) +
+    geom_point(
+      mapping = aes(
+        color = 'class'
+      )
+    ) +
+    geom_smooth(
+      color = "red"
+    )
+)
+```
+
+### The `group` Aesthetic
+
+See [https://plotnine.org/](https://plotnine.org/)
+```{python}
+#| eval: false
+
+(
+  ggplot(
+    data = df, 
+    mapping = aes(
+      x = 'x', 
+      y = 'y',
+      color = 'ID'
+      )
+    ) +
+    geom_line(
+      mapping = aes(
+        group = 'ID' # <-
+      )
+    )
+)
+```
+
+
+```{python}
+help(geom_line)
+
+```
+
+### Check Out Jeroen's Data Viz with Plotnine
+
+[https://f0nzie.github.io/rmarkdown-python-plotnine]()
