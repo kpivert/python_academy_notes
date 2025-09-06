@@ -1,0 +1,239 @@
+---
+title: "week4_demo"
+format: pdf
+editor: visual
+---
+
+## Vectorize or Apply: Is the first truly quicker?
+
+If you want some more detail about speed related items:
+
+[top-5-tips-to-make-your-pandas-code-absurdly-fast](https://tryolabs.com/blog/2023/02/08/top-5-tips-to-make-your-pandas-code-absurdly-fast)
+
+## Apply on a Series (Single Col) vs. Vectorize
+
+```{python}
+import pandas as pd
+import numpy as np
+
+# Example DataFrame
+data = {
+    "name": ["Alice", "Bob", "Charlie", "Diana"],
+    "age": [25, 32, 41, 29],
+    "height_cm": [165, 175, 180, 158]
+}
+df = pd.DataFrame(data)
+print(df)
+```
+
+Test 1: Apply a very simple calculation to a column.
+
+Here we'll convert meters to cm.
+
+Here I was seeing \~1 second difference between 100,000 iterations.
+
+```{python}
+
+#simple function converting cm to m
+def height_in_meters(cm):
+  return cm/100.0
+
+#vectorize the simple equation
+height_in_meters_vec = np.vectorize(height_in_meters)
+
+
+NUM_ITERATIONS = 10000  #how many times we'll use the vectorized equation
+                        #in one test
+NUM_TESTS = 10 #how many tests
+
+import time #package for starting a timer
+time_results_vec = np.array([]) #to record the times
+
+for i in range(NUM_TESTS):    #we'll try the test a few times
+  start = time.perf_counter() #start the timer
+  
+  #try vectorizing a bunch to convert cm -> m to a column
+  for i in range(NUM_ITERATIONS):  
+    df['height_m'] = height_in_meters_vec(df["height_cm"])
+  
+  end = time.perf_counter()  #end time
+  time_vec = end-start   #find how long it took to vectorize a bunch
+  time_results_vec = np.append(time_results_vec, time_vec) #record the results
+  
+time_results_vec  #show the recorded times
+
+```
+
+```{python}
+
+time_results_apply = np.array([])
+
+for i in range(NUM_TESTS): #we'll try the test a few times
+  start = time.perf_counter() #start the timer
+  
+  #try applying the cm-> m function a bunch
+  for i in range(NUM_ITERATIONS): 
+    df['height_m_apply'] = df['height_cm'].apply(height_in_meters)
+  
+  end = time.perf_counter()
+  time_apply = end-start
+  time_results_apply = np.append(time_results_apply, time_apply)
+  
+time_results_apply #show the recorded times
+
+```
+
+Mean difference in times between apply on 1 col and vectorizing a function of 1 var:
+
+```{python}
+
+ #on average, how much longer was apply than vec 
+(time_results_apply - time_results_vec).mean()  
+
+ #on average, how many times quicker was apply than vec 
+(time_results_apply / time_results_vec).mean()
+
+```
+
+# Test 2: Applying to a dataframe vs. Vectorize
+
+We'll use a BMI eqtn for this example.
+
+This calculation requires 2 cols of data.
+
+```{python}
+
+import pandas as pd
+
+df = pd.DataFrame({
+    'weight_kg': [50, 65, 80, 95],
+    'height_cm': [160, 170, 180, 190]
+})
+
+df
+```
+
+```{python}
+
+# BMI method
+def BMI(weight_kg, height_cm):
+  return weight_kg / ((height_cm/100)**2)
+
+#vectorize it
+BMI_vec = np.vectorize(BMI)
+
+time_results_vec2 = np.array([])  #record the results
+
+for i in range(NUM_TESTS):        #we'll try the test a few times
+  start = time.perf_counter()     #start the timer!
+  
+  #try using the vectorized function a bunch (now with 2 cols) 
+  for i in range(NUM_ITERATIONS):
+    df['BMI'] = BMI_vec(df['weight_kg'], df['height_cm'])
+  
+  end = time.perf_counter()       #end the timer
+  time_vec2 = end-start           #find how long it took to do a bunch
+  time_results_vec2 = np.append(time_results_vec2, time_vec2) #record how long
+                                                              #it took to do
+                                                              #a bunch
+  
+time_results_vec2 #show the recorded times
+
+
+```
+
+```{python}
+
+#BMI method set up to use apply
+def BMI2(row):
+  return row['weight_kg'] / ((row['height_cm']/100.0)**2)
+
+time_results_apply2 = np.array([])    #for the recorded results
+
+for i in range(NUM_TESTS):        #we'll try the test a few times
+  start = time.perf_counter()     #start the timer!
+  
+  #try applying a function a bunch (now depending on 2 cols) 
+  for i in range(NUM_ITERATIONS):
+      df['BMI_apply'] = df.apply(BMI2, axis=1)
+  
+  end = time.perf_counter()       #end the timer
+  time_apply2 = end-start         #find the time difference
+  time_results_apply2 = np.append(time_results_apply2, time_apply2) #record the
+                                                                    #time diff
+  
+time_results_apply2 #show the recorded times
+```
+
+Mean difference in times between apply on 2 cols and vectorizing using a function of 2 vars:
+
+```{python}
+
+ #on average, how much longer was apply than vec 
+(time_results_apply2 - time_results_vec2).mean()  
+
+ #on average, how many times quicker was apply than vec 
+(time_results_apply2 / time_results_vec2).mean()
+```
+
+# List Comprehensions versus for loops
+
+While we're on speed, for Loops are generally considered SLOW.
+
+List comprehensions are quicker.
+
+List comprehensions allow for quick, relative basic processing on each item in a collection
+
+In the article I shared above: `vectorize < list comps < apply < for loops`
+
+```{python}
+#Get 100 random numbers between 0-100
+percentages = np.random.random(100) * 100
+percentages
+```
+
+```{python}
+
+#Here we use a for loop to convert each to a P or F
+#We time how long this takes with a loop
+p_or_f_results = np.array([""] * 100)
+
+start_for_loop = time.perf_counter()
+
+for i, grade in enumerate(percentages):
+  if grade < 70:
+    p_or_f_results[i] = "F"
+  else:
+    p_or_f_results[i] = "P"
+  
+
+end_for_loop = time.perf_counter()
+
+p_or_f_time_loop = end_for_loop - start_for_loop
+
+p_or_f_time_loop
+p_or_f_results
+```
+
+```{python}
+
+#Here we use a for loop to convert each to a P or F
+#We time how long this takes with a loop
+
+start_list_comp = time.perf_counter()
+
+p_or_f_results_list_comp  = ["P" if grade >= 70 else "F" for grade in percentages]
+
+end_list_comp = time.perf_counter()
+
+p_or_f_time_list_comp  = end_list_comp  - start_list_comp 
+
+p_or_f_time_list_comp 
+p_or_f_results_list_comp 
+
+```
+
+```{python}
+
+p_or_f_time_list_comp / p_or_f_time_loop 
+```

@@ -1,0 +1,559 @@
+---
+title: "Week 4"
+format: html
+---
+
+### `if` Statements
+
+-   `if` allows conditional statements
+
+```{python}
+wind_speed = 3
+
+if wind_speed > 5:
+  print('Windy')
+
+```
+
+### Syntax
+
+-   `if` is keyword indicating an `if` statement
+-   `wind_speed > 5` is **Boolean** or conditional statement. If `True` code in **body** is executed.
+-   `:` tells Python where the **Boolean** expression ends and the **body** starts.
+-   `print('Windy')` is **body** of `if` statement. This part **must be indented relative to `if` for Python to recognize it as a part of the `if` statement**
+
+```{python}
+
+wind_speed = 27
+
+if wind_speed > 5:
+  print('Windy')
+```
+
+-   `if` statements are example of control flow which **controls** the order of code execution.
+
+-   `if` statements can modify typical line-by-line flow of code because some lines can be skipped when we use them.
+
+### `if-else` Statements
+
+-   Use `else` to do something else when `wind_speed` is less than 5 mph
+
+-   **Next unindented line after `if` is else.**
+
+-   Together this is an `if-else` statement.
+
+```{python}
+wind_speed = 3
+
+if wind_speed > 5:
+  print('Windy')
+else:
+  print('Not Windy')
+```
+
+### `elif` Statement
+
+-   To run more than a single `if-else` statement, use `elif` short for **else if**
+
+```{python}
+
+wind_speed = 3
+
+if wind_speed < 5:
+  print('Too Calm')
+elif wind_speed < 15:
+  print('Good')
+else:
+  print('Too Windy')
+  
+```
+
+### Variable Assignment
+
+```{python}
+
+wind_speed = 3
+
+if wind_speed < 5:
+  weather_status = 'Too Calm'
+elif wind_speed < 15:
+  weather_status = 'Good'
+else:
+  weather_status = 'Too Windy'
+
+weather_status
+```
+
+### Nested Statements
+
+Python interprets the beginning and end of each `if` statement **according to indentation level.**
+
+#### Exercise 1
+
+Pretend there is no `abs()` function
+
+```{python}
+
+number = -25
+
+if number > 0:
+  print(number)
+elif number == 0:
+  print(number)
+else:
+  print(number * -1)
+```
+
+```{python}
+number = -25
+
+if number > 0:
+  print(f'{number} is positive')
+else:
+  print(number * -1)
+```
+
+#### FFS
+
+```{python}
+if number < 0:
+  number = number * -1
+
+number
+```
+
+#### Exercise 2
+
+**Remember: There needs to be a `:` after `if`, `elif`, or `else`**
+
+#### Exercise 3
+
+The restaurant management has decided on a new set of temperature categories for each temperature measurement:
+
+-   Too cold (`temp < 32`)
+
+-   Satisfactory (`32 <= temp < 35`)
+
+-   Warm (`35 <= temp < 38`)
+
+-   Too hot (`temp >= 38`)
+
+```{python}
+temp = 34
+
+if temp < 32:
+  status = 'Too cold'
+elif temp < 35:
+  status = 'Satisfactory'
+elif temp < 38:
+  status = 'Warm'
+else:
+  status = 'Too hot'
+
+status
+```
+
+### Writing Functions
+
+Every modern programming language allows you to define **functions** in order to solve this problem.
+
+A function is a reusable chunk of code that can have:
+
+1.  a name, so that we can refer to it
+
+2.  some inputs, so that we can give it data to work with
+
+3.  an output, so that it can give us back an answer
+
+An example of a function that has no inputs is `random()` from the random module. When we call `random()`, it tells us the next random number in the range \[0.0, 1.0):
+
+```{python}
+from random import random
+random()
+```
+
+However, most functions accept inputs that tell them more about what to do.
+
+For example, `random.uniform(a, b)` generates random numbers between the bounds *a* and *b*.
+
+If we call it without inputs, it complains that it is missing required arguments.
+
+```{python}
+from random import uniform
+uniform()
+```
+
+```{python}
+
+uniform(0, 100)
+```
+
+### Creating a Simple Function
+
+```{python}
+def test_the_microphone():
+  print('Is this switched on?')
+
+test_the_microphone()
+```
+
+#### Anatomy of a function
+
+-   `def` keyword indicates we are **defining** a function
+-   Provide name of function with `()`
+-   Since function doesn't require inputs, we don't put anything in `()`
+-   After `()` place `:` to say what will be in function
+-   **Body** of function (`print('Is this switched on?)`)
+-   **Body** is indented. Very important because indentation indicates to Python *what is and what isn't included in the function*
+
+**NB: You can create copies of functions like with other variables!**
+
+```{python}
+duplicate = test_the_microphone
+duplicate()
+```
+
+### Providing Input
+
+-   Change input to include a **parameter** in the parens that come after the function name
+-   Example, parameter's name is `amount`
+
+```{python}
+def print_with_tax(amount):
+  print(amount * 1.10)
+
+print_with_tax(10.99)
+```
+
+```{python}
+print_with_tax(amount = 200)
+```
+
+Did you notice that Python returned something like 110.00000000000001 and 220.00000000000003 instead of 110 and 220?
+
+That’s because Python doesn’t have a way to represent the infinite number of possible floating point numbers using the finite number of bits in a computer.
+
+Instead, Python uses a mathematical formula to assign each bit to specific numbers.
+
+When Python is returning the output of a calculation using floating point numbers, it returns the closest number that it can. While not exact, being off by .00000000000003 is still really close.
+
+In our case, since our function deals with currency and we only want a maximum of 2 decimal places anyway, we can simply round the result of the calculation.
+
+```{python}
+def print_with_tax(amount):
+  with_tax = amount * 1.10
+  rounded = round(with_tax, ndigits = 2)
+  print(rounded)
+```
+
+```{python}
+print_with_tax(220)
+```
+
+We don’t have to give the function a constant whenever we call it. Instead, we can write an expression that does a calculation directly as the input:
+
+```{python}
+print_with_tax(200 + 300)
+```
+
+This is no different from doing arithmetic like `round(1.10 * (200 + 300), ndigits=2)`.
+
+You may wonder why we are only seeing one decimal place in `550.0`, even though we chose `ndigits = 2` in our `round()` step. This is because Python will not show any “extra” zeroes in the decimal. The first `.0`is important to indicate that `550.0`is a **float** rather than an **integer**, but beyond that, no more are needed.
+
+```{python}
+print_with_tax([1, 10, 100])
+```
+
+That’s right. The amount variable inside the function will take on the value \[1, 10, 100\], but we didn’t write the calculation in the body of the function in a form that works on a list. Python will try to run \[1, 10, 100\] \* 1.10, which will return an error saying that a list cannot be multiplied by a float. This is because when \* 1.10 is applied to lists, Python interprets this to mean ‘repeat the values in this list 1.10 times’, which is not possible.
+
+This is why it is important to consider the data type of the inputs that you want to use when defining your function.
+
+### Limitations of printing values
+
+So far, our functions like print_with_tax() only print values:
+
+```{python}
+#| eval:false
+
+def print_with_tax(amount): 
+  with_tax = amount * 1.10 
+  rounded = round(with_tax, ndigits = 2) 
+  print(rounded)
+```
+
+While this is great, what if we wanted to store the result from our function in a variable?
+
+If we simply assigned the value of calling print_with_tax(100) to a variable result, notice the output of `print(result)`:
+
+```{python}
+result = print_with_tax(100)
+print(result)
+```
+
+We will still see the `110` value being printed but when we print the `result` variable, we get a `None` back! This is because `print()` is a function that only prints the output and the return value is `None`.
+
+That’s not very useful if we want to reuse the value of `result` from `print_with_tax()`. Let’s look at a new Python keyword that will help us fix that.
+
+### Returning Values
+
+So far, we have only printed a result with our function, rather than *returning* an object that can be used outside of the function. We can do this using a `return` statement.
+
+```{python}
+def with_tax_using_return(amount):
+  with_tax = amount * 1.15
+  return round(with_tax, ndigits = 2)
+
+with_tax_using_return(10)  
+```
+
+Now that the function is returning a value, we can continue to use that value outside of the function. In the following example, we save the output from the function to an object called `result` and then add 1 to it.
+
+```{python}
+
+result = with_tax_using_return(10)
+result + 1
+```
+
+### Early `return`
+
+Once a return statement is run, the function execution stops - even if there are additional lines written after the `return` statement. This can be useful when mixing `return` statements with control flow, like `if` statements.
+
+For example, we may decide not to charge tax if the item the user has selected is worth less than \$1.00:
+
+```{python}
+def with_tax_early_return(value):
+  if (value < 1.00):
+    return value
+  return round(value * 1.15, ndigits = 2)
+```
+
+```{python}
+with_tax_early_return(0.97)
+with_tax_early_return(2.33)
+```
+
+### Multiple Parameters
+
+If we want a function to accept several parameters representing different variables, we must write several names in parentheses when we define the function. Then, when the function is called, we must provide a matching value for each parameter we defined.
+
+```{python}
+
+def calculate_with_tax(amount, taxRate):
+  with_tax = amount * (1 + taxRate)
+  rounded = round(with_tax, ndigits = 2)
+  return rounded
+
+calculate_with_tax(100, 0.07)
+calculate_with_tax(200 + 300, 0.15)
+```
+
+```{python}
+def min_limit(values, threshold):
+  if sum(values) > threshold:
+    return sum(values)
+  return threshold
+
+min_limit(values = [1.5, 1, 0.75], threshold = 5)
+min_limit([30, 15, 25], 25)
+```
+
+#### Exercise 1
+
+**an you create a function called `f_to_c`** that takes a temperature value in degrees Fahrenheit and converts it to Celsius using the following conversion?
+
+$C = 5/9 ​* (F − 32)$
+
+To test your function, use an input value of 70 degrees Fahrenheit. The result should be about 21 degrees Celsius.
+
+```{python}
+
+def f_to_c(f):
+  C = (5 / 9) * (f - 32)
+  C_rounded = round(C, ndigits = 1)
+  return C_rounded
+
+f_to_c(70)
+
+```
+
+#### Exercise 2
+
+**Can you create a function called `rain_intensity`** that takes a rain gauge measurement in mm/hr as input and returns an intensity category according to the following ranges?
+
+-   Light rain (`rain ≤ 2.5`)
+
+-   Moderate rain (`2.5 < rain ≤ 7.5`)
+
+-   Heavy rain (`7.5 < rain ≤ 50`)
+
+-   Violent rain (`rain > 50`)
+
+To test your function, use an input value of `3` mm/hr. The result should be `'Moderate rain'`.
+
+```{python}
+def rain_intensity(mm_hr):
+  if mm_hr <= 2.5:
+    return 'Light rain'
+  elif mm_hr <= 7.5:
+    return 'Moderate rain'
+  elif mm_hr <= 50:
+    return 'Heavy rain'
+  elif mm_hr > 50:
+    return 'Violent rain'
+
+rain_intensity(51)
+```
+
+### Creating Functions from Existing Code
+
+```{python}
+#| eval: false
+import pandas as pd
+data_1 = pd.read_csv('data/data-1.csv')
+data_1.columns = data_1.columns.str.lower()
+data_1['filled'] = data_1['occupancy'] / data_1['capacity']
+data_1 = data_1.drop(columns = ['shelter_name', 'occupancy', 'capacity'])
+data_1.head()
+```
+
+### Naming
+
+-   If describing function, say "read and clean shelter data"... --\> `read_and_clean_shelter_data()`
+
+```{python}
+#| eval: false
+
+def read_and_clean_shelter_data(filename:
+  result = pd.read_csv(filename)
+  result.columns = result.columns.str.lower()
+  result['filled'] = result['occupancy'] / result['capacity']
+  result = result.drop(columns = ['shelter_name', 'occupancy', 'capacity'])
+  return result
+```
+
+#### How to write functions
+
+1.  Get something working
+2.  Determine which parts will always be the same and which parts will change each time the operations are repeated
+3.  Put the parts that stay the same in the body of the function
+4.  Make values that change the function's parameters
+5.  Make sure the function is returning the right thing
+6.  Make sure the function and its parameters have sensible names
+
+```{python}
+#| eval: false
+
+def average_fill(df):
+  avg_filled = df['filled'].mean() * 100
+  return round(avg_filled, ndigits = 2)  
+```
+
+### Apply Your Own Functions
+
+```{python}
+import pandas as pd
+```
+
+### `.apply()` Review
+
+```{python}
+def bin_mass(x):
+  if x < 3550:
+    return 'Low'
+  elif x < 4750:
+    return 'Medium'
+  else:
+    return 'High'
+
+bin_mass(3550)
+```
+
+### Week 4 Slack Notes
+
+-   We discussed speed of apply versus vectorize and clarified some vectorize details.
+
+-   When writing functions before they are vectorized, we imagine that each parameter is a single value (an int, a float, a string) from a single row in the dataframe. Then we call np.vectorize so that we can pass in Series/column data even though the parameter in the original function represents a single value.
+
+```         
+		#a regular function - so here the name parameter represents a single string
+		def capitalize_name(name):  
+			return name.upper()
+
+		#Example of how to use the function
+		capitalize_name("Charlie")  #returns CHARLIE	
+			
+		#Now we vectorize the function so that this new version       
+		#can handle receiving a column/Series as a parameter. 
+		capitalize_name_vec = np.vectorize(capitalize_name)
+		
+		#So we can pass in a column of strings to the vectorized version  
+		df['first_name_upper'] = capitalize_name_vec(df['first_name'])
+```
+
+We discussed list comprehensions which are meant to transform each item in a list in a relatively basic way. So for example, if else statements are possible, but not if-elif-else.
+
+-   Here's another resource on list comprehensions:  <https://realpython.com/list-comprehension-python/>
+
+-   We also compared speeds:   vectorize \< list comps \< apply \< for loops
+
+-   I punted a question to the other cohort mentors asking for their suggested matplotlib resources. Here is what they had to say:
+
+    -   <https://wesmckinney.com/book/plotting-and-visualization>
+
+```{=html}
+<!-- -->
+```
+-   [Python graph gallery](https://python-graph-gallery.com/) is a good resource and it often shows how to make the same graph in both matplotlib and seaborn
+
+-   This repo was also recommended - Note that the slides and notebooks folder each has "1-getting_started_with_matplotlib" file.  These files could be helpful.
+
+    -   <https://github.com/stefmolin/python-data-viz-workshop>
+
+<https://wesmckinney.com/book/data-wrangling#prep_merge_join>
+
+[Pandas Melt](https://pandas.pydata.org/docs/reference/api/pandas.melt.html)
+
+**Aggregating a column with multiple functions:**
+
+Using @Diana Garcia's example code, we can use the .agg function and map each column to the list of functions that we wish to apply to each group.
+
+```{python}
+#| eval: false
+
+agg_funcs = ['mean', 'std', 'sum']  #other common options: "min", "max", "var", 
+                                    #"count" (non-NA values), "size" (total rows, including NA),
+                                    #"median", "first", "last", "prod" (product of values),
+                                    #"nunique" (number of unique values), "sem" (standard error of the mean)
+covid['month'] = pd.to_datetime(covid['date']).dt.month
+covid.groupby(['state', 'month']).agg({'cases': agg_funcs, 'deaths': agg_funcs})
+```
+
+Doing this procedure creates a multi-level column structure which is tricky to deal with. So @Diana Garcia used this resource to solve the issue.
+
+-   [How do i convert one level of pandas multiindex column to a standalone column](https://stackoverflow.com/questions/70911464/how-do-i-convert-one-level-of-pandas-multiindex-column-to-a-standalone-column)
+
+Below is another way to group a column by multiple aggregate functions. This way avoids the multi-level column structure.
+
+```{python}
+#| eval: false
+
+agg_df = covid.groupby(["state", "month"]).agg(
+    cases_mean=("cases", "mean"),  #For example: Creates a column called cases_mean 
+	                               #that contains the mean cases of each group
+    cases_std=("cases", "std"),
+    cases_sum=("cases", "sum"),
+    deaths_mean=("deaths", "mean"),
+    deaths_std=("deaths", "std"),
+    deaths_sum=("deaths", "sum"),	
+)
+
+agg_df.reset_index()
+```
+
+**Reordering bars**
+
+A few of you hit an issue where your bars in a bar chart were not ordered as you desired. @Brent Pfeiffer was able to use reorder to correct this: [reorder reference](https://plotnine.org/reference/reorder.html) @Diana Garcia also found reorder_categories worked well: [reorder_categories reference](https://pandas.pydata.org/docs/reference/api/pandas.Series.cat.reorder_categories.html)
+
+**geom_area/geom_ribbon**
+
+We discovered a situation where geom_area and geom_ribbon unexpectedly required that we set "group = 1".

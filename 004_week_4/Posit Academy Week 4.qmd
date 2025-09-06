@@ -1,0 +1,690 @@
+---
+title: "Apply Functions"
+format: html
+---
+
+```{python}
+import pandas as pd
+from palmerpenguins import load_penguins
+penguins = load_penguins()
+```
+
+### Review
+
+Let’s start by reviewing how we used `.apply()` in an earlier tutorial to apply a non-vectorized function to every value in a column.
+
+We defined a function for you called `bin_mass()`, which returns either `'Low'`, `'Medium'`, or `'High'`, depending on the input value:
+
+```{python}
+def bin_mass(x):
+  if x < 3550:
+    return 'Low'
+  elif x < 4750:
+    return 'Medium'
+  else:
+    return 'High'
+
+bin_mass(3550)
+```
+
+Because we wrote this function to take a single input and return a single output (i.e. is not vectorized), calling the function on an entire column of the data set produced an error:
+
+```{python}
+bin_mass(penguins['body_mass_g'])
+```
+
+So, we learned to instead use the `.apply()` method to apply a function to every value in a column:
+
+```{python}
+penguins['body_mass_g'].apply(bin_mass)
+```
+
+```{python}
+#| eval: false
+
+def bin_age(x):
+  if x < 40:
+    return '30s'
+  elif x < 50:
+    return '40s'
+  elif x < 60:
+    return '50s'
+  else:
+    return '60s'
+
+patients['age_group'] = patients['age'].apply(bin_age) 
+patients
+```
+
+Now let’s think about LDL cholesterol, sometimes called “bad” cholesterol. Official [NIH guidelines](https://medlineplus.gov/lab-tests/cholesterol-levels/) specify five categories:
+
+| LDL cholesterol level | LDL cholesterol category |
+|-----------------------|--------------------------|
+| Less than 100 mg/dL   | optimal                  |
+| 100 to \< 130 mg/dL   | near optimal             |
+| 130 to \< 160 mg/dL   | borderline high          |
+| 160 to \< 190 mg/dL   | high                     |
+| 190 mg/dL and above   | very high                |
+
+**Can you do the following steps?**
+
+-   Write a function called `get_ldl_cholesterol_status()` that recodes a numeric LDL cholesterol values to one of the five categories above.
+
+-   Apply `get_ldl_cholesterol_status()` to the `ldl_cholesterol` column of `patients`.
+
+-   Save the result as a new column of `patients` called `ldl_cholesterol_status`.
+
+-   Return `patients`.
+
+```{python}
+#| eval: false
+
+def get_ldl_cholesterol_status(ldl_cholesterol):
+  if ldl_cholesterol < 100:
+    return 'optimal'
+  elif ldl_cholesterol < 130:
+    return 'near optimal'
+  elif ldl_cholesterol < 160:
+    return 'borderline high'
+  elif ldl_cholesterol < 190:
+    return 'high'
+  else:
+    return 'very high'
+
+patients['ldl_cholesterol_status'] = patients['ldl_cholesterol'].apply(get_ldl_cholesterol_status)
+
+patients
+```
+
+### Lambda functions
+
+Lambda functions are a shorthand way to define functions. The main differences are that they:
+
+-   Don’t need to be named
+
+-   Don’t use a `return` statement
+
+-   Are typically written on one line
+
+-   Are defined with the `lambda` keyword instead of `def`
+
+This is the syntax for a lambda function:
+
+```         
+lambda <arguments>: <expression>
+```
+
+Here’s a simple function that adds two to the input value. **Can you turn this function into a lambda function?**
+
+```{python}
+def add_two(x):
+  return x + 2 
+
+add_two(1)
+```
+
+```{python}
+add_two = lambda x: x + 2
+add_two(1)
+```
+
+In the previous example, we choose to name our lambda function `add_two`. But earlier we said that lambda functions don’t need to be named.
+
+Would our code also work like this? Run the code below to find out.
+
+```{python}
+(lambda x: x + 2)(1)
+```
+
+When we evaluate our code,
+
+`(lambda x: x + 2)(1)`
+
+it is computed as:
+
+`1 + 2`
+
+### Multiple arguments
+
+Let’s try to write a lambda function with two arguments. The formula for the volume of a cylinder is:
+
+πr\^2h
+
+where r is the radius and h is the height.
+
+**Can you write a lambda function to calculate the volume of a cylinder** with a radius of 4 cm and a height of 13 cm? Please use `3.14` to approximate the value of π.
+
+```{python}
+(lambda r, h: 3.14 * r**2 * h)(4, 13)
+```
+
+To define a lambda function we use the following syntax:
+
+```         
+lambda <arguments>: <expression>
+```
+
+Here is an example where we define a lambda function and then call it, all it one step:
+
+```         
+(lambda x: x + 2)(1)
+```
+
+```         
+## 3
+```
+
+-   `(lambda x: x + 2)` - We wrap the function definition in parentheses
+
+-   `(1)` - We call the function using another set of parentheses containing our arguments (if any), the same way we would with any function.
+
+### **Use `.apply()` with a lambda function**
+
+Why bother learning to write lambda functions? One reason is to be able to define a function and supply it as an argument, all in one step.
+
+Let’s take a look at an example. The blood glucose levels in our data set are reported in mg/dL, but mmol/L is the unit most commonly used internationally. We can divide mg/dL by 18 to convert to mmol/L.
+
+Here’s how that would look as a lambda function:
+
+```         
+patients['glucose'].apply(lambda x: x / 18)
+```
+
+This saves a lot of typing compared to the non-lambda way:
+
+```         
+def convert_units(x):   
+  return x/18  
+
+patients['glucose'].apply(convert_units)
+```
+
+Another benefit is that we keep the details of the function that we are applying right with the `.apply()` statement. In a long script where many functions are defined, it could take a bit of scrolling to find the definition of `convert_units()`.
+
+In this case, using a lambda function is a good choice since the calculation is so simple.
+
+### Your turn
+
+Suppose an engineer is doing some calculations and wants to create a new column of the `forces` data set that takes the sine of the `theta` column and multiplies it by 9.8.
+
+```         
+forces
+```
+
+```         
+##    theta  time 
+## 0   34.4   101 
+## 1   23.2   132 
+## 2   24.5   128 
+## 3   39.5    98 
+## 4   20.5   203
+```
+
+This will require using the `sin()` function from the math package. We’ll load the math package now.
+
+```         
+import math
+```
+
+**Can you write a lambda function as an argument to `.apply()`** to apply the calculation described above?
+
+Your answer should work with the `forces` data set. (Remember you can always look at the hints (light bulb icon) if you would like help getting started.)
+
+```{python}
+import math
+
+forces['theta'].apply(lambda x: math.sin(x) * 9.8)
+```
+
+Here’s a comparison of the two methods:
+
+**With a lambda function**:
+
+```         
+forces['theta'].apply(lambda theta: math.sin(theta) * 9.8)
+```
+
+```         
+## 0    1.537312 
+## 1   -9.165057 
+## 2   -5.795304 
+## 3    9.541725 
+## 4    9.768932 
+## Name: theta, dtype: float64
+```
+
+**Without lambda function**:
+
+```         
+def calc(theta):   
+  return math.sin(theta) * 9.8  
+
+forces['theta'].apply(calc)
+```
+
+```         
+## 0    1.537312 
+## 1   -9.165057 
+## 2   -5.795304 
+## 3    9.541725 
+## 4    9.768932 
+## Name: theta, dtype: float64
+```
+
+You’ll come across both styles in Python code, so it’s helpful to be familiar with both of them.
+
+Some reason to use `lambda` are:
+
+-   To save time typing.
+
+-   You don’t need to scroll up to find your function, since this notation keeps the function and the code that is calling it together.
+
+Some reasons to use `def` are:
+
+-   To re-use your function again later in your code.
+
+-   The notation may seem more straightforward.
+
+-   This is the only good option for multi-line functions.
+
+In this course, whichever style you choose to use in any given situation is up to you.
+
+The `lambda` notation is a bit more complex, so do not feel pressured to use it. It’s provided here more as a reference since you may see `lambda` functions as you look for solutions on the internet.
+
+### How To Vectorize Functions
+
+```{python}
+import sys
+print(sys.modules.keys())
+
+import 
+installed_packages = [d.project_name for d in pkg_resources.working_set]
+
+print(installed_packages)
+```
+
+```{python}
+numbers = pd.Series([-40, -10.4, 0, 3.14, 42])
+
+def get_sign(number):
+  if number < 0:
+    return '-'
+  elif number == 0:
+    return ''
+  else:
+    return '+'
+
+numbers.apply(get_sign)
+```
+
+Now let’s review a similar example that you completed in a previous tutorial using the `patients` data set.
+
+We’d like to recode LDL cholesterol, sometimes called “bad” cholesterol into the five categories specified by the official [NIH guidelines](https://medlineplus.gov/lab-tests/cholesterol-levels/).
+
+| LDL cholesterol level | LDL cholesterol category |
+|-----------------------|--------------------------|
+| Less than 100 mg/dL   | optimal                  |
+| 100 to \< 130 mg/dL   | near optimal             |
+| 130 to \< 160 mg/dL   | borderline high          |
+| 160 to \< 190 mg/dL   | high                     |
+| 190 mg/dl and above   | very high                |
+
+**Can you do the following steps?**
+
+-   Write a function called `get_ldl_cholesterol_status` to recode numeric LDL cholesterol values to the five categories above.
+
+-   Run the test case that we’ve provided for you.
+
+```{python}
+def get_ldl_cholesterol_status(ldl):
+  if ldl < 100:
+    return 'optimal'
+  elif ldl < 130:
+    return 'near optimal'
+  elif ldl < 160:
+    return 'borderline high'
+  elif ldl < 190:
+    return 'high'
+  else:
+    return 'very high'
+
+get_ldl_cholesterol_status(128)
+```
+
+We’ve saved the function for you to use again:
+
+```         
+def get_ldl_cholesterol_status(value):   
+  if (value < 100):     
+    return 'optimal'   
+  elif (value < 130):     
+    return 'near optimal'   
+  elif (value < 160):     
+    return 'borderline high'   
+  elif (value < 190):     
+    return 'high'   
+  else:     
+    return 'very high'  
+
+get_ldl_cholesterol_status(128)
+```
+
+```         
+## 'near optimal'
+```
+
+Now that we have our function, let’s use it to recode the LDL cholesterol values in `patients`.
+
+**Can you do the following steps?**
+
+-   Apply the `get_ldl_cholesterol_status` function to the `ldl_cholesterol` column of `patients`.
+
+-   Save the result as a new column of `patients` called `ldl_cholesterol_status`
+
+-   Return `patients`.
+
+```{python}
+#| eval: false
+
+patients['ldl_cholesterol_status'] = patients['ldl_cholesterol'].apply(get_ldl_cholesterol_status)
+
+patients
+```
+
+So far we have:
+
+-   written a function that takes one argument as input
+
+-   tested our function on an individual value `get_ldl_cholesterol_status(128)`
+
+-   applied it to a column of our data set `patients['ldl_cholesterol'].apply(get_ldl_cholesterol_status)`
+
+**Take a guess. What would happen if we tried to supply an entire vector as an argument to our function, like this:\
+`get_ldl_cholesterol_status(patients['ldl_cholesterol'])`**
+
+Our function is designed to work on individual values. When we instead supply an entire vector as input to our function, it tries to ask “is this Series less than 100?” In this context, what would an output of `True` or `False` even mean? Python cannot compare an entire Series to 100, so it produces an error letting us know that the results of the comparison would have been ambiguous.
+
+In short, our function is not vectorized. `.apply()` is what allowed us to run our function on every value in the vector.
+
+Now let’s think about how this would work if our function took multiple arguments instead of one.
+
+### Functions with multiple arguments
+
+Imagine that we want to identify which patients require medical intervention based on their age, diabetes, and LDL cholesterol status. Patients eligible for intervention must meet three criteria:
+
+1.  age 40 or older
+
+2.  blood glucose is 126 mg/dL or greater
+
+3.  LDL cholesterol is 100 mg/dL or greater
+
+How would we do this with a user-defined function and `.apply()`?
+
+We might start by writing a function that takes three inputs, like this:
+
+```         
+def intervene_or_not(age, glucose, ldl_cholesterol):   
+  if (age >= 40) & (glucose >= 126) & (ldl_cholesterol >= 100):
+    return 'yes'   
+  else:     
+    return 'no'
+```
+
+The function can successfully recode an individual set of values:
+
+```         
+intervene_or_not(25, 130, 103)
+```
+
+```         
+## 'no'
+```
+
+But the function is not vectorized. In previous examples, we used `.apply()` on a column of our data set when the function was not vectorized.
+
+But how would we provide the *three* necessary columns from our data set to `.apply()`?
+
+The template we were following only involves a single column:
+
+```         
+<data set>['<column name>'].apply(<function>)
+```
+
+That’s because we were using the `.apply()` method of the Series class. There is also an `.apply()` method for the DataFrame class that would allow us to do something like this:
+
+```         
+<data set>.apply(<function>)
+```
+
+But we’d have to rewrite our function to get it to work, and the performance (i.e., speed) of this operation is poor compared to other strategies. For those reasons, we’ll learn about a different way to accomplish this using `vectorize()`.
+
+### Vectorize your functions
+
+How can we apply this function to each row of our data set without using `.apply()`? numpy can help with this with its `vectorize()` function.
+
+```{python}
+import numpy as np
+```
+
+numpy’s `vectorize()` function is a function just like we’ve been using from other libraries, the main difference is that **it’s a function that takes a function as its input**. The output of `vectorize()` is a vectorized version of the function we pass in.
+
+Use the numpy `vectorize()` function to vectorize the `intervene_or_not()` function we created earlier, assign the result, and return `intervene_or_not_vec`.
+
+```{python}
+#| eval: false
+
+intervene_or_not_vec = np.vectorize(intervene_or_not)
+```
+
+Notice that when we pass the function `intervene_or_not` into `vectorize()` we pass it without the round parenthesis, `()`. This is because we’re actually referring to the function `intervene_or_not` and not *calling* the function `intervene_or_not()` to make a calculation.
+
+Now that we have a vectorized function, `intervene_or_not_vec()`, we can use it with vectors as input:
+
+```         
+intervene_or_not_vec(patients['age'], patients['glucose'], patients['ldl_cholesterol'])
+```
+
+```         
+## array(['yes', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', ##        'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', 'no', ##        'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'yes', 'no'], ##       dtype='<U3')
+```
+
+**Create a new column called `intervene`** that contains the output of our `intervene_or_not_vec` function and return the `intervene` column.
+
+```{python}
+#| eval: false
+
+patients['intervene'] = intervene_or_not_vec(patients['age'], patients['glucose'], patients['ldl_cholesterol'])
+
+patients
+```
+
+In our previous example of using `np.vectorize()` we assigned the result to a new function, `intervene_or_not_vec()`. We could have overwritten our original function name, `intervene_or_not()`, if we wanted to.
+
+We are using the `_vec` suffix to distinguish between our original function, and the vectorized function. Keeping the function names separate like this helps distinguish the two behaviors in our code.
+
+There is a more concise way to vectorize our functions using Python *decorators*, but that will be out of scope for this lesson.
+
+#### Practice
+
+```{python}
+penguins.head()
+```
+
+```{python}
+from plotnine import ggplot, aes, geom_point, geom_hline, geom_vline, theme_minimal 
+```
+
+```{python}
+ggplot.show(
+  ggplot(
+    data = penguins,
+    mapping = aes(
+      x = 'flipper_length_mm',
+      y = 'bill_length_mm',
+      color = 'species'
+      )
+    ) +
+    geom_point() +
+    geom_hline(yintercept = 45) +
+    geom_vline(xintercept = 205)
+)
+```
+
+We need a function, `classify_penguin()`, that takes in 2 parameters, `flipper_length` and `bill_length`. The function will return the name of a penguin species, `"Gentoo"`, `"Chinstrap"`, or `"Adelie"`, based on the cutoff values we just determined.
+
+**Can you write the function** in the code box below and test it using the two test cases provided below?
+
+```{python}
+def classify_penguin(flipper_length, bill_length):
+  if flipper_length > 205:
+    return 'Gentoo'
+  elif bill_length < 45:
+    return 'Adelie'
+  else:
+    return 'Chinstrap'
+
+classify_penguin(230, 40)
+classify_penguin(100, 50)
+```
+
+Now we have a function that can take a `flipper_length` and `bill_length` value and return a prediction of the species.
+
+```         
+def classify_penguin(flipper_length, bill_length):   
+  if flipper_length >= 205:     
+    return 'Gentoo'   
+  else:     
+    if bill_length >= 45:       
+      return 'Chinstrap'     
+  else:       
+    return 'Adelie'  
+
+classify_penguin(230, 40)
+```
+
+```         
+## 'Gentoo'
+```
+
+```         
+classify_penguin(100, 50)
+```
+
+```         
+## 'Chinstrap'
+```
+
+We want to be able to use the `penguins` data set and give a prediction for each row in our data set. Let’s vectorize it.
+
+**Use the `numpyvectorize()` function to vectorize the `classify_penguin()` function** that we created previously.
+
+```{python}
+classify_penguin_vec = np.vectorize(classify_penguin)
+```
+
+Use the new vectorized function to create a column called `species_predict` that contains the species predictions for each row in the `penguins` data set. Return the new column.
+
+```{python}
+
+penguins['species_predict'] = classify_penguin_vec(
+  penguins['flipper_length_mm'],
+  penguins['bill_length_mm']
+) 
+
+penguins['species_predict']
+```
+
+Let’s see how we actually did in our simple classifier.
+
+```         
+pd.crosstab(penguins['species'], penguins['species_predict'])
+```
+
+```{python}
+pd.crosstab(
+  penguins['species'],
+  penguins['species_predict']
+)
+```
+
+## **Vectorizing other functions**
+
+The `vectorize()` function give us a lot of flexibility with how we use functions in pandas. So far, we vectorized a function that we defined ourselves. However, because `vectorize()` can take a function as its input, it means we are not limited to functions we define ourselves.
+
+If we ever need to use a function that is not vectorized, we can pass the function into `vectorize()` and continue working with the newly modified function as if the original function was vectorized all along.
+
+```{python}
+def is_match(x, y):
+  if (type(x) != type(y)):
+    return 0
+  elif x == y:
+    return 1
+  return 0
+    
+
+is_match(42, 42)
+is_match('Number', 42)
+is_match('Gentoo', 'Gentoo')
+
+is_match_vec = np.vectorize(is_match)
+```
+
+**Use the `is_match()` function** to see how many of the original `penguins['species']` column are the same as the predicted `penguins['species_predict']` column.
+
+Then save the comparison results to a new column called `is_match.`
+
+```{python}
+
+penguins['is_match'] = is_match_vec(
+  penguins['species'], 
+  penguins['species_predict']
+  )
+
+penguins['is_match'].value_counts()  
+```
+
+```{python}
+penguins['is_match_2'] = penguins.apply(
+  lambda row: is_match(
+    row['species'], 
+    row['species_predict']), 
+    axis = 1
+    )
+```
+
+## **When not to `vectorize()`**
+
+Not every custom function you write needs to go through the `vectorize()` process. Series objects in Python generally know how to broadcast and vectorize basic mathematical operations. In these scenarios, you can directly make the calculation between Series objects without any additional work.
+
+Create a new column called `bill_area` that multiplies the `bill_length_mm` and `bill_depth_mm` columns together. You can directly multiply the columns using `*`.
+
+```{python}
+
+penguins['bill_area'] = penguins['bill_length_mm'] * penguins['bill_depth_mm']
+
+penguins.head()
+```
+
+Good job. The multiplication operation (`*`) automatically ran once for each row of the columns that we multiplied together, because `*` is already vectorized.
+
+```{python}
+def area(x, y):
+  return x * y
+
+area(penguins['bill_length_mm'], penguins['bill_depth_mm'])
+```
+
+That’s right. Since the contents of the `area()` function already work with Series variables,
+there is **no need to vectorize** the `area()`.
+
+<https://numpy.org/doc/stable/reference/generated/numpy.vectorize.html>
+
+```{python}
+#| eval: false
+
+agg_df = df.groupby(["state", "month"]).agg(
+    cases_min=("cases", "min"),
+    cases_max=("cases", "max"),
+    cases_mean=("cases", "mean"),
+)
+```
