@@ -475,19 +475,19 @@ bin_mass(3550)
 -   When writing functions before they are vectorized, we imagine that each parameter is a single value (an int, a float, a string) from a single row in the dataframe. Then we call np.vectorize so that we can pass in Series/column data even though the parameter in the original function represents a single value.
 
 ```         
-		#a regular function - so here the name parameter represents a single string
-		def capitalize_name(name):  
-			return name.upper()
+        #a regular function - so here the name parameter represents a single string
+        def capitalize_name(name):  
+            return name.upper()
 
-		#Example of how to use the function
-		capitalize_name("Charlie")  #returns CHARLIE	
-			
-		#Now we vectorize the function so that this new version       
-		#can handle receiving a column/Series as a parameter. 
-		capitalize_name_vec = np.vectorize(capitalize_name)
-		
-		#So we can pass in a column of strings to the vectorized version  
-		df['first_name_upper'] = capitalize_name_vec(df['first_name'])
+        #Example of how to use the function
+        capitalize_name("Charlie")  #returns CHARLIE    
+            
+        #Now we vectorize the function so that this new version       
+        #can handle receiving a column/Series as a parameter. 
+        capitalize_name_vec = np.vectorize(capitalize_name)
+        
+        #So we can pass in a column of strings to the vectorized version  
+        df['first_name_upper'] = capitalize_name_vec(df['first_name'])
 ```
 
 We discussed list comprehensions which are meant to transform each item in a list in a relatively basic way. So for example, if else statements are possible, but not if-elif-else.
@@ -500,9 +500,8 @@ We discussed list comprehensions which are meant to transform each item in a lis
 
     -   <https://wesmckinney.com/book/plotting-and-visualization>
 
-```{=html}
 <!-- -->
-```
+
 -   [Python graph gallery](https://python-graph-gallery.com/) is a good resource and it often shows how to make the same graph in both matplotlib and seaborn
 
 -   This repo was also recommended - Note that the slides and notebooks folder each has "1-getting_started_with_matplotlib" file.  These files could be helpful.
