@@ -1,0 +1,132 @@
+---
+title: "Group and summarize data"
+format: html
+---
+# Instructions
+
+This week, you learned about several more pandas methods. 
+
+In this milestone, you'll group the data by state and then summarize the results to determine the top ten states with the highest COVID-related deaths.
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rsacdn.link/milestones/internal/python/covid/assets/covid_dictionary.html
+
+# Milestone
+
+```{python}
+#| label: 'setup'
+#| include: false
+
+# Import your packages here
+import pandas as pd
+from matplotlib import rcParams
+
+
+# Set some options
+pd.set_option('mode.copy_on_write', True)
+pd.set_option('display.max_columns', None)
+rcParams.update({'savefig.bbox': 'tight'})
+```
+
+## Summarize data
+
+In this milestone, you'll use groupwise summaries to compute the total values of `deaths` for each state and then plot the results for the states with the highest values.
+
+## Recreation
+
+### Part 1 - Import
+
+Before you begin, you will need to import the `covid` data set:
+
+1. Read the data from the data file `covid.csv`, which is stored in the `data/` folder in your working directory.
+2. Save the data set to a variable named `covid`.
+
+Work in the code chunk below:
+
+```{python}
+#| label: 'recreation-import'
+
+```
+
+### Part 2 - Compute total deaths
+
+Run the code below to compute the total values of `deaths` for the state of New York.
+
+```{python}
+subset = covid.loc[covid['state'] == 'NY']
+subset['deaths'].sum()
+```
+
+### Part 3 - Summarize data
+
+Next, you'll compute the summary measure of total `deaths` for each state.
+
+Run the code below to see a table.
+
+```{python}
+#| label: 'solution'
+solution = pd.read_csv('data/milestone05.csv')
+solution
+```
+
+
+Your task is to use what you've learned about functions and grouped summaries to transform `covid` into this table.
+
+You will need to:
+
+1. Group the data  by `state` using `.groupby()`
+2. Summarize the total value of `cases` and `deaths` for each group
+3. Use `.nlargest()` to find the top ten states with the highest total value of `deaths`
+
+Work in the code chunk below. Save the result as `cases_deaths`. We will use the result in Part 4.
+
+```{python}
+#| label: 'recreation-summary'
+
+```
+
+Run the following code chunk to test whether your table matches the solution:
+
+```{python}
+#| label: 'compare'
+
+# If your answer is correct, the comparison should return an empty DataFrame.
+cases_deaths.reset_index(drop=True).compare(solution)
+```
+
+### Part 4 - Visualize it
+
+Using the File Explorer on the left, navigate to the `images/` directory, then click on `milestone05.png` to open an image in the Editor pane. 
+
+You should see a plot that displays the total deaths for the ten states with the highest values.
+
+Use the new `cases_deaths` data to recreate the plot.
+
+```{python}
+#| label: 'recreation-visualize'
+
+```
+
+## Extension
+
+Using the code chunk below, investigate a research question about this data, using the additional data wrangling skills you learned this week. Some ideas:
+
+1. Some states within the US coordinated their policies in response to the pandemic; do you see a regional or coalition-based pattern in `cases`, `deaths`, or other variables? Illustrate your findings with at least one graph.
+
+2. Create both a table and a related graph for the 10 states with the _lowest_ reported values of `deaths`. Do you see any relationship between the `cases` and `deaths`in these states?
+
+3. We have not yet explored the variable `tests`; what can you learn about the number of tests administered in different states? The relationship between tests and cases?
+
+4. [any other research question of interest]
+
+Alternately, working with a data set of your own, complete the following:
+
+1. Read in your data
+2. Use `.groupby()` and `.apply()` or `.agg()` to produce a summary table from your data 
+3. Create a related graph of this data subset using plotnine
+
+
+```{python}
+#| label: 'extension'
+
+```
+

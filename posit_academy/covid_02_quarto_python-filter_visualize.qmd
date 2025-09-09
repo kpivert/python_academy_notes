@@ -1,0 +1,250 @@
+---
+title: "Visualize and filter data"
+format: html
+---
+
+# Instructions
+
+This week, you learned about basic data types, as well as the pandas DataFrame and Series classes. You also learned to filter tables and visualize them with plotnine.
+
+You'll apply your new skills in this milestone to visualize the number of COVID-19 cases and deaths over time for New York state.
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rsacdn.link/milestones/internal/python/covid/assets/covid_dictionary.html
+
+# Milestone
+
+```{python}
+#| label: 'setup'
+
+# Import your packages here
+import pandas as pd
+from matplotlib import rcParams
+
+
+# Set some pandas options
+pd.set_option('display.max_columns', None)
+pd.set_option('mode.copy_on_write', True)
+rcParams.update({'savefig.bbox': 'tight'}) # Keeps plotnine legend from being cut off
+```
+
+## Read and visualize
+
+In this milestone, you'll use plotnine to visualize how the number of COVID-19 cases and deaths evolved for a subset of the data.
+
+Before you begin, you will need to import the `covid` data set.
+
+## Recreation
+
+### Part 1 - Import
+
+In the code chunk below, use a function from the pandas package to read in the `covid` data set.
+
+-   The data set lives in the file `covid.csv`, which is stored in the `data/` folder in your working directory. (Hint: review milestone 1 for a reminder of how to read in data.)
+-   When the data is imported, assign the data set to a variable named `covid`
+
+```{python}
+#| label: 'recreation-import'
+covid = pd.read_csv('data/covid.csv')
+```
+
+### Part 2 - Subset
+
+Run the code below to see a table.
+
+```{python}
+#| label: 'recreate-this'
+#| message: false
+
+solution = pd.read_csv('data/milestone02.csv')
+solution
+```
+
+Your task is to filter `covid` for the rows where `state` is "NY" and save the result as a new data set called `subset`.
+
+Note: the index numbers for your table and the example will be different; that is expected. We'll learn about resetting indexes in a future week.
+
+```{python}
+#| label: 'recreation-subset'
+subset = covid.loc[covid['state'] == "NY"]
+```
+
+### Part 3 - Visualize
+
+Using the File Explorer on the left, navigate to the `images/` directory, then click on `milestone02.png` to open an image in the Editor pane.
+
+You shoul dsee a plot that displays `cases` and `deaths` over time *only for the state of New York*.
+
+Use plotnine functions and the `subset` data set in the following chunk to re-create this plot.
+
+*Hint:* This plot uses two geoms to create the two lines, one representing number of cases and the other representing number of deaths
+
+*Hint:* If you get a warning saying, "Each group consists of only one observation. Do you need to adjust the group aesthetic?", then add `group=1` to each of your geoms.
+
+```{python}
+#| label: 'recreation_visualize_1'
+
+# Remember to import the plotnine functions that you'll be using.
+# You can add them to the `setup` chunk at the top to keep your code organized. 
+from plotnine import ggplot, aes, geom_line, theme_minimal, theme_void, theme, element_blank, element_rect, labs
+
+# help(theme)
+
+ggplot.show(
+  ggplot(
+    data = subset, 
+    mapping = aes(
+      x = 'date', 
+      y = 'cases'
+      )
+    ) +
+    geom_line(
+      aes(
+        group = 1
+      )
+    ) +
+    geom_line(
+      data = subset,
+      mapping = aes(
+        x = 'date', 
+        y = 'deaths',
+        group = 1
+      )
+    ) +
+    labs(
+      title = "Cases and Deaths for New York"
+    ) +
+    theme(
+      panel_grid = element_blank(),
+      plot_background = element_rect(color="#ffffff"),
+      panel_background = element_rect(fill="#ffffff")
+    ) 
+    # theme_void()
+)
+
+```
+
+## Extension
+
+Using the code chunk below, investigate a single research question about this data, using the visualization skills you learned this week. Some ideas:
+
+1.  Your recreation focused on the evolution of `cases` and `deaths` in the state of New York. How does the trajectory of New York compare to another state with similar values of `cases`?
+
+2.  Do you see similar patterns across states? Does this answer change if you look at only high (or low) values of `cases`?
+
+3.  Within a state or states of interest, what patterns do you see between `cases` and `deaths` over time?
+
+4.  \[any other research question of interest\]
+
+Alternately, working with a data set of your own, complete the following:
+
+1.  Read in your data
+2.  Filter your data using a logical test/condition
+3.  Graph this data subset using at least one geom
+
+```{python}
+from great_tables import GT, md, html
+```
+
+```{python}
+covid_cases_deaths = (
+  covid
+    .groupby('state')
+    .agg({
+      'cases': ['sum', 'mean'],
+      'deaths': ['sum', 'mean']
+    })
+    .sort_values(by = ('cases', 'sum'), ascending = False)
+)
+
+covid_cases_deaths
+```
+
+```{python}
+# GT((
+statewise_cases_deaths = (
+  covid
+    .groupby('state')[['cases', 'deaths']].sum()
+
+    # .reset_index(name = 'total_cases')
+    # .sort_values(by = 'total_cases', ascending = False)
+    # .head(n = 10)
+)
+```
+
+::::: columns
+::: {.column width="50%"}
+```{python}
+
+ggplot.show(
+  ggplot(
+    data = subset, 
+    mapping = aes(
+      x = 'date', 
+      y = 'cases'
+      )
+    ) +
+    geom_line(
+      aes(
+        group = 1
+      )
+    ) +
+    geom_line(
+      data = subset,
+      mapping = aes(
+        x = 'date', 
+        y = 'deaths',
+        group = 1
+      )
+    ) +
+    labs(
+      title = "Cases and Deaths for New York"
+    ) +
+    theme(
+      panel_grid = element_blank(),
+      plot_background = element_rect(color="#ffffff"),
+      panel_background = element_rect(fill="#ffffff")
+    ) 
+    # theme_void()
+)
+```
+:::
+
+::: {.column width="50%"}
+```{python}
+#| label: 'extension'
+
+ggplot.show(
+  ggplot(
+    data = covid.loc[covid['state'] == 'FL'], 
+    mapping = aes(
+      x = 'date', 
+      y = 'cases'
+      )
+    ) +
+    geom_line(
+      aes(
+        group = 1
+      )
+    ) +
+    geom_line(
+      data = subset,
+      mapping = aes(
+        x = 'date', 
+        y = 'deaths',
+        group = 1
+      )
+    ) +
+    labs(
+      title = "Cases and Deaths for Florida"
+    ) +
+    theme(
+      panel_grid = element_blank(),
+      plot_background = element_rect(color="#ffffff"),
+      panel_background = element_rect(fill="#ffffff")
+    ) 
+    # theme_void()
+)
+
+```
+:::
+:::::

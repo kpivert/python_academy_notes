@@ -1,0 +1,264 @@
+---
+title: "Python Basics"
+format: html
+---
+
+# Instructions
+
+Welcome to your first project milestone! In this project, you will use Python to investigate real data related to COVID-19.
+
+We will split our work into milestones that build on each other to iteratively explore the data.
+
+## How to complete a milestone
+
+Each milestone will require you to read and edit a Quarto document, like this one. \*\*To learn how to use Quarto in Positron, see here: https://quarto.org/docs/get-started/hello/positron.html.
+
+For each milestone, you will need to:
+
+1.  **Recreate a result,** like a plot, table, or model. This will require you to use the skills you have studied that week.
+
+2.  **Extend the result.** Explore a new question about the data--this will provide an opportunity to both apply the skills you learned that week and to teach yourself something new. We will provide suggestions each week, but you are encouraged to explore any aspect of the data that interests you. Alternatively, apply and extend the skills you learned that week by working with your own data.
+
+Remember, being able to teach yourself new parts of a computer language is what will make you a truly competent open source programmer---and we are here to help.
+
+You'll share your extension with your groupmates at the weekly meeting, and show them how they could do the same.
+
+## The `covid` data set
+
+The data comes from the The COVID Tracking Project: <https://covidtracking.com/>.
+
+To learn more about the variables contained in the data set, refer to the data dictionary: <https://rsacdn.link/milestones/internal/python/covid/assets/covid_dictionary.html>
+
+# Milestone
+
+```{python}
+#| label: 'setup'
+
+# Import your packages here
+import pandas as pd
+import numpy as np
+
+# Set a display option so all columns of tables are displayed
+pd.set_option('display.max_columns', None)
+pd.set_option('display.float_format', '{:.3f}'.format)
+```
+
+## Python Basics
+
+In this milestone, you'll become familiar with the `covid` data set.
+
+## Recreation
+
+### Part 1
+
+Let's start by loading the data that we'll be using.
+
+To begin:
+
+-   Run the setup chunk above, which will import pandas with the common alias, `pd`.
+-   Use `help(pd.read_csv)` to explore the help page for the pandas `read_csv()` function.
+-   Use `read_csv()` to load our data set, which is stored at `data/covid.csv`.
+-   Save the data set to a variable named `covid`.
+
+```{python}
+#| label: 'recreation_1'
+
+# help(pd.read_csv)
+covid = pd.read_csv(filepath_or_buffer = "data/covid.csv")
+```
+
+### Part 2
+
+Now that `covid` is loaded, run the following code chunk, which will pull out the `cases`, `deaths`, and `state` columns and save them as variables to use later.
+
+```{python}
+#| label: 'save_columns'
+
+# This code may look unfamiliar.
+# Don't worry, we will cover this in next week's tutorials. 
+cases = covid['cases']
+deaths = covid['deaths']
+state = covid['state']
+```
+
+### Part 3
+
+Use Python to explore our data:
+
+-   Display the contents of `covid`
+-   Display the contents of the columns that we saved separately for you: `cases`, `deaths`, and `state`
+-   Use the built-in `max()` function to find the highest value of `cases` recorded by any state
+-   Use the built-in `max()` function to find the highest value of `deaths` recorded by any state
+-   Use the pandas `Series.value_counts()` function to tally up the *number of records* for each state in the data set
+
+*Hint:* you may want to look up the help pages for each of these functions.
+
+Write your code in the following chunk:
+
+```{python}
+#| label: 'recreation_2'
+# Display contents
+covid
+
+# Display pandas.Series objects
+cases
+deaths
+state
+
+# Highest Number of Cases
+# help(max)
+
+max(cases)
+
+# Highest Number of Deaths
+
+max(deaths)
+
+# Number of records per state
+
+help(pd.Series.value_counts)
+help(pd.value_counts)
+
+state.value_counts()
+
+state.value_counts(dropna = False)
+
+
+```
+
+## Extension
+
+Explore `covid` or one of the individual columns in a new way. Consider using a new function, or something that you can learn from a help page. (One idea: Are there any functions that you would like to use from the `statistics` package?)
+
+**For your first extension, we encourage you to think small.** Throughout this course, you will build many skills to explore data; for this first week, your work will likely be fairly straightforward. Consider *limiting yourself to 30-45 minutes* for this portion of your work; at the end of that time interval, stop working and make notes on your progress, dead-ends, and aspirations -- bringing those to your group for discussion during the milestone session.
+
+Write your extension code in the following chunk:
+
+```{python}
+#| label: 'extension'
+
+# 1. Group by and count
+
+# help(pd.groupby()) Doesn't work, guess this is a method??
+help(covid.groupby)
+```
+
+```{python}
+# This gives counts but puts them in each column...not desired
+
+# covid.groupby('state').count()
+covid.groupby('state', dropna = False).count()
+```
+
+```{python}
+
+# help(covid.size)
+
+# This works, but it isn't a DataFrame any longer...it's a series....
+
+# covid.groupby('state').size()
+covid.groupby('state', dropna = False).size()
+```
+
+```{python}
+# Additional `groupby` actions suggested by Positron Assistant
+covid.groupby('state').size()
+```
+
+```{python}
+# Count specific column
+covid.groupby('state')['cases'].count()
+```
+
+```{python}
+# Very useful: sum of COVID-19 cases by state
+# covid.groupby('state')['cases'].sum()
+covid.groupby('state')['cases'].sum().reset_index(name = 'total_cases')
+```
+
+```{python}
+covid.groupby('state')['tests'].sum()
+```
+
+```{python}
+# covid.groupby('state')['tests'].mean()
+covid.groupby('state')['tests'].mean().reset_index(name="Average cases")
+```
+
+```{python}
+# covid.groupby('state')['tests'].median()
+# This returns help page for pandas.Series...very helpful. 
+# Has Attributes and Methods
+help(covid.groupby('state')['tests'].median())
+
+# pandas.core.groupby.generic.SeriesGroupBy
+# type(covid.groupby('state')['tests'])
+
+# pandas.core.series.Series
+# type(covid['tests'])
+```
+
+```{python}
+# Count records per state (same as size())
+# This is what I was looking for...
+
+covid.groupby('state').size().reset_index(name='record_count')
+```
+
+```{python}
+# A pandas DataFrame
+type(covid.groupby('state').size().reset_index(name='record_count')) 
+```
+
+```{python}
+# Can't go help(pd.reset_index), you have to have the type (DataFrame, Series)
+# help(pd.DataFrame.reset_index)
+help(covid.reset_index)
+```
+
+```{python}
+# Multiple aggregations---this is very efficient.
+covid.groupby('state').agg({
+    'cases': ['count', 'sum', 'mean'],
+    'deaths': ['count', 'sum']
+})
+```
+
+```{python}
+# Count unique values
+covid.groupby('state')['date'].nunique()
+```
+
+```{python}
+## describe()!
+# Very cool
+covid.groupby('state').describe()
+
+```
+
+```{python}
+covid['tests'].describe()
+```
+
+```{python}
+# python excludes the most-right value, that is 1
+np.arange(.1, 1, .1) 
+
+```
+
+```{python}
+cases.describe(
+  percentiles = np.arange(.1, 1, .1)
+)
+```
+
+```{python}
+
+# Dot chaining...very nice
+(
+  covid
+    .isna()
+    .sum()
+)
+
+```

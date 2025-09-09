@@ -1,0 +1,347 @@
+---
+title: "Write functions"
+format: html
+---
+
+# Instructions
+
+This week, you learned how to write and apply your own functions.
+
+You'll use these skills to add a column that recodes integer month (i.e., 1, 2) to month names (i.e., January, February).
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rsacdn.link/milestones/internal/python/covid/assets/covid_dates_split_dictionary.html
+
+# Milestone
+
+```{python}
+#| label: 'setup'
+#| include: false
+
+# Import your packages here
+import pandas as pd
+from matplotlib import rcParams
+import numpy as np
+import plotnine as p9
+
+# Set some options
+pd.set_option('mode.copy_on_write', True)
+pd.set_option('display.max_columns', None)
+rcParams.update({'savefig.bbox': 'tight'}) # Keeps plotnine legend from being cut off
+
+```
+
+## Create and select columns
+
+As we work towards building polished reports and plots, it may be useful to include the month name in our data set rather than the date. In this milestone, you'll create a new variable that contains the month name associated with a month number.
+
+## Recreation
+
+### Part 1 - Import
+
+First, import your data set, as you have in past milestones: 1. Read the data from the data file `covid_dates_split.csv`, stored in the `data/` folder in your working directory. 2. Save the data set to a variable named `covid`.
+
+Work in the code chunk below.
+
+```{python}
+#| label: 'recreation_import'
+
+covid = pd.read_csv('data/covid_dates_split.csv')
+```
+
+### Part 2 - Write a function
+
+Your task is to write a function named `recode_month()` that will accept an integer as input and return the associated month name:
+
+-   1: 'January'
+-   2: 'February'
+-   3: 'March'
+-   4: 'April'
+-   5: 'May'
+-   6: 'June'
+-   7: 'July'
+-   8: 'August'
+-   9: 'September'
+-   10: 'October'
+-   11: 'November'
+-   12: 'December'
+
+(For now, don't add error checks, e.g., what if a number greater than 12 is input.)
+
+```{python}
+#| label: 'recreation-function'
+
+def recode_month(x):
+  if x == 1:
+    return 'January'
+  elif x == 2:
+    return 'February'
+  elif x == 3:
+    return 'March'
+  elif x == 4:
+    return 'April'
+  elif x == 5:
+    return 'May'
+  elif x == 6:
+    return 'June'
+  elif x == 7:
+    return 'July'
+  elif x == 8:
+    return 'August'
+  elif x == 9:
+    return 'September'
+  elif x == 10:
+    return 'October'
+  elif x == 11:
+    return 'November'
+  elif x == 12:
+    return 'December'
+
+```
+
+Run the following code chunk to test your function on a few different values:
+
+```{python}
+#| label: 'compare_results'
+
+recode_month(1) # should return 'January'
+recode_month(3) # should return 'March'
+recode_month(5) # should return 'May'
+```
+
+### Part 3 - Apply
+
+1.  Using your function, add a new column to `covid` called `month_name` that contains the name associated with each numeric month value.
+2.  Save the resulting table as `data/covid_with_months.csv`. **Note:** when saving, set `index=False`.
+
+```{python}
+#| label: 'recreation_apply'
+
+covid['month_name'] = covid['month'].apply(recode_month)
+
+covid.to_csv('data/covid_with_months.csv', index = False)
+
+```
+
+## Extension
+
+Use the code chunk(s) below to extend your work, investigating a research question of your choosing. Some suggestions, below:
+
+Consider:
+
+1.  Write a function that bins `hospitalizations` into high, medium, and low using if else statements and cutoff values of your choosing. Do the same for `deaths` and `cases.` How do states with high hospitalization counts compare to states with high death counts? Compared to states with high case counts?
+
+2.  Write a function that calculates the hospitalization rate as defined by `hospitalizations`/`cases`. For a handful of states of your choosing, use this function to calculate the hospitalization rate for each `state` and `month` group and then visualize the result. How do the states compare to one another? Are there any differences or similarities that were surprising to you?
+
+3.  \[any other research question of interest\]
+
+Alternately, working with a data set of your own, complete the following:
+
+1.  Read in your data
+2.  Write a function the performs an operation on your data
+3.  Call the function, or use `.apply()` to apply it to every row in the dataset
+
+```{python}
+#| label: 'extension'
+
+# Add Column with date formatted as `Timestamp`
+
+covid['date_formatted'] = covid['date'].apply(pd.to_datetime)
+
+# Eliminate Negative Hospitalization Records
+
+covid = covid.loc[covid['hospitalizations'] >= 0].copy()
+covid = covid.loc[covid['deaths'] >= 0].copy()
+covid = covid.loc[covid['cases'] >= 0].copy()
+
+```
+
+
+```{python}
+
+def bin_hospitalizations(hospitalizations):
+  if hospitalizations < 37: 
+    return 'low'
+  elif hospitalizations < 5457:
+    return 'medium'
+  else:
+    return 'high'
+  
+covid['binned_hosp'] = covid['hospitalizations'].apply(bin_hospitalizations)
+
+```
+
+
+```{python}
+# Do the same for `deaths` and `cases.`
+
+# pd.cut(covid['deaths'], bins = 3, retbins = True)
+# pd.qcut(covid['deaths'], q = 3, retbins = True)
+
+# covid.loc[covid['deaths'] < 0]
+
+def bin_deaths(deaths):
+  if deaths < 2:
+    return 'low'
+  elif deaths < 15:
+    return 'medium'
+  else:
+    return 'high'
+
+# covid['deaths'].apply(bin_deaths).value_counts()
+
+covid['binned_deaths'] = covid['deaths'].apply(bin_deaths)
+
+# pd.qcut(covid['cases'], q = 3, retbins = True)
+
+def bin_cases(cases):
+  if cases < 146:
+    return 'low'
+  elif cases < 922:
+    return 'medium'
+  else:
+    return 'high'
+
+# covid['cases'].apply(bin_cases).value_counts()    
+
+covid['binned_cases'] = covid['cases'].apply(bin_cases)
+
+```
+
+
+```{python}
+# How do states with high hospitalization counts compare to states with high death counts? 
+
+covid.sort_values(by = 'hospitalizations', ascending = False).loc[:, ['state', 'hospitalizations', 'deaths', 'binned_hosp', 'binned_deaths']].head(n = 15)
+```
+
+```{python}
+# Compared to states with high case counts?
+
+covid.sort_values(by = 'hospitalizations', ascending = False).loc[:, ['state', 'hospitalizations', 'cases', 'binned_hosp', 'binned_cases']].head(n = 15)
+```
+
+
+```{python}
+# 2.  Write a function that calculates the hospitalization rate as defined by `hospitalizations`/`cases`. 
+
+def hosp_case_ratio_agg(group):
+  total_hosp = group['hospitalizations'].sum()
+  total_cases = group['cases'].sum()
+  if total_cases == 0 or pd.isna(total_cases):
+    return 0
+  elif total_hosp == 0 or pd.isna(total_hosp):
+    return 0
+  else:
+    return total_hosp / total_cases
+
+result = covid.groupby(['state', 'month']).apply(hosp_case_ratio_agg).reset_index()
+result.columns = ['state', 'month', 'hosp_case_ratio']
+
+```
+
+```{python}
+
+#  For a handful of states of your choosing, use this function to calculate the hospitalization rate for each `state` and `month` group and then visualize the result. How do the states compare to one another? Are there any differences or similarities that were surprising to you?
+from plotnine import ggplot, aes, geom_line, theme, theme_minimal, geom_col, facet_wrap
+
+```
+
+```{python}
+
+ggplot.show(
+  ggplot(
+    result.loc[result['state'].isin(['VA', 'MA'])],
+    aes(
+      x = 'month', 
+      y = 'hosp_case_ratio',
+      group = 'state'
+      )
+    ) +
+    geom_col() +
+    facet_wrap('~state') +
+    theme_minimal() 
+)
+```
+
+
+```{python}
+#| label: Scratch
+#| eval: false
+
+# Calculate Bins for 'low', 'medium', and 'high'
+
+pd.cut(covid['hospitalizations'], bins = 3)
+
+# Returns:
+# Name: hospitalizations, Length: 20692, dtype: category
+# Categories (3, interval[float64, right]): [(-16.373, 5457.667] < (5457.667, 10915.333] < (10915.333, 16373.0]]
+
+# count    20692.000000
+# mean        38.585927
+# std        187.106400
+# min          0.000000
+# 25%          0.000000
+# 50%          0.000000
+# 75%         37.000000
+# max      16373.000000
+# Name: hospitalizations, dtype: float64
+
+covid['hospitalizations'].apply(bin_hospitalizations).value_counts()
+
+p9.ggplot.show(
+  p9.ggplot(
+    covid, 
+    p9.aes( 
+      x = 'hospitalizations'
+    )
+  ) +
+  p9.geom_histogram(
+    bins = 50
+  )
+)
+
+# df['quartile'] = pd.qcut(df['values'], q=4, labels=['Q1', 'Q2', 'Q3', 'Q4'])
+
+pd.qcut(covid['hospitalizations'], q = 3, labels = ['low', 'medium', 'high'])
+pd.cut(covid['hospitalizations'], bins = 3)
+
+covid.loc[covid['hospitalizations'] < 0]
+
+# Count observations in each bin
+# bin_counts = df['quartile'].value_counts()
+print(bin_counts)
+
+# Sort by bin order (not frequency)
+# bin_counts_sorted = df['quartile'].value_counts().sort_index()
+# print(bin_counts_sorted)
+
+
+# Define your own percentiles to ensure 3 categories
+percentiles = covid['hospitalizations'].quantile([0, 0.33, 0.67, 1.0]).values
+# Make sure edges are unique
+percentiles = np.unique(percentiles)
+pd.cut(covid['hospitalizations'], bins=percentiles, retbins=True, include_lowest=True)
+```
+
+
+```{python}
+# 2.  Write a function that calculates the hospitalization rate as defined by `hospitalizations`/`cases`. For a handful of states of your choosing, use this function to calculate the hospitalization rate for each `state` and `month` group and then visualize the result. How do the states compare to one another? Are there any differences or similarities that were surprising to you?
+
+# def hosp_case_ratio(row):
+#   if row['cases'] == 0 or pd.isna(row['cases']):
+#     return 0
+#   else:
+#     return row['hospitalizations'] / row['cases']
+
+# def hosp_case_ratio(hospitalizations, cases):
+#   if cases == 0 or pd.isna(cases):
+#     return 0
+#   else:
+#     return hospitalizations / cases
+
+# hosp_case_ratio_vec = np.vectorize(hosp_case_ratio)
+# # hosp_case_ratio_vec(covid['hospitalizations'], covid['cases']).max()
+
+# # df['sqrt_value'] = df.groupby('group')['value'].apply(vectorized_calc).reset_index(level=0, drop=True)
+# covid.groupby(['state', 'month'])[['hospitalizations', 'cases']].apply(hosp_case_ratio_vec).reset_index(level=0, drop=True)
+```

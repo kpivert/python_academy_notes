@@ -1,0 +1,813 @@
+---
+title: "Week 5"
+format: html
+---
+
+### Missing Values in pandas
+
+[General Social Survey](https://gss.norc.org)
+
+-   `NaN` comes from {numpy}. To use manually need to import `NaN` from numpy
+-   `NaN` == `nan` == `NAN`
+-   Pandas treats built-in Python value `None` as `NaN`
+
+```{python}
+
+import numpy as np
+import pandas as pd
+brianna_happy = 'Very happy'
+brianna_tv_hours = np.nan
+```
+
+`nan` can appear in vectors
+
+```{python}
+tv_hours = pd.Series([3, np.nan, 5, 5, 5, 5, np.nan, 3, 2, 2])
+```
+
+### Operations with Missing Values
+
+Numerical operations with missing info return more missing information
+
+```{python}
+brianna_tv_hours * 7
+```
+
+### Comparisons with `np.nan`
+
+**Comparing `np.nan` with another value will always return `False`**
+
+```{python}
+3 < np.nan
+3 == np.nan
+3 > np.nan
+```
+
+Example in R `#| eval: false 3 == NA`
+
+```{python}
+np.nan == np.nan
+```
+
+### Detect Missing Values
+
+-   Use `.isna()`
+-   It is **vectorized**
+
+```{python}
+pd.isna(brianna_tv_hours)
+```
+
+```{python}
+pd.isna(tv_hours)
+```
+
+When `isna()` called on vector get Boolean vector.
+
+Sometimes pair `isna()` with method that can summarize Boolean vector
+
+-   `isna(x).any()` returns `True` if **any** items in `x` missing
+-   `isna(x).all()` returns `True` if **all** items in `x` missing
+-   `isna(x).sum()` calculates **number** of missing items in `x`
+-   `isna(x).mena()` calculates **proportion** of missing items in `x`
+
+```{python}
+pd.isna(tv_hours).any()
+pd.isna(tv_hours).mean()
+
+```
+
+### Exclude missing values
+
+-   **NB:** many methods in Pandas automatically ignore `nan` values
+-   Functions have a `skipna` parameter defaulting to `True`
+-   Must check how functions and methods handled missing data. `statistics` moduel in Python will retain missing values by default
+
+```{python}
+tv_hours.mean()
+```
+
+```{python}
+tv_hours.mean(skipna = False)
+```
+
+```{python}
+import statistics
+
+statistics.mean(tv_hours)
+```
+
+### Drop missing values
+
+-   Pandas `.dropna()` method drops rows where those variables are `nan`
+-   Without arguments, `.dropna()` drops any observation (row) with a missing value in any column (variable).
+
+```{python}
+#| eval: false
+
+gss.dropna(subset = ['tv_hours', 'happy'])
+
+gss_dropped = gss.dropna(subset = ['tv_hours', 'work_hours'])
+
+gss_dropped.reset_index()
+gss_dropped.reset_index(drop = True)
+
+```
+
+NB: Subset will still have original row numbers.
+
+-   `gss_dropped.reset_index()` reset row values
+-   `gss_dropped.reset_index(drop = True)` will drop extra `index` column
+
+```{python}
+help(pd.read_csv)
+```
+
+### Fix missing values
+
+Pandas takes a lot of common `nan` values
+
+`na_values: Hashable, Iterable of Hashable or dict of {Hashable : Iterable}, optional Additional strings to recognize as NA/NaN. If dict passed, specific per-column NA values. By default the following values are interpreted as NaN: " ", "#N/A", "#N/A N/A", "#NA", "-1.#IND", "-1.#QNAN", "-NaN", "-nan", "1.#IND", "1.#QNAN", "", "N/A", "NA", "NULL", "NaN", "None", "n/a", "nan", "null ".`
+
+#### Convert values to `nan`
+
+Use `.replace()` Series or DataFrame method
+
+```{python}
+pd.Series([32, 999, 12]).replace(999, np.nan)
+```
+
+-   Can also provide `.replace()` a list or dictionary of values to replace.
+-   Do so conditionally with `.loc[]` or `.iloc[]`
+
+```{python}
+#| eval: false
+
+gss['religion'] = gss['religion'].replace('None', np.nan)
+
+```
+
+#### Fill `nan` values
+
+-   Replace missing values with non-missing values with `.fillna()`
+
+```{python}
+pd.Series([32, np.nan, 52]).fillna(42)
+```
+
+#### Complete a column using another column
+
+```{python}
+
+responses = pd.DataFrame(
+  {'first': [14, np.nan, np.nan, np.nan, 4.0],
+  'second': [13, 5, 4, np.nan, np.nan]}
+)
+```
+
+```{python}
+
+responses['first'].fillna(responses['second'])
+```
+
+**NB:** - `.fillna()` method has a `method` parameter that allows us to backfill with `bfill` or forward fill with `ffill`
+
+```{python}
+pd.Series([32, np.nan, 52]).fillna(method = 'bfill')
+```
+
+```{python}
+pd.Series([32, np.nan, 52]).fillna(method = 'ffill')
+```
+
+If data begins and ends with missing values:
+
+```{python}
+
+(
+  pd.Series([np.nan, 32, np.nan, 52, np.nan])
+    .fillna(method = 'bfill')
+    .fillna(method = 'ffill')
+)
+
+```
+
+### Complete a column using interpolation
+
+-   Default interpolation method is `linear`, but can use `quadratic` or `cubic`
+
+```{python}
+#| eval: false
+
+tv_per_month['interp_hours'] = tv_per_month['hours'].interpolate()
+```
+
+### Summarize Tables
+
+```{python}
+import pandas as pd
+import numpy as np
+import statistics
+```
+
+```{python}
+from palmerpenguins import load_penguins
+penguins = load_penguins()
+```
+
+```{python}
+penguins
+```
+
+Find smallest body mass
+
+```{python}
+penguins['body_mass_g'].min()
+```
+
+### Summary functions
+
+-   `.min()` is a type of summary function. Takes multiple values and returns a single summary value.
+
+#### Summary functions with missing values
+
+```{python}
+pd.Series([1, 2, 3, np.nan]).mean()
+```
+
+```{python}
+penguins['body_mass_g'].max()
+```
+
+#### `.agg()`
+
+`.agg()` allos us to commpute multiple summary statistics at once as long as they are all methods of the Pandas Series class. Get results back in new DataFrame
+
+```{python}
+penguins.agg({
+  'bill_length_mm': 'median'
+})
+```
+
+#### `.agg()` Syntax
+
+First argument of `.agg()` can be one of the following values: - string function name ('min') - list of functions and/or function names \[min, max\] OR \['min', 'max'\] - Dict mapping column names to a function, string function name, or list of functions
+
+When we use dist as input to `.agg()` provide a column name on left side of `:` and functions to use on that column on the right side of the `:`
+
+penguins.agg({ <column name>: \<function(s)\> })
+
+**NB: Output of `.agg()` is Series**
+
+```{python}
+penguins.agg({
+  'bill_length_mm': 'median'
+})
+```
+
+**But, if you want output to be DataFrame supply function as a list**
+
+```{python}
+penguins.agg({
+  'bill_length_mm': ['median']
+})
+```
+
+### Multiple Methods
+
+To use multiple methods, provide them as a list
+
+```{python}
+penguins.agg({
+  'bill_length_mm': ['mean', 'median']
+})
+```
+
+```{python}
+penguins.agg({
+  'body_mass_g': ['min', 'mean', 'median', 'max']
+})
+```
+
+```{python}
+penguins.agg({
+  'bill_length_mm': ''
+})
+```
+
+`.agg()` does not modify the DataFrame, but returns a new one, which can be assigned
+
+```{python}
+summary_stats = penguins.agg({
+  'body_mass_g': ['min', 'max']
+})
+```
+
+### Multiple Columns
+
+Specify additional columns by adding new dictionary items, separated by a comma
+
+```{python}
+penguins.agg({
+  'bill_length_mm': ['mean'],
+  'bill_depth_mm': ['mean']
+})
+```
+
+```{python}
+penguins.agg({
+  'year': ['min', 'max'],
+  'bill_length_mm': ['min', 'max']
+})
+```
+
+#### Limitations of `.agg()`
+
+Providing additional arguements for the summary function is not intuitive with `.agg()`
+
+Can provide a lambda function including function and arguments
+
+```{python}
+penguins.agg({
+  'bill_length_mm': lambda col: col.mean(skipna = False)
+})
+```
+
+#### Multiple Column Summaries
+
+Can't use `.agg()` with summary function involving multiple columns, like `statistics.correlation()`
+
+```{python}
+# remove nans first
+
+penguins_no_na = penguins.dropna()
+
+statistics.correlation(penguins_no_na['bill_length_mm'], penguins_no_na['bill_depth_mm'])
+```
+
+### Groupwise Operations
+
+```{python}
+#| eval: false
+
+import pandas as pd
+import statistics
+```
+
+```{python}
+(
+  penguins
+    .agg({
+      'body_mass_g': ['mean'],
+      'flipper_length_mm': ['mean'],
+      'bill_length_mm': ['mean']
+    })
+)
+```
+
+We can use `.loc[]` to compute separate statistics for each species
+
+```{python}
+(
+  penguins.loc[penguins['species'] == 'Adelie']
+    .agg({
+      'body_mass_g': ['mean'],
+      'flipper_length_mm': ['mean'],
+      'bill_length_mm': ['mean']
+    })
+)  
+```
+
+### `.groupby()`
+
+-   Interacts with other pandas DataFrame methods to apply those functions in groupwise fashion
+-   `.groupby()` divides data into groups of rows, then python runs `.agg()` on each group and combines results into single table
+
+```{python}
+(
+  penguins
+    .groupby('species')
+    .agg({
+      'body_mass_g': ['mean'],
+      'flipper_length_mm': ['mean'],
+      'bill_length_mm': ['mean']
+    })
+)
+```
+
+### Syntax
+
+When using `.groupby()` give one or more column names, will create a DataFrameGroupBy object
+
+```{python}
+(
+  penguins
+    .groupby(['island', 'year'])
+    .agg({
+      'bill_length_mm': 'max'
+    })
+)
+```
+
+### `.reset_index()`
+
+By default `.agg()` returns the grouping information as part of the DataFrame's index instead of as columns
+
+We can visually tell that the grouping information is stored in the index (i.e., row names) because the names `island` and `year` are not in alignment with the name of the regular column, `bill_length_mm` and there are blank values in the `island` column under each unique island (`Biscoe`, `Dream`, `Torgersen`).
+
+We can also check the index by calling the `.columns` or `.index` attribute on the result. Let’s take a closer look at the index.
+
+```{python}
+(
+  penguins
+    .groupby(['island', 'year'])
+    .agg({
+      'bill_length_mm': 'max'
+    })
+    .index
+)
+```
+
+In the DataFrame output above, pandas stored the grouping information in something called a MultiIndex. A MultiIndex allows hierarchical organization of indices, so each value in the `island` column is displayed once rather than repeated across each of the three rows that it represents.
+
+We can call `.reset_index()` to convert the index back to something more familiar, keeping all of the data within columns rather than in the index.
+
+```{python}
+(
+  penguins
+    .groupby(['island', 'year'])
+    .agg({
+      'bill_length_mm': 'max'
+    })
+    .reset_index()
+)
+```
+
+We recommend always using `.reset_index()` after doing a groupwise summary.
+
+### 
+`.size()` and `.nunique()`
+
+`pd.Series` supplies two methods that are very useful for groupwise counting:
+
+-   `.size()` returns the number of rows in a column or group.
+
+-   `.nunique()` returns the number of distinct values that appear in a column or group.
+
+```{python}
+(
+  penguins
+    .groupby('island')
+    .agg({
+      'species': ['size', 'nunique']
+    })
+    .reset_index()
+)
+```
+
+## **Groupwise summaries without `.agg()`**
+
+So far, we’ve only used `.groupby()` to perform grouped summaries with `.agg()`.
+
+Remember, `.agg()` helps us when we want to calculate multiple summaries at once, and
+store the results in the same table. But there’s no need to use `.agg()` if we only want to compute one summary, or if the syntax of `.agg()` is causing challenges.
+
+Other pandas summary functions will also work in a groupwise fashion.
+
+```{python}
+(
+  penguins
+    .groupby('island')
+    .size()
+    .reset_index()
+)
+```
+
+### 
+`.nsmallest()` and `.nlargest()`
+
+The pandas Series class also includes the methods `.nsmallest()` and `.nlargest()` which return the `n` smallest or largest values of a Series.
+
+```{python}
+(
+  penguins['bill_length_mm']
+    .nsmallest(3)
+    .reset_index()
+)
+```
+
+```{python}
+(
+  penguins['bill_length_mm']
+    .nlargest(3)
+    .reset_index()
+)
+
+```
+
+Like `.size()`, these methods can also be used on a grouped DataFrame.
+
+**Use `.nlargest()` to find the three largest bill lengths *for each species* in `penguins`.** You will need to:
+
+-   Group the data by each value of `species`
+
+-   Index the DataFrame to get the `bill_length_mm` column (a grouped Series)
+
+-   Use `.nlargest()` to get the three largest bill lengths per species
+
+-   Reset the index of the resulting DataFrame
+
+```{python}
+(
+  penguins
+    .groupby('species')['bill_length_mm']
+    .nlargest(3)
+    .reset_index()
+)
+```
+
+### Groupwise summaries with `.apply()`
+
+Sometimes we may want to use our own summary function that is not a method of the pandas Series class.
+
+For example, we might want to calculate the percentage of female penguins that were recorded on each island in each year with the following function:
+
+```{python}
+def pct_f(df):
+  counts = df['sex'].value_counts()
+  pct_f = counts['female'] / (counts['male'] + counts['female']) * 100
+  return pct_f
+```
+
+Then we can *apply* our function to the grouped DataFrame using the `.apply()` method:
+
+```{python}
+(
+  penguins
+    .groupby('island')
+    .apply(pct_f)
+)
+```
+
+The `.apply()` method recognizes groups, and applies our function once for each group.
+
+We can also use `.apply()` whenever we want to use a function in a groupwise manner that doesn’t already recognize groups.
+
+For example, the `quantiles()` function from the `statistics` module produces the following error when we try to provide a column from a grouped DataFrame as input.
+
+```{python}
+statistics.quantiles(penguins.groupby('island')['body_mass_g'])
+```
+
+```{python}
+(
+  penguins
+    .groupby('island')['body_mass_g']
+    .apply(statistics.quantiles)
+)
+```
+
+Here’s another resource if you’d like to read more about grouped DataFrames and grouped transformations:
+
+-   [Chapter 10: Data Aggregation](https://wesmckinney.com/book/data-aggregation.html) in *Python for Data Analysis, 3E*
+
+### Facets and Labels
+
+
+```{python}
+from plotnine import ggplot, aes, geom_point, geom_smooth, geom_line, facet_wrap, labs, facet_grid, theme, element_text
+
+from gapminder import gapminder
+gapminder_2007 = gapminder.loc[gapminder['year'] == 2007]
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    facet_wrap(facets = 'continent')
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] == 'Oceania'], 
+    aes(
+      x = 'year', 
+      y = 'lifeExp',
+      group = 1
+      )
+    ) +
+    geom_point() +
+    geom_line() +
+    facet_wrap(
+      facets = 'country'
+    )
+)
+```
+
+
+```{python}
+oceania = gapminder.loc[gapminder['continent'] == 'Oceania']
+
+ggplot.show(
+  ggplot(
+    oceania, 
+    aes(
+      x = 'year', 
+      y = 'lifeExp',
+      group = 1
+      )
+    ) +
+    geom_point() +
+    geom_line() +
+    facet_wrap(
+      facets = 'country'
+    )
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    facet_wrap(facets = 'continent',
+    nrow = 1
+    ) +
+    theme(
+      axis_text_x = element_text(size = 4)
+    )
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    facet_wrap(facets = 'continent',
+    ncol = 1
+    ) +
+    theme(
+      axis_text_x = element_text(size = 4)
+    )
+)
+```
+
+
+```{python}
+#| eval: false
+
+
+ggplot.show(
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    facet_grid(cols = 'continent', rows = 'size')+
+    theme(
+      axis_text_x = element_text(size = 4)
+    )
+)
+```
+
+### Building on a saved plot
+
+
+```{python}
+p = (
+  ggplot(
+    gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    facet_wrap(facets = 'continent')   
+)
+
+```
+
+
+```{python}
+ggplot.show(p)
+```
+
+
+```{python}
+ggplot.show(
+  p +
+    geom_smooth()
+)
+```
+
+
+```{python}
+ggplot.show(
+  p + 
+    labs(title = 'Life expectancy increases with per capita GDP')
+)
+```
+
+### Captions
+
+
+```{python}
+ggplot.show(
+  p + 
+    labs(
+      title = 'Life expectancy increases with per capita GDP',
+      caption = 'Source: http://www.gapmider.org/data/'
+    )
+)
+```
+
+### Axis and legend labels
+
+
+```{python}
+ggplot.show(
+  p + 
+    labs(
+      x = 'GDP per capita',
+      y = 'Life expectancy',
+      size = 'Population'
+    )
+)
+```
+
+
+```{python}
+ggplot.show(
+ ggplot(
+    data = gapminder_2007.loc[gapminder_2007['continent'] != 'Oceania'], 
+    aes(
+      x = 'gdpPercap',
+      y = 'lifeExp',
+      size = 'pop'
+      )
+    ) +
+    geom_point() +
+    labs(
+      x = 'GDP per capita',
+      y = 'Life expectancy',
+      size = 'Population',
+      caption = 'Source: http://www.gapminder.org/data/'
+    ) =
+    facet_wrap(
+      facets = 'continent',
+      ncol = 2
+    )
+)
+```
+
+
+```{python}
+ggplot.show(
+  ggplot(gapminder_2007, aes(x='gdpPercap', y='lifeExp', size='pop'))
+  + geom_point() +
+    labs(
+      x = 'GDP per capita',
+      y = 'Life expectancy',
+      size = 'Population',
+      caption = 'Source: http://www.gapminder.org/data/', 
+      title = 'Life expectancy increases wtih per capita GDP'
+    ) +
+    facet_wrap(
+      facets = 'continent',
+      ncol = 2
+    )
+)
+```
