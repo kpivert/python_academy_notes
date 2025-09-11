@@ -289,11 +289,6 @@ penguins.agg({
 })
 ```
 
-```{python}
-penguins.agg({
-  'bill_length_mm': ''
-})
-```
 
 `.agg()` does not modify the DataFrame, but returns a new one, which can be assigned
 
