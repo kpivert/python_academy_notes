@@ -345,3 +345,19 @@ pd.cut(covid['hospitalizations'], bins=percentiles, retbins=True, include_lowest
 # # df['sqrt_value'] = df.groupby('group')['value'].apply(vectorized_calc).reset_index(level=0, drop=True)
 # covid.groupby(['state', 'month'])[['hospitalizations', 'cases']].apply(hosp_case_ratio_vec).reset_index(level=0, drop=True)
 ```
+
+
+```{python}
+def hosp_case_ratio_agg_2(group):
+  total_hosp = np.nansum(group['hospitalizations'])
+  total_cases = np.nansum(group['cases'])
+  if total_cases == 0:
+    return 0
+  else:
+    return total_hosp / total_cases
+
+result_2 = covid.groupby(['state', 'month']).apply(hosp_case_ratio_agg_2).reset_index()
+result_2.columns = ['state', 'month', 'hosp_case_ratio']
+
+result.equals(result_2)
+```
